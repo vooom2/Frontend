@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Requirements from "./Requirements";
-import ProfileForm from "./ProfileForm";
-import DocumentUpload from "./DocumentUpload";
-import GuarantorForm from "./GuarantorForm";
-import Verifying from "./Verifying";
+import Requirements from "./requirements";
+import ProfileForm from "./profile_form";
+import DocumentUpload from "./document_upload";
+import GuarantorForm from "./guarantor_form";
+import Verifying from "./verifying";
 import { useNavigate } from "react-router";
 
 export default function SetupAccount() {

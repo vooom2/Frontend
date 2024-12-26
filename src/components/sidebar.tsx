@@ -1,11 +1,20 @@
-"use client"
-import { APP_NAME } from '@/utils/constant'
-import { LayoutDashboard, CreditCard, Users, FileText, Bike, User, LogOut } from 'lucide-react'
-import { Link, useLocation, } from 'react-router'
+"use client";
+import { APP_NAME } from "@/utils/constant";
+import {
+    LayoutDashboard,
+    CreditCard,
+    Users,
+    FileText,
+    Bike,
+    User,
+    LogOut,
+} from "lucide-react";
+import { Link, useLocation } from "react-router";
 import Logo from "../assets/images/logo.png";
+import { Button } from "./ui/button";
 
 interface SidebarProps {
-    onNavigate?: () => void
+    onNavigate?: () => void;
 }
 
 const navigation = [
@@ -16,12 +25,10 @@ const navigation = [
     { name: "Complaint", href: "/dashboard/complaints", icon: FileText },
     { name: "Bike History", href: "/dashboard/bikes", icon: Bike },
     { name: "Profile", href: "/dashboard/profile", icon: User },
-]
-
+];
 
 export default function Sidebar({ onNavigate }: SidebarProps) {
-
-    const location = useLocation()
+    const location = useLocation();
 
     return (
         <div className="flex flex-col h-full p-4 bg-white">
@@ -32,30 +39,32 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
             </div>
             <nav className="space-y-1 flex-1">
                 {navigation.map((item) => {
-                    const Icon = item.icon
-                    const isActive = location.pathname === item.href
+                    const Icon = item.icon;
+                    const isActive = location.pathname === item.href;
 
                     return (
                         <Link
                             key={item.name}
                             to={item.href}
                             onClick={onNavigate}
-                            className={`flex items-center gap-3 px-3 py-5 rounded-2xl text-sm ${isActive
-                                ? "bg-primary text-white"
-                                : "hover:bg-muted"
+                            className={`flex items-center gap-3 px-3 py-5 rounded-2xl text-sm ${isActive ? "bg-primary text-white" : "hover:bg-muted"
                                 }`}
                         >
                             <Icon className="h-5 w-5" />
                             {item.name}
                         </Link>
-                    )
+                    );
                 })}
             </nav>
-            <button className="flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground hover:bg-muted rounded-lg">
-                <LogOut className="h-5 w-5" />
-                Sign out
-            </button>
+            <Link to="/auth/login" className="w-full">
+                <Button
+                    variant="outline"
+                    className=" flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground hover:bg-muted rounded-lg"
+                >
+                    <LogOut className="h-5 w-5" />
+                    Sign out
+                </Button>
+            </Link>
         </div>
-    )
+    );
 }
-

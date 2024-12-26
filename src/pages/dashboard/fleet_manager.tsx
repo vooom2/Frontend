@@ -75,7 +75,7 @@ function DetailsField({ label, value }: { label: string; value: string }) {
     return (
         <div className="space-y-1">
             <p className="text-sm text-gray-500">{label}</p>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between bg-gray-100 p-2 rounded-md">
                 <span>{value}</span>
                 <Button
                     variant="ghost"
@@ -96,7 +96,7 @@ export default function FleetManager() {
         <div className="container mx-auto p-4">
             <h1 className="text-xl font-semibold mb-6">Fleet Manager</h1>
             <div className="grid md:grid-cols-[300px_1fr] gap-6">
-                <div className="space-y-2">
+                <div className="space-y-2 bg-white rounded-xl p-6">
                     {managers.map((manager) => (
                         <div
                             key={manager.id}
@@ -117,7 +117,7 @@ export default function FleetManager() {
                     ))}
                 </div>
 
-                <Card className="p-6">
+                <Card className="p-6 border-0 shadow-none">
                     <h2 className="text-lg font-semibold mb-6">Details</h2>
                     <div className="grid gap-6">
                         <div className="grid md:grid-cols-2 gap-6">
