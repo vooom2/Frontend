@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/popover"
 function DashboardHeader() {
     return (
-        <header className="sticky top-0 bg-background z-10 py-6 px-4">
+        <header className="sticky top-0 bg-background z-10 py-6 px-0 md:px-4">
             <div className="flex h-16 items-center px-4 gap-4 ">
                 {/* Mobile Navigation */}
                 <MobileNav />
@@ -18,7 +18,7 @@ function DashboardHeader() {
                     {/* Left Section: Title and Welcome Text */}
                     <div className="flex flex-col gap-1 flex-1">
                         <h1 className="text-xl font-semibold">Dashboard</h1>
-                        <p className="text-sm text-muted-foreground">
+                        <p className="text-xs md:text-sm text-muted-foreground">
                             Hi 👋, welcome to your dashboard
                         </p>
                     </div>

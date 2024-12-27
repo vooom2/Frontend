@@ -53,12 +53,12 @@ function StatusBadge({ status }: { status: VehicleStatus['returnStatus'] }) {
 
 export default function BikeHistory() {
     return (
-        <div className="container mx-auto p-4 space-y-4">
+        <div className="container mx-auto p-2 md:p-4 space-y-4 w-screen">
             <div className="flex justify-between items-center">
                 <h1 className="text-xl font-semibold">Status of Vehicles</h1>
             </div>
 
-            <div className="rounded-xl border overflow-hidden">
+            <div className="rounded-xl border overflow-hidden relative w-full text-nowrap">
                 <Table>
                     <TableHeader className="bg-black hover:bg-black">
                         <TableRow>

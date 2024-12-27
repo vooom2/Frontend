@@ -63,7 +63,7 @@ export default function Login() {
                                     className="bg-transparent border-zinc-800"
                                 />
                             </div>
-                            <Link to="/dashboard">
+                            <Link to="/dashboard/unverified">
                                 <Button className="w-full bg-white text-black hover:bg-zinc-200 rounded-full py-6">
                                     Login
                                 </Button>

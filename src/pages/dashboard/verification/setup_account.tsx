@@ -3,7 +3,7 @@ import Requirements from "./requirements";
 import ProfileForm from "./profile_form";
 import DocumentUpload from "./document_upload";
 import GuarantorForm from "./guarantor_form";
-import Verifying from "./verifying";
+import Verifying from "./verifying_account";
 import { useNavigate } from "react-router";
 
 export default function SetupAccount() {
@@ -12,7 +12,7 @@ export default function SetupAccount() {
 
     const handleStepChange = (index: number) => {
         if (index > 4) {
-            navigate("/dashboard/rent/available");
+            navigate("/dashboard");
             return;
         }
         setCurrentStep(index);
@@ -51,7 +51,7 @@ export default function SetupAccount() {
                         className="max-w-3xl w-full mx-auto bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition"
                         onClick={() => handleStepChange(currentStep + 1)}
                     >
-                        {currentStep <= 3 ? "Next" : "View Profile"}
+                        {currentStep <= 3 ? "Next" : "View Dashboard"}
                     </button>
                 </div>
 
