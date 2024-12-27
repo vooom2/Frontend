@@ -13,8 +13,8 @@ export default function Login() {
 
     return (
         <div className="min-h-screen flex lg:grid-cols-3 bg-black p-6 w-screen">
-            <div className="p-8 text-white lg:w-[55vw]">
-                <div className="max-w-xl mx-auto space-y-8">
+            <div className="ld:p-8 text-white lg:w-[55vw]">
+                <div className="max-w-xl mx-auto space-y-8 mt-10">
                     <div className="space-y-6">
                         <img src={logo} alt="vooom logo" className="w-40" />
                         <ToggleGroup
@@ -63,10 +63,11 @@ export default function Login() {
                                     className="bg-transparent border-zinc-800"
                                 />
                             </div>
-
-                            <Button className="w-full bg-white text-black hover:bg-zinc-200 rounded-full py-6">
-                                Login
-                            </Button>
+                            <Link to="/dashboard">
+                                <Button className="w-full bg-white text-black hover:bg-zinc-200 rounded-full py-6">
+                                    Login
+                                </Button>
+                            </Link>
 
                             <p className="text-sm text-center text-zinc-400">
                                 By clicking the "login" button, you agree to{' '}

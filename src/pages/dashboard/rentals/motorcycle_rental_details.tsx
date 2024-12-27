@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card"
 import { FileText } from "lucide-react"
 import { Link } from "react-router"
 
-export default function MotorcycleDetails() {
+export default function MotorcycleRentalDetails() {
     const images = [
         "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204",
         "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204",

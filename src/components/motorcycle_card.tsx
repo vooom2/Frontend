@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 export function MotorcycleCard({ model, year, condition, imageUrl, pricePerDay, maxDistance, rentalPeriod }: Motorcycle) {
     const navigate = useNavigate();
     return (
-        <div className="border rounded-lg overflow-hidden bg-white" onClick={() => navigate("/dashboard/rent/available/20")}>
+        <div className="border rounded-lg overflow-hidden bg-white" onClick={() => navigate("20")}>
             <div className="relative">
                 <div className="absolute top-2 left-2 z-10">
                     <span className="px-2 py-1 rounded-md bg-white text-xs text-onprimary

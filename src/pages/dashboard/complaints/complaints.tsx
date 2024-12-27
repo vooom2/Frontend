@@ -119,8 +119,9 @@ export default function Complaints() {
             <div className="flex justify-between items-center">
                 <h1 className="text-xl font-semibold">Report</h1>
 
-                <Link to="create"></Link>
-                <Button variant="destructive">Make a report</Button>
+                <Link to="create">
+                    <Button variant="destructive">Make a report</Button>
+                </Link>
             </div>
 
             <div className="rounded-xl border overflow-hidden">

@@ -13,8 +13,8 @@ export default function Signup() {
 
     return (
         <div className="min-h-screen flex lg:grid-cols-3 bg-black p-6 w-screen">
-            <div className="p-8 text-white lg:w-[55vw]">
-                <div className="max-w-xl mx-auto space-y-8">
+            <div className="lg:p-8 text-white lg:w-[55vw]">
+                <div className="max-w-xl mx-auto space-y-8 ">
                     <div className="space-y-6">
                         <img src={logo} alt="vooom logo" className="w-40" />
                         <ToggleGroup

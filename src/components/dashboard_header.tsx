@@ -1,6 +1,11 @@
 import { Bell, User } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import MobileNav from './mobile_nav'
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 function DashboardHeader() {
     return (
         <header className="sticky top-0 bg-background z-10 py-6">
@@ -16,7 +21,7 @@ function DashboardHeader() {
                         <p className="text-sm text-muted-foreground">
                             Hi 👋, welcome to your dashboard
                         </p>
-                    </div>,
+                    </div>
 
                     {/* Right Section: Search, Notification, and Buttons */}
                     <div className="flex items-center gap-4 flex-none md:flex-1 justify-end">
@@ -30,10 +35,21 @@ function DashboardHeader() {
                         </div>
 
                         <div className="relative">
-                            <Bell />
-                            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold h-4 w-4 flex items-center justify-center rounded-full">
-                                2
-                            </span>
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <div>
+
+                                        <Bell />
+                                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold h-4 w-4 flex items-center justify-center rounded-full">
+                                            2
+                                        </span>
+                                    </div>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-80">
+
+                                </PopoverContent>
+                            </Popover>
+
                         </div>
 
                         {/* Contact Fleet Manager Button */}

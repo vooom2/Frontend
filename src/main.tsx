@@ -10,7 +10,7 @@ import BikeHistory from "./pages/dashboard/bikes_history.tsx";
 import Profile from "./pages/dashboard/profile.tsx";
 import SetupAccount from "./pages/dashboard/verification/setup_account.tsx";
 import MotorcycleRental from "./pages/dashboard/rentals/motorcycle_rental.tsx";
-import MotorcycleDetails from "./pages/dashboard/rentals/motorcycle_details.tsx";
+import MotorcycleRentalDetails from "./pages/dashboard/rentals/motorcycle_rental_details.tsx";
 import BikeApplication from "./pages/dashboard/rentals/bike_application.tsx";
 import BikeApplicationFinale from "./pages/dashboard/rentals/bike_application_finale.tsx";
 import VerificationBanner from "./components/verification_banner.tsx";
@@ -26,11 +26,12 @@ createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route element={<Signup />} path="auth/signup" />
         <Route element={<Login />} path="auth/login" />
+        <Route element={<Login />} path="/" />
         <Route element={<DashboardLayout />} path="dashboard">
           <Route index element={<Dashboard />} />
           <Route path="unverified" element={<VerificationBanner />} />
           <Route path="rent/available" element={<MotorcycleRental />} />
-          <Route path="rent/available/:id" element={<MotorcycleDetails />} />
+          <Route path="rent/available/:id" element={<MotorcycleRentalDetails />} />
           <Route path="rent/available/apply/:id" element={<BikeApplication />} />
           <Route path="rent/available/apply/success" element={<BikeApplicationFinale />} />
 
