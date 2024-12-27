@@ -19,7 +19,7 @@ export default function SetupAccount() {
     }
 
     return (
-        <div className="mt-10 flex items-center justify-center ">
+        <div className="mt-10 py-6 flex items-center justify-center ">
             <div className="max-w-4xl w-full">
                 {/* Header Section */}
                 <div className="text-center">
@@ -31,7 +31,7 @@ export default function SetupAccount() {
                 </div>
 
                 {/* Progress Indicator */}
-                <div className="mt-4 flex items-center space-x-4 bg-black py-3 px-6 rounded-xl justify-around">
+                <div className="mt-4 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 bg-black py-3 px-4 sm:px-6 rounded-md justify-around">
                     <Step completed={currentStep > 0} label="Personal Verification" />
                     <Separator />
                     <Step completed={currentStep > 1} label="National Verification" />
@@ -48,7 +48,7 @@ export default function SetupAccount() {
                 {/* Next Button */}
                 <div className="mt-6 text-center">
                     <button
-                        className="max-w-3xl w-full mx-auto bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition"
+                        className="max-w-3xl w-full mx-auto bg-black text-white py-3 rounded-md hover:bg-gray-800 transition"
                         onClick={() => handleStepChange(currentStep + 1)}
                     >
                         {currentStep <= 3 ? "Next" : "View Dashboard"}
@@ -75,15 +75,14 @@ interface StepProps {
 
 function Step({ label, completed }: StepProps) {
     return (
-        <div
-            className="flex items-center space-x-2 text-gray-300 font-semibold"
-        >
+        <div className="flex flex-col items-center space-y-1 text-gray-300 font-semibold">
             <div
-                className={`h-5 w-5 flex items-center justify-center transition-all rounded-full ${completed ? 'bg-green-500' : 'bg-[#3C3E3C]'}`}
+                className={`h-5 w-5 flex items-center justify-center transition-all rounded-full ${completed ? 'bg-green-500' : 'bg-[#3C3E3C]'
+                    }`}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className={`h-3 w-3 text-black`}
+                    className="h-3 w-3 text-black"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -91,11 +90,11 @@ function Step({ label, completed }: StepProps) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                 </svg>
             </div>
-            <span className="text-sm">{label}</span>
-        </div >
+            <span className="text-xs sm:text-sm text-center text-nowrap">{label}</span>
+        </div>
     );
 }
 
 function Separator() {
-    return <div className="w-10 h-[2px] bg-white/70 rounded" />;
+    return <div className="hidden sm:block w-full h-[1px] bg-white/50 rounded" />;
 }

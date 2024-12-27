@@ -3,7 +3,7 @@ import { CloudUpload } from "lucide-react";
 
 export default function DocumentUpload() {
     return (
-        <div className="flex flex-col items-center justify-center bg-gray-50 px-4 my-10">
+        <div className="flex flex-col items-center justify-center bg-gray-50 md:px-4 my-10">
             <div className="w-full max-w-3xl space-y-8">
                 {/* Compulsory Section */}
                 <div className="space-y-4">

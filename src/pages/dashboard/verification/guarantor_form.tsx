@@ -10,8 +10,8 @@ import { CloudUpload } from "lucide-react";
 
 export default function GuarantorForm() {
     return (
-        <div className="flex items-center justify-center px-4 my-10">
-            <div className="w-full max-w-3xl rounded-lg p-6 space-y-6">
+        <div className="flex items-center justify-center md:px-4 my-10">
+            <div className="w-full max-w-3xl rounded-lg md:py-6 space-y-6">
                 {/* Full name */}
                 <div>
                     <label className="block text-sm font-medium text-gray-700">
