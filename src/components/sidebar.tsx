@@ -41,7 +41,7 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
                 {navigation.map((item) => {
                     const Icon = item.icon;
                     const isActive = location.pathname === item.href;
-
+                    console.log(location.pathname, item.href);
                     return (
                         <Link
                             key={item.name}

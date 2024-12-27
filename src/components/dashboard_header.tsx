@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/popover"
 function DashboardHeader() {
     return (
-        <header className="sticky top-0 bg-background z-10 py-6">
+        <header className="sticky top-0 bg-background z-10 py-6 px-4">
             <div className="flex h-16 items-center px-4 gap-4 ">
                 {/* Mobile Navigation */}
                 <MobileNav />

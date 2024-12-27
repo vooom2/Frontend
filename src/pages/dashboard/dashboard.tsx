@@ -80,7 +80,7 @@ export default function Dashboard() {
                         <p className="text-sm text-muted-foreground">VN 225893</p>
                     </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-col md:flex-row">
                     <Button variant="outline">View Detail</Button>
                     <Button variant="destructive">Make a report</Button>
                 </div>

@@ -9,9 +9,9 @@ export default function DashboardLayout() {
                 <div className="hidden md:block w-64 fixed inset-y-0">
                     <Sidebar />
                 </div>
-                <main className="flex-1 md:pl-64">
+                <main className="flex-1 md:pl-64 ">
                     <DashboardHeader />
-                    <div className="p-4 space-y-4">
+                    <div className="px-2 md:p-4 space-y-4">
                         <Outlet />
                     </div>
                 </main>
