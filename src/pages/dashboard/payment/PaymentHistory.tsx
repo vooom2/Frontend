@@ -37,7 +37,7 @@ export default function PaymentHistory() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                <div className="lg:col-span-4">
+                <div className="lg:col-span-4 text-nowrap">
                     <Card>
                         <div className="p-4 border-b">
                             <h3 className="font-semibold">Status of Payment</h3>
