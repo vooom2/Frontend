@@ -64,7 +64,7 @@ export default function Login() {
                                 />
                             </div>
                             <Link to="/dashboard/unverified">
-                                <Button className="w-full bg-white text-black hover:bg-zinc-200 rounded-full py-6">
+                                <Button className="w-full bg-white text-black hover:bg-zinc-200 rounded-full py-6 mt-4">
                                     Login
                                 </Button>
                             </Link>
