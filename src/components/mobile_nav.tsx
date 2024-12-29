@@ -1,10 +1,8 @@
-"use client"
-
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { Menu } from 'lucide-react'
 import { useState } from "react"
-import Sidebar from "./sidebar"
+import RiderSidebar from "./rider_sidebar"
 
 export default function MobileNav() {
     const [open, setOpen] = useState(false)
@@ -17,7 +15,7 @@ export default function MobileNav() {
                 </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0 w-72">
-                <Sidebar onNavigate={() => setOpen(false)} />
+                <RiderSidebar onNavigate={() => setOpen(false)} />
             </SheetContent>
         </Sheet>
     )

@@ -7,9 +7,10 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { Link } from "react-router";
 import deliveryman from "../../assets/images/delivery_man.jpeg"
 import logo from "../../assets/images/logo_white.png"
+import { USER_ROLES } from "@/utils/constant"
 
 export default function Login() {
-    const [userType, setUserType] = useState("vehicle-owner")
+    const [userType, setUserType] = useState(USER_ROLES.OWNER)
 
     return (
         <div className="min-h-screen flex lg:grid-cols-3 bg-black p-6 w-screen">
@@ -24,13 +25,13 @@ export default function Login() {
                             className="bg-zinc-900 p-1 rounded-lg grid grid-cols-2"
                         >
                             <ToggleGroupItem
-                                value="vehicle-owner"
+                                value={USER_ROLES.OWNER}
                                 className="data-[state=on]:bg-white data-[state=on]:text-black rounded-md px-3 py-2 text-sm transition-colors"
                             >
                                 Vehicle Owner
                             </ToggleGroupItem>
                             <ToggleGroupItem
-                                value="riders"
+                                value={USER_ROLES.RIDER}
                                 className="data-[state=on]:bg-white data-[state=on]:text-black rounded-md px-3 py-2 text-sm transition-colors"
                             >
                                 Riders
@@ -63,7 +64,7 @@ export default function Login() {
                                     className="bg-transparent border-zinc-800"
                                 />
                             </div>
-                            <Link to="/dashboard/unverified">
+                            <Link to={`/${userType}/dashboard/unverified`}>
                                 <Button className="w-full bg-white text-black hover:bg-zinc-200 rounded-full py-6 mt-4">
                                     Login
                                 </Button>

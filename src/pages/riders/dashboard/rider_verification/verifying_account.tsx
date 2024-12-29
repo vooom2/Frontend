@@ -1,4 +1,4 @@
-import image from '../../../assets/images/verifying.png'
+import image from '../../../../assets/images/verifying.png';
 function Verifying() {
     return (
         <div className="text-center px-4 my-10">

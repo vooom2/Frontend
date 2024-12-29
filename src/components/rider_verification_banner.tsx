@@ -1,9 +1,9 @@
-import { APP_NAME } from "@/utils/constant";
+import { APP_NAME, USER_ROLES } from "@/utils/constant";
 import { FileWarning, X } from 'lucide-react';
 import { Button } from "./ui/button";
 import { Link } from "react-router";
 
-export default function VerificationBanner() {
+export default function RiderVerificationBanner() {
     return (
         <div className="px-4 py-6 sm:py-8">
             <div className="relative flex flex-col p-4 sm:p-6 bg-black text-white rounded-lg shadow-lg max-w-4xl mx-auto">
@@ -22,7 +22,7 @@ export default function VerificationBanner() {
                     Complete your KYC and Identity Verification to enable you to become
                     verified on Vooom
                 </p>
-                <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 bg-white py-4 px-4 sm:px-6 rounded-xl">
+                <div className="mt-4 flex flex-col sm:flex-row justify-around items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 bg-white py-4 px-4 sm:px-6 rounded-xl">
                     <Step label="Personal Verification" />
                     <Separator />
                     <Step label="National Verification" />
@@ -35,7 +35,7 @@ export default function VerificationBanner() {
                     <FileWarning className="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12 text-blue-500" />
                 </div>
                 <h3 className="text-base sm:text-lg font-medium mb-3">You have no active Bike on {APP_NAME}</h3>
-                <Link to="/dashboard/setupaccount">
+                <Link to={`/${USER_ROLES.RIDER}/dashboard/setupaccount`}>
                     <Button className="rounded-3xl bg-black px-4 py-2 text-sm sm:text-base">Complete Verification</Button>
                 </Link>
             </div>

@@ -41,7 +41,7 @@ export default function MotorcycleRentalDetails() {
         <div className="max-w-6xl mx-auto p-4  space-y-8">
             <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-4">
-                    <Link to="/dashboard/rent/available/apply/id">
+                    <Link to="apply">
                         <Button className="w-full  bg-black text-white hover:bg-gray-900" size="lg">
                             Apply for Bike
                         </Button>

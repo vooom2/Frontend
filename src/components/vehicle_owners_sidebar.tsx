@@ -1,13 +1,13 @@
 "use client";
-import { APP_NAME } from "@/utils/constant";
+import { APP_NAME, USER_ROLES } from "@/utils/constant";
 import {
     LayoutDashboard,
     CreditCard,
-    Users,
     FileText,
     Bike,
     User,
     LogOut,
+    CalendarSearch,
 } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import Logo from "../assets/images/logo.png";
@@ -18,16 +18,15 @@ interface SidebarProps {
 }
 
 const navigation = [
-    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Rent Bike", href: "/dashboard/rent/available", icon: Bike },
-    { name: "Payment History", href: "/dashboard/payments", icon: CreditCard },
-    { name: "Fleet Manager", href: "/dashboard/fleet", icon: Users },
-    { name: "Complaint", href: "/dashboard/complaints", icon: FileText },
-    { name: "Bike History", href: "/dashboard/bikes", icon: Bike },
-    { name: "Profile", href: "/dashboard/profile", icon: User },
+    { name: "Dashboard", href: `/${USER_ROLES.OWNER}/dashboard`, icon: LayoutDashboard },
+    { name: "Active Bike", href: `/${USER_ROLES.OWNER}/dashboard/rent/available`, icon: Bike },
+    { name: "Withdrawal", href: `/${USER_ROLES.OWNER}/dashboard/payments`, icon: CreditCard },
+    { name: "Report", href: `/${USER_ROLES.OWNER}/dashboard/fleet`, icon: FileText },
+    { name: "Inspection", href: `/${USER_ROLES.OWNER}/dashboard/complaints`, icon: CalendarSearch },
+    { name: "Profile", href: `/${USER_ROLES.OWNER}/dashboard/bikes`, icon: User },
 ];
 
-export default function Sidebar({ onNavigate }: SidebarProps) {
+export default function VechicleOwnerSidebar({ onNavigate }: SidebarProps) {
     const location = useLocation();
 
     return (

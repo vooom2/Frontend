@@ -115,7 +115,7 @@ function StatusBadge({ status }: { status: Report['status'] }) {
 
 export default function Complaints() {
     return (
-        <div className="container mx-auto px-2 md:px-4 py-8 w-screen relative">
+        <div className="container mx-auto px-2 md:px-4 py-8 w-[95vw] md:w-full relative">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
                 <h1 className="text-2xl font-semibold mb-4 sm:mb-0">Report</h1>
 

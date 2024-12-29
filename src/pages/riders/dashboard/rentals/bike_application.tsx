@@ -71,7 +71,7 @@ export default function BikeApplication() {
               N{payments.reduce((sum, p) => sum + p.amount, 0).toLocaleString()}
             </span>
           </div>
-          <Link to="/dashboard/rent/available/apply/success">
+          <Link to="success">
             <Button className="w-full bg-black text-white hover:bg-gray-900" size="lg">
               Proceed
             </Button>
