@@ -6,7 +6,8 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import { useLocation } from 'react-router'
+import { Link, useLocation } from 'react-router'
+import { USER_ROLES } from '@/utils/constant'
 function DashboardHeader() {
     const location = useLocation();
     return (
@@ -55,17 +56,29 @@ function DashboardHeader() {
                         </div>
 
                         {/* Contact Fleet Manager Button */}
-                        {location.pathname.indexOf("/rider") != -1 && <Button
+                        {location.pathname.indexOf(`${USER_ROLES.RIDER}`) != -1 && <Button
                             size="sm"
                             className="bg-onprimary hover:bg-onprimary/90 text-white whitespace-nowrap hidden md:block"
                         >
                             Contact Fleet Manager
                         </Button>
+
+                        }
+                        {/* Host vehicle fbutton */}
+                        {location.pathname.indexOf(`${USER_ROLES.OWNER}`) != -1 && <Button
+                            size="sm"
+                            className="bg-onprimary hover:bg-onprimary/90 text-white whitespace-nowrap hidden md:block"
+                        >
+                            Host Vehicle
+                        </Button>
+
                         }
                         {/* Profile/Menu Icon */}
-                        <div className="items-center gap-2 border rounded-md px-2 py-1 hidden md:block">
-                            <User className="h-5 w-5" />
-                        </div>
+                        <Link to={location.pathname.indexOf(`${USER_ROLES.RIDER}`) != -1 ? `/${USER_ROLES.RIDER}/dashboard/profile` : `/${USER_ROLES.OWNER}/dashboard/profile`}>
+                            <div className="items-center gap-2 border rounded-md px-2 py-1 hidden md:block">
+                                <User className="h-5 w-5" />
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div >
