@@ -6,7 +6,9 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import { useLocation } from 'react-router'
 function DashboardHeader() {
+    const location = useLocation();
     return (
         <header className="sticky top-0 bg-background z-10 py-6 px-0 md:px-4">
             <div className="flex h-16 items-center px-4 gap-4 ">
@@ -53,13 +55,13 @@ function DashboardHeader() {
                         </div>
 
                         {/* Contact Fleet Manager Button */}
-                        <Button
+                        {location.pathname.indexOf("/rider") != -1 && <Button
                             size="sm"
                             className="bg-onprimary hover:bg-onprimary/90 text-white whitespace-nowrap hidden md:block"
                         >
                             Contact Fleet Manager
                         </Button>
-
+                        }
                         {/* Profile/Menu Icon */}
                         <div className="items-center gap-2 border rounded-md px-2 py-1 hidden md:block">
                             <User className="h-5 w-5" />

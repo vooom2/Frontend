@@ -19,11 +19,11 @@ interface SidebarProps {
 
 const navigation = [
     { name: "Dashboard", href: `/${USER_ROLES.OWNER}/dashboard`, icon: LayoutDashboard },
-    { name: "Active Bike", href: `/${USER_ROLES.OWNER}/dashboard/rent/available`, icon: Bike },
-    { name: "Withdrawal", href: `/${USER_ROLES.OWNER}/dashboard/payments`, icon: CreditCard },
-    { name: "Report", href: `/${USER_ROLES.OWNER}/dashboard/fleet`, icon: FileText },
-    { name: "Inspection", href: `/${USER_ROLES.OWNER}/dashboard/complaints`, icon: CalendarSearch },
-    { name: "Profile", href: `/${USER_ROLES.OWNER}/dashboard/bikes`, icon: User },
+    { name: "Active Bike", href: `/${USER_ROLES.OWNER}/dashboard/bikes`, icon: Bike },
+    { name: "Wallet", href: `/${USER_ROLES.OWNER}/dashboard/wallet`, icon: CreditCard },
+    { name: "Report", href: `/${USER_ROLES.OWNER}/dashboard/report`, icon: FileText },
+    { name: "Inspection", href: `/${USER_ROLES.OWNER}/dashboard/inspection`, icon: CalendarSearch },
+    { name: "Profile", href: `/${USER_ROLES.OWNER}/dashboard/profile`, icon: User },
 ];
 
 export default function VechicleOwnerSidebar({ onNavigate }: SidebarProps) {
@@ -40,7 +40,6 @@ export default function VechicleOwnerSidebar({ onNavigate }: SidebarProps) {
                 {navigation.map((item) => {
                     const Icon = item.icon;
                     const isActive = location.pathname === item.href;
-                    console.log(location.pathname, item.href);
                     return (
                         <Link
                             key={item.name}

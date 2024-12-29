@@ -8,7 +8,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { HomeStatusIndicatorCard } from "@/components/home_status_indicator"
+import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator"
 import { Link } from "react-router"
 
 
@@ -30,10 +30,10 @@ export default function PaymentHistory() {
 
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                <HomeStatusIndicatorCard bg="bg-black" label="Total Payment" icon="clock" value="N234,000" />
-                <HomeStatusIndicatorCard label="Amount this week" icon="clock" value="N21,000" />
-                <HomeStatusIndicatorCard label="Outstanding" icon="clock" value="N0" />
-                <HomeStatusIndicatorCard label="Active Repairs" icon="bike" value="3" />
+                <DashboardStatusIndicatorCard bg="bg-black" label="Total Payment" icon="clock" value="N234,000" />
+                <DashboardStatusIndicatorCard label="Amount this week" icon="clock" value="N21,000" />
+                <DashboardStatusIndicatorCard label="Outstanding" icon="clock" value="N0" />
+                <DashboardStatusIndicatorCard label="Active Repairs" icon="bike" value="3" />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">

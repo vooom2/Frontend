@@ -113,19 +113,18 @@ function StatusBadge({ status }: { status: Report['status'] }) {
     )
 }
 
-export default function Complaints() {
+export default function RiderComplaints() {
     return (
-        <div className="container mx-auto px-2 md:px-4 py-8 w-[95vw] md:w-full relative">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+        <div className="container mx-auto px-2 md:px-4 py-8 w-full relative">
+            <div className="flex justify-between items-start sm:items-center mb-6">
                 <h1 className="text-2xl font-semibold mb-4 sm:mb-0">Report</h1>
-
                 <Link to="create">
-                    <Button variant="destructive">Make a report</Button>
+                    <Button variant="destructive" className="text-xs md:text-sm">Make a report</Button>
                 </Link>
             </div>
 
-            <div className="rounded-xl border overflow-hidden relative w-full">
-                <div className="overflow-x-auto w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                <div className="lg:col-span-4 rounded-md overflow-clip">
                     <Table>
                         <TableHeader className="bg-black hover:bg-black">
                             <TableRow>
@@ -180,7 +179,7 @@ export default function Complaints() {
                     </Table>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

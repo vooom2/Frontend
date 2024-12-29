@@ -10,7 +10,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { HomeStatusIndicatorCard } from "@/components/home_status_indicator"
+import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator"
 
 function CircularProgress() {
     return (
@@ -45,7 +45,7 @@ function CircularProgress() {
     )
 }
 
-export default function Dashboard() {
+export default function RiderDashboard() {
     const paymentData = [
         { week: 'Week 4 November', amount: 21500, outstanding: 0, delayedFine: 0, status: 'Make Payment' },
         { week: 'Week 4 October', amount: 21500, outstanding: 0, delayedFine: 0, status: 'Paid' },
@@ -87,10 +87,10 @@ export default function Dashboard() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                <HomeStatusIndicatorCard label="Total Payment" icon="clock" value="N234,000" />
-                <HomeStatusIndicatorCard label="Amount this week" icon="clock" value="N21,000" />
-                <HomeStatusIndicatorCard label="Outstanding" icon="clock" value="N0" />
-                <HomeStatusIndicatorCard label="Active Repairs" icon="bike" value="3" />
+                <DashboardStatusIndicatorCard label="Total Payment" icon="clock" value="N234,000" />
+                <DashboardStatusIndicatorCard label="Amount this week" icon="clock" value="N21,000" />
+                <DashboardStatusIndicatorCard label="Outstanding" icon="clock" value="N0" />
+                <DashboardStatusIndicatorCard label="Active Repairs" icon="bike" value="3" />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">

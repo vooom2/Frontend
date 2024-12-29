@@ -1,4 +1,4 @@
-import { HomeStatusIndicatorCard } from "@/components/home_status_indicator";
+import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator";
 import { MotorcycleCard } from "@/components/motorcycle_card";
 import type { Motorcycle } from "@/types/motorcycle";
 
@@ -26,7 +26,7 @@ export default function MotorcycleRental() {
         <div className="max-w-7xl mx-auto p-4 space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {statusIndicators.map((indicator, index) => (
-                    <HomeStatusIndicatorCard key={index} {...indicator} />
+                    <DashboardStatusIndicatorCard key={index} {...indicator} />
                 ))}
             </div>
 
