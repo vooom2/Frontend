@@ -3,36 +3,10 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import "./index.css";
 import DashboardLayout from "./components/dashboard_layout.tsx";
-import RiderDashboard from "./pages/riders/dashboard/RiderDashboard.tsx";
-import PaymentHistory from "./pages/riders/dashboard/payment/PaymentHistory.tsx";
-import FleetManager from "./pages/riders/dashboard/FleetManager.tsx";
-import BikeHistory from "./pages/riders/dashboard/BikesHistory.tsx";
-import Profile from "./pages/riders/dashboard/RiderProfileSettings.tsx";
-import SetupAccount from "./pages/riders/dashboard/rider_verification/setup_account.tsx";
-import MotorcycleRental from "./pages/riders/dashboard/rentals/MotorcycleRental.tsx";
-import MotorcycleRentalDetails from "./pages/riders/dashboard/rentals/MotorcycleRentalDetails.tsx";
-import BikeApplication from "./pages/riders/dashboard/rentals/BikeApplication.tsx";
-import BikeApplicationFinale from "./pages/riders/dashboard/rentals/bike_application_finale.tsx";
-import RiderVerificationBanner from "./components/rider_verification_banner.tsx";
-import MakePayment from "./pages/riders/dashboard/payment/MakePayment.tsx";
-import RiderComplaints from "./pages/riders/dashboard/complaints/RiderComplaints.tsx";
-import ComplaintForm from "./pages/riders/dashboard/complaints/complaint_form.tsx";
 import Signup from "./pages/auth/signup.tsx";
 import Login from "./pages/auth/login.tsx";
 import { USER_ROLES } from "./utils/constant.tsx";
-import OwnerVerificationBanner from "./components/owners_verification_banner.tsx";
-import OwnerSetupAccount from "./pages/vechicle_owners/dashboard/owners_verification/owner_setup_account.tsx";
-import OwnerAccountVerified from "./pages/vechicle_owners/dashboard/owners_verification/owner_account_verified.tsx";
-import OwnerDashboard from "./pages/vechicle_owners/dashboard/owner_dashboard.tsx";
-import VehicleRegistration from "./pages/vechicle_owners/dashboard/host_vehicles/vehicle_registration.tsx";
-import ListedBikes from "./pages/vechicle_owners/dashboard/listed_bikes/ListedBikes.tsx";
-import OwnerBikeDetails from "./pages/vechicle_owners/dashboard/listed_bikes/OwnerBikeDetails.tsx";
-import Inspection from "./pages/vechicle_owners/dashboard/inspection/inspection.tsx";
-import InspectionBikeDetails from "./pages/vechicle_owners/dashboard/inspection/inspection_bike_details.tsx";
-import OwnerReport from "./pages/vechicle_owners/dashboard/report/owner_report.tsx";
-import OwnerWallet from "./pages/vechicle_owners/dashboard/wallet/owner_wallet.tsx";
-import OwnerWithdrawalForm from "./pages/vechicle_owners/dashboard/wallet/owner_withdrawal.tsx";
-import OwnerProfileSettings from "./pages/vechicle_owners/dashboard/profile/owner_profile_settings.tsx";
+import { BikeApplication, BikeApplicationFinale, BikeHistory, ComplaintForm, FleetManager, Inspection, InspectionBikeDetails, ListedBikes, MakePayment, MotorcycleRental, MotorcycleRentalDetails, OwnerAccountVerified, OwnerBikeDetails, OwnerDashboard, OwnerProfileSettings, OwnerReport, OwnerSetupAccount, OwnerVerificationBanner, OwnerWallet, OwnerWithdrawalForm, PaymentHistory, RiderComplaints, RiderDashboard, RiderProfileSettings, RiderSetupAccount, RiderVerificationBanner, VehicleRegistration } from "./utils/pages_exports.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -83,8 +57,8 @@ createRoot(document.getElementById("root")!).render(
           <Route path="complaints/create" element={<ComplaintForm />} />
 
           <Route path="bikes" element={<BikeHistory />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="setupaccount" element={<SetupAccount />} />
+          <Route path="profile" element={<RiderProfileSettings />} />
+          <Route path="setupaccount" element={<RiderSetupAccount />} />
         </Route>
       </Routes>
     </BrowserRouter>
