@@ -1,5 +1,3 @@
-'use client'
-
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -96,7 +94,7 @@ function StatusBadge({ status }: { status: Vehicle['healthStatus'] }) {
 }
 
 
-export default function VehiclesTable() {
+export default function BikesRecordTable() {
     return (
         <div className="container mx-auto px-2 md:px-4 py-8 md:w-full relative">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">

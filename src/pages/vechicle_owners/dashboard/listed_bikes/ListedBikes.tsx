@@ -1,5 +1,5 @@
 import { DashboardStatusIndicatorCard } from '@/components/home_status_indicator'
-import BikesRecords from './bikes_records'
+import BikesRecordTable from './bikes_record_table'
 
 function ListedBikes() {
     return (
@@ -9,7 +9,7 @@ function ListedBikes() {
                 <DashboardStatusIndicatorCard label="Active bikes" icon="bike" value="5" />
                 <DashboardStatusIndicatorCard label="InActive bikes" icon="bike" value="0" />
             </div>
-            <BikesRecords />
+            <BikesRecordTable />
         </div>
     )
 }

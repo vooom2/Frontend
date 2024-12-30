@@ -65,12 +65,15 @@ function DashboardHeader() {
 
                         }
                         {/* Host vehicle fbutton */}
-                        {location.pathname.indexOf(`${USER_ROLES.OWNER}`) != -1 && <Button
-                            size="sm"
-                            className="bg-onprimary hover:bg-onprimary/90 text-white whitespace-nowrap hidden md:block"
-                        >
-                            Host Vehicle
-                        </Button>
+                        {location.pathname.indexOf(`${USER_ROLES.OWNER}`) != -1 &&
+                            <Link to={`/${USER_ROLES.OWNER}/dashboard/host`}>
+                                <Button
+                                    size="sm"
+                                    className="bg-onprimary hover:bg-onprimary/90 text-white whitespace-nowrap hidden md:block"
+                                >
+                                    Host Vehicle
+                                </Button>
+                            </Link>
 
                         }
                         {/* Profile/Menu Icon */}
