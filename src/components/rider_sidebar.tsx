@@ -18,13 +18,13 @@ interface SidebarProps {
 }
 
 const navigation = [
-    { name: "Dashboard", href: `/${USER_ROLES.RIDER}/dashboard`, icon: LayoutDashboard },
-    { name: "Rent Bike", href: `/${USER_ROLES.RIDER}/dashboard/rent/available`, icon: Bike },
-    { name: "Payment History", href: `/${USER_ROLES.RIDER}/dashboard/payments`, icon: CreditCard },
-    { name: "Fleet Manager", href: `/${USER_ROLES.RIDER}/dashboard/fleet`, icon: Users },
-    { name: "Complaint", href: `/${USER_ROLES.RIDER}/dashboard/complaints`, icon: FileText },
-    { name: "Bike History", href: `/${USER_ROLES.RIDER}/dashboard/bikes`, icon: Bike },
-    { name: "Profile", href: `/${USER_ROLES.RIDER}/dashboard/profile`, icon: User },
+    { name: "Dashboard", href: `/${USER_ROLES.RIDER}/dashboard`, tag: "/dashboard", icon: LayoutDashboard },
+    { name: "Rent Bike", href: `/${USER_ROLES.RIDER}/dashboard/rent/available`, tag: "/rent", icon: Bike },
+    { name: "Payment History", href: `/${USER_ROLES.RIDER}/dashboard/payments`, tag: "/payments", icon: CreditCard },
+    { name: "Fleet Manager", href: `/${USER_ROLES.RIDER}/dashboard/fleet`, tag: "/fleet", icon: Users },
+    { name: "Complaint", href: `/${USER_ROLES.RIDER}/dashboard/complaints`, tag: "/complaints", icon: FileText },
+    { name: "Bike History", href: `/${USER_ROLES.RIDER}/dashboard/bikes`, tag: "/bikes", icon: Bike },
+    { name: "Profile", href: `/${USER_ROLES.RIDER}/dashboard/profile`, tag: "/profile", icon: User },
 ];
 
 export default function RiderSidebar({ onNavigate }: SidebarProps) {
@@ -38,9 +38,9 @@ export default function RiderSidebar({ onNavigate }: SidebarProps) {
                 </h1>
             </div>
             <nav className="space-y-1 flex-1">
-                {navigation.map((item) => {
+                {navigation.map((item, index) => {
                     const Icon = item.icon;
-                    const isActive = location.pathname === item.href;
+                    const isActive = index == 0 ? location.pathname === item.href : location.pathname.indexOf(item.tag) != -1 ? true : false;
                     return (
                         <Link
                             key={item.name}

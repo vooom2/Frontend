@@ -48,8 +48,9 @@ createRoot(document.getElementById("root")!).render(
           <Route path="rent/available/:id" element={<MotorcycleRentalDetails />} />
           <Route path="rent/available/:id/apply" element={<BikeApplication />} />
           <Route path="rent/available/:id/apply/success" element={<BikeApplicationFinale />} />
+
           <Route path="payments" element={<PaymentHistory />} />
-          <Route path="payments/pay" element={<MakePayment />} />
+          <Route path="payments/pay/:id" element={<MakePayment />} />
 
           <Route path="fleet" element={<FleetManager />} />
 

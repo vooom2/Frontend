@@ -1,5 +1,3 @@
-// src/utils/exports.tsx
-
 export { default as OwnerDashboard } from '../pages/vechicle_owners/dashboard/OwnerDashboard.tsx';
 export { default as OwnerVerificationBanner } from '../components/owners_verification_banner.tsx';
 export { default as OwnerSetupAccount } from '../pages/vechicle_owners/dashboard/owners_verification/OwnerSetupAccount.tsx';
@@ -27,4 +25,4 @@ export { default as FleetManager } from '../pages/rider/dashboard/FleetManager.t
 export { default as RiderComplaints } from '../pages/rider/dashboard/complaints/RiderComplaints.tsx';
 export { default as ComplaintForm } from '../pages/rider/dashboard/complaints/ComplaintForm.tsx';
 export { default as BikeHistory } from '../pages/rider/dashboard/BikesHistory.tsx';
-export { default as RiderProfileSettings } from '../pages/rider/dashboard/RiderProfileSettings.tsx';
+export { default as RiderProfileSettings } from '../pages/rider/dashboard/profile/RiderProfileSettings.tsx';

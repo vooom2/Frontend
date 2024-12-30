@@ -11,6 +11,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator"
+import formatCurrency from "@/utils/formatCurrency"
 
 function CircularProgress() {
     return (
@@ -87,9 +88,9 @@ export default function RiderDashboard() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                <DashboardStatusIndicatorCard label="Total Payment" icon="clock" value="N234,000" />
-                <DashboardStatusIndicatorCard label="Amount this week" icon="clock" value="N21,000" />
-                <DashboardStatusIndicatorCard label="Outstanding" icon="clock" value="N0" />
+                <DashboardStatusIndicatorCard label="Total Payment" icon="clock" value={formatCurrency(320000)} />
+                <DashboardStatusIndicatorCard label="Amount this week" icon="clock" value={formatCurrency(21000)} />
+                <DashboardStatusIndicatorCard label="Outstanding" icon="clock" value={formatCurrency(0)} />
                 <DashboardStatusIndicatorCard label="Active Repairs" icon="bike" value="3" />
             </div>
 

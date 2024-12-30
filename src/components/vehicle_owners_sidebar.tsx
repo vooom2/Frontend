@@ -18,12 +18,12 @@ interface SidebarProps {
 }
 
 const navigation = [
-    { name: "Dashboard", href: `/${USER_ROLES.OWNER}/dashboard`, icon: LayoutDashboard },
-    { name: "Active Bike", href: `/${USER_ROLES.OWNER}/dashboard/bikes`, icon: Bike },
-    { name: "Wallet", href: `/${USER_ROLES.OWNER}/dashboard/wallet`, icon: CreditCard },
-    { name: "Report", href: `/${USER_ROLES.OWNER}/dashboard/report`, icon: FileText },
-    { name: "Inspection", href: `/${USER_ROLES.OWNER}/dashboard/inspection`, icon: CalendarSearch },
-    { name: "Profile", href: `/${USER_ROLES.OWNER}/dashboard/profile`, icon: User },
+    { name: "Dashboard", href: `/${USER_ROLES.OWNER}/dashboard`, tag: "/dashboard", icon: LayoutDashboard },
+    { name: "Active Bikes", href: `/${USER_ROLES.OWNER}/dashboard/bikes`, tag: "/bikes", icon: Bike },
+    { name: "Wallet", href: `/${USER_ROLES.OWNER}/dashboard/wallet`, tag: "/wallet", icon: CreditCard },
+    { name: "Report", href: `/${USER_ROLES.OWNER}/dashboard/report`, tag: "/report", icon: FileText },
+    { name: "Inspection", href: `/${USER_ROLES.OWNER}/dashboard/inspection`, tag: "/inspection", icon: CalendarSearch },
+    { name: "Profile", href: `/${USER_ROLES.OWNER}/dashboard/profile`, tag: "/profile", icon: User },
 ];
 
 export default function VechicleOwnerSidebar({ onNavigate }: SidebarProps) {
@@ -37,9 +37,9 @@ export default function VechicleOwnerSidebar({ onNavigate }: SidebarProps) {
                 </h1>
             </div>
             <nav className="space-y-1 flex-1">
-                {navigation.map((item) => {
+                {navigation.map((item, index) => {
                     const Icon = item.icon;
-                    const isActive = location.pathname === item.href;
+                    const isActive = index == 0 ? location.pathname === item.href : location.pathname.indexOf(item.tag) != -1 ? true : false;
                     return (
                         <Link
                             key={item.name}
