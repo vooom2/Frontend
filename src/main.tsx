@@ -7,9 +7,11 @@ import Signup from "./pages/auth/signup.tsx";
 import Login from "./pages/auth/login.tsx";
 import { USER_ROLES } from "./utils/constant.tsx";
 import { BikeApplication, BikeApplicationFinale, BikeHistory, ComplaintForm, FleetManager, Inspection, InspectionBikeDetails, ListedBikes, MakePayment, MotorcycleRental, MotorcycleRentalDetails, OwnerAccountVerified, OwnerBikeDetails, OwnerDashboard, OwnerProfileSettings, OwnerReport, OwnerSetupAccount, OwnerVerificationBanner, OwnerWallet, OwnerWithdrawalForm, PaymentHistory, RiderComplaints, RiderDashboard, RiderProfileSettings, RiderSetupAccount, RiderVerificationBanner, VehicleRegistration } from "./utils/pages_exports.tsx";
+import { Toaster } from "react-hot-toast";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    <Toaster />
     <BrowserRouter>
       <Routes>
         <Route element={<Signup />} path="auth/signup" />

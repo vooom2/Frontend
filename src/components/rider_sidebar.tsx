@@ -12,6 +12,7 @@ import {
 import { Link, useLocation } from "react-router";
 import Logo from "../assets/images/logo.png";
 import { Button } from "./ui/button";
+import AuthService from "@/api/auth.services";
 
 interface SidebarProps {
     onNavigate?: () => void;
@@ -55,15 +56,15 @@ export default function RiderSidebar({ onNavigate }: SidebarProps) {
                     );
                 })}
             </nav>
-            <Link to="/auth/login" className="w-full">
-                <Button
-                    variant="outline"
-                    className=" flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground hover:bg-muted rounded-lg"
-                >
-                    <LogOut className="h-5 w-5" />
-                    Sign out
-                </Button>
-            </Link>
-        </div>
+            <Button
+                variant="outline"
+                className=" flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground hover:bg-muted rounded-lg"
+                onClick={() => AuthService.logout()}
+            >
+                <LogOut className="h-5 w-5" />
+                Sign out
+            </Button>
+
+        </div >
     );
 }

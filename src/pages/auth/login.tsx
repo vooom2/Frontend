@@ -1,16 +1,62 @@
-
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Link } from "react-router";
-import deliveryman from "../../assets/images/delivery_man.jpeg"
-import logo from "../../assets/images/logo_white.png"
-import { USER_ROLES } from "@/utils/constant"
+import { useForm, SubmitHandler } from "react-hook-form";
+import deliveryman from "../../assets/images/delivery_man.jpeg";
+import logo from "../../assets/images/logo_white.png";
+import { USER_ROLES } from "@/utils/constant";
+import InputError from "@/components/input_errors";
+import AuthService from "@/api/auth.services";
+import notify from "@/utils/toast";
+import CircularLoader from "@/components/circular_loader";
+import { handleAxiosError } from "@/utils/axios";
+
+type Inputs = {
+    email: string;
+    password: string;
+};
 
 export default function Login() {
-    const [userType, setUserType] = useState(USER_ROLES.OWNER)
+    const [userType, setUserType] = useState(USER_ROLES.OWNER);
+    const [isLoading, setIsLoading] = useState(false);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<Inputs>();
+
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        try {
+            setIsLoading(true);
+            const response = await AuthService.login(data);
+            if (response.userType == userType) {
+                notify("Login successful", "success");
+                setTimeout(() => {
+                    window.location.href = `/${userType}/dashboard`
+                }, 3000)
+            } else {
+                notify("Invalid user type selected", "error");
+            }
+        } catch (error: unknown) {
+            notify(handleAxiosError(error), "error");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        (async () => {
+            await AuthService.getCurrentUser().then((res) => {
+                const userType = res.profile.account_type;
+                setTimeout(() => {
+                    window.location.href = `/${userType}/dashboard`
+                }, 2000)
+            })
+        })()
+    }, [])
 
     return (
         <div className="min-h-screen flex lg:grid-cols-3 bg-black p-6 w-screen">
@@ -42,18 +88,21 @@ export default function Login() {
                     <div className="space-y-6">
                         <div className="space-y-2">
                             <h2 className="text-xl font-semibold">Welcome Back 👋</h2>
-                            <p className="text-sm text-zinc-400">We are happy to have you back</p>
+                            <p className="text-sm text-zinc-400">
+                                We are happy to have you back
+                            </p>
                         </div>
 
-                        <form className="space-y-4">
-
+                        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                             <div className="space-y-2">
                                 <Label htmlFor="email">Email Address</Label>
                                 <Input
                                     id="email"
                                     type="email"
                                     className="bg-transparent border-zinc-800"
+                                    {...register("email", { required: true })}
                                 />
+                                {errors.email && <InputError />}
                             </div>
 
                             <div className="space-y-2">
@@ -62,16 +111,16 @@ export default function Login() {
                                     id="password"
                                     type="password"
                                     className="bg-transparent border-zinc-800"
+                                    {...register("password", { required: true })}
                                 />
+                                {errors.password && <InputError />}
                             </div>
-                            <Link to={`/${userType}/dashboard/unverified`}>
-                                <Button className="w-full bg-white text-black hover:bg-zinc-200 rounded-full py-6 mt-4">
-                                    Login
-                                </Button>
-                            </Link>
+                            <Button className="w-full bg-white text-black hover:bg-zinc-200 rounded-full py-6 mt-4">
+                                {isLoading ? <CircularLoader /> : "Login"}
+                            </Button>
 
                             <p className="text-sm text-center text-zinc-400">
-                                By clicking the "login" button, you agree to{' '}
+                                By clicking the "login" button, you agree to{" "}
                                 <Link to="#" className="text-orange-500 hover:underline">
                                     Vooom's terms of acceptable use
                                 </Link>
@@ -80,8 +129,11 @@ export default function Login() {
                         </form>
 
                         <p className="text-sm text-center">
-                            Don't have an account?{' '}
-                            <Link to="/auth/signup" className="text-orange-500 hover:underline">
+                            Don't have an account?{" "}
+                            <Link
+                                to="/auth/signup"
+                                className="text-orange-500 hover:underline"
+                            >
                                 Create one
                             </Link>
                         </p>
@@ -89,15 +141,14 @@ export default function Login() {
                 </div>
             </div>
 
-            <div className="relative hidden lg:block lg:w-[45vw] rounded-[2rem]"
+            <div
+                className="relative hidden lg:block lg:w-[45vw] rounded-[2rem]"
                 style={{
                     backgroundImage: `url(${deliveryman})`,
                     backgroundSize: "cover",
-                    backgroundPosition: "center"
+                    backgroundPosition: "center",
                 }}
-            >
-            </div>
+            ></div>
         </div>
-    )
+    );
 }
-

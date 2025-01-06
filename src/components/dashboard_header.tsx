@@ -8,8 +8,10 @@ import {
 } from "@/components/ui/popover"
 import { Link, useLocation } from 'react-router'
 import { USER_ROLES } from '@/utils/constant'
+import { useUserStore } from '@/store/user_store'
 function DashboardHeader() {
     const location = useLocation();
+    const userInfo = useUserStore((state) => state.userInfo);
     return (
         <header className="sticky top-0 bg-background z-10 py-6 px-0 md:px-4">
             <div className="flex h-16 items-center px-4 gap-4 ">
@@ -22,7 +24,7 @@ function DashboardHeader() {
                     <div className="flex flex-col gap-1 flex-1">
                         <h1 className="text-xl font-semibold">Dashboard</h1>
                         <p className="text-xs md:text-sm text-muted-foreground">
-                            Hi 👋, welcome to your dashboard
+                            Hi {userInfo.full_name}👋, Welcome to your dashboard
                         </p>
                     </div>
 

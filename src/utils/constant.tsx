@@ -4,7 +4,7 @@ export const DEFAULT_LANGUAGE = "en";
 export const SUPPORT_EMAIL = "support@vooomshadcn.com";
 export const USER_ROLES = {
     RIDER: "rider",
-    OWNER: "vehicle_owner",
+    OWNER: "owner",
     ADMIN: "admin"
 }
 export const COPYRIGHT_YEAR = new Date().getFullYear().toString();
