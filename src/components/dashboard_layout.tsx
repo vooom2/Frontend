@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import RiderSidebar from './rider_sidebar'
 import { Outlet, useLocation } from 'react-router'
@@ -6,25 +7,30 @@ import { USER_ROLES } from '@/utils/constant';
 import VechicleOwnerSidebar from './vehicle_owners_sidebar';
 import LoadingOverlay from './loading_overlay';
 import { useEffect } from 'react';
-import AuthService from '@/api/auth.services';
-import { useLoadingStore } from '@/store/loading_state_store';
-import { useUserStore } from '@/store/user_store';
+import useLoadingStateStore from '@/stores/loading_state_store';
+import useUserStore from '@/stores/user_store';
+import UserService from '@/api/user.services';
+
 
 export default function DashboardLayout() {
     const location = useLocation();
-    const loaderState = useLoadingStore((state) => state.isLoading);
-    const setLoaderState = useLoadingStore((state) => state.setState);
+    const { isLoading, setState } = useLoadingStateStore((state) => state);
     const updateUserInfo = useUserStore((state) => state.updateInfo);
     useEffect(() => {
-        (async () => {
-            await AuthService.getCurrentUser().then((res) => {
-                updateUserInfo(res.profile);
-                setLoaderState(false);
-            });
-        })();
+        const fetchUserInfo = async () => {
+            const res = await UserService.getCurrentUser() as { profile: any };
+            updateUserInfo(res.profile);
+            setState(false);
+        };
+
+        fetchUserInfo();
+        const intervalId = setInterval(fetchUserInfo, 5000);
+
+        return () => clearInterval(intervalId);
+
     }, []);
     return (
-        <LoadingOverlay isLoading={loaderState}>
+        <LoadingOverlay isLoading={isLoading}>
             <div className="min-h-screen bg-[#F9F9F9] w-screen">
                 <div className="flex">
                     <div className="hidden md:block w-64 fixed inset-y-0">

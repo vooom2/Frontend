@@ -2,6 +2,8 @@
 import { USER_ACCESS_TOKEN } from "@/utils/appstrings";
 import axiosInstance, { handleAxiosError } from "@/utils/axios";
 import notify from "@/utils/toast";
+import { UserInfo } from "os";
+import UserService from "./user.services";
 
 interface LoginResponse {
   token: string;
@@ -59,7 +61,7 @@ const AuthService = {
       window.location.href= "/auth/login";
       notify("Not unauthorized", "error");
     }
-    await AuthService.getCurrentUser();
+    await UserService.getCurrentUser();
   },
   
   logout: (): void => {
@@ -67,19 +69,7 @@ const AuthService = {
     window.location.href = "/auth/login";
   },
 
-  getCurrentUser: async (): Promise<unknown> => {
-    try {
-      const response = await axiosInstance.get("/user");
-      if(response.status != 200 && response.status != 201){
-          window.location.href= "/auth/login";
-          notify("Not unauthorized", "error");
-      }
-      return response.data;
-    } catch (err) {
-      console.log(err);
-    //  await AuthService.getCurrentUser();
-    }
-  },
+ 
 };
 
 export default AuthService;

@@ -9,8 +9,11 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { TabsContent } from "@/components/ui/tabs";
+import useUserStore from "@/stores/user_store";
 
 function OwnerProfile() {
+    const userInfo = useUserStore((state) => state.userInfo);
+
     return (
         <TabsContent value="account" className="mt-6">
             <form className="space-y-6">
@@ -21,7 +24,8 @@ function OwnerProfile() {
                             <Input
                                 id="fullName"
                                 placeholder="Full Name"
-                                defaultValue="Full Name"
+                                defaultValue={userInfo?.full_name}
+                                disabled
                             />
                             <User className="absolute right-3 top-2.5 h-5 w-5 text-muted-foreground" />
                         </div>
@@ -31,22 +35,22 @@ function OwnerProfile() {
                         <Input
                             id="email"
                             type="email"
-                            defaultValue="emmataylor@gmail.com"
+                            disabled
+                            defaultValue={userInfo?.email}
                         />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="phone">Phone Number</Label>
                         <div className="flex gap-2">
-                            <Select defaultValue="234">
+                            <Select defaultValue="234" disabled>
                                 <SelectTrigger className="w-[100px]">
                                     <SelectValue />
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="234">+234</SelectItem>
-                                    <SelectItem value="1">+1</SelectItem>
                                 </SelectContent>
                             </Select>
-                            <Input id="phone" defaultValue="08065650633" />
+                            <Input id="phone" defaultValue="08065650633" disabled value={userInfo?.phone_number} />
                         </div>
                     </div>
                     <div className="space-y-2">
@@ -69,7 +73,7 @@ function OwnerProfile() {
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="state">State</Label>
-                        <Select defaultValue="lagos">
+                        <Select defaultValue="lagos" disabled>
                             <SelectTrigger>
                                 <SelectValue />
                             </SelectTrigger>

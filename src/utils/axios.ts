@@ -31,6 +31,9 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401 || error.response?.status === 400) {
       localStorage.removeItem(USER_ACCESS_TOKEN);
+      if(window.location.pathname !== "/auth/login"){
+        window.location.href = "/auth/login";
+      }
     } else if (error.code === 'ECONNABORTED' || !error.response) {
       // Handle timeout or no connection errors
       console.error('Network connection error:', error.message);

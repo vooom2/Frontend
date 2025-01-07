@@ -9,8 +9,11 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { TabsContent } from "@/components/ui/tabs";
+import useUserStore from "@/stores/user_store";
 
 function RiderProfile() {
+    const userInfo = useUserStore((state) => state.userInfo);
+
     return (
         <TabsContent value="account" className="mt-6">
             <form className="space-y-6">
@@ -43,10 +46,9 @@ function RiderProfile() {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="234">+234</SelectItem>
-                                    <SelectItem value="1">+1</SelectItem>
                                 </SelectContent>
                             </Select>
-                            <Input id="phone" defaultValue="08065650633" />
+                            <Input id="phone" defaultValue="08065650633" disabled value={userInfo.phone_number} />
                         </div>
                     </div>
                     <div className="space-y-2">

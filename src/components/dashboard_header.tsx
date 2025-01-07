@@ -8,7 +8,8 @@ import {
 } from "@/components/ui/popover"
 import { Link, useLocation } from 'react-router'
 import { USER_ROLES } from '@/utils/constant'
-import { useUserStore } from '@/store/user_store'
+import useUserStore from '@/stores/user_store'
+
 function DashboardHeader() {
     const location = useLocation();
     const userInfo = useUserStore((state) => state.userInfo);
@@ -23,8 +24,9 @@ function DashboardHeader() {
                     {/* Left Section: Title and Welcome Text */}
                     <div className="flex flex-col gap-1 flex-1">
                         <h1 className="text-xl font-semibold">Dashboard</h1>
-                        <p className="text-xs md:text-sm text-muted-foreground">
-                            Hi {userInfo.full_name}👋, Welcome to your dashboard
+                        <p className="text-xs md:text-sm text-muted-foreground ">
+                            Hi <span className='capitalize'> {userInfo?.full_name ?? ""}
+                            </span>👋, Welcome to your dashboard
                         </p>
                     </div>
 
@@ -43,7 +45,6 @@ function DashboardHeader() {
                             <Popover>
                                 <PopoverTrigger asChild>
                                     <div>
-
                                         <Bell />
                                         <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold h-4 w-4 flex items-center justify-center rounded-full">
                                             2

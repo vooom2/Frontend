@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/table"
 import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator"
 import formatCurrency from "@/utils/formatCurrency"
+import RiderVerificationBanner from "@/components/rider_verification_banner"
+import useUserStore from "@/stores/user_store"
 
 function CircularProgress() {
     return (
@@ -58,88 +60,96 @@ export default function RiderDashboard() {
         { week: 'Week 2 September', amount: 21500, outstanding: 0, delayedFine: 3500, status: 'Paid' },
         { week: 'Week 1 September', amount: 21500, outstanding: 0, delayedFine: 0, status: 'Paid' },
     ]
+    const userInfo = useUserStore((state) => state.userInfo)
 
     return (
-        <div className="container mx-auto p-2 lg:p-6 space-y-6">
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <div className="relative h-12 w-12 rounded-full overflow-hidden">
-                        <img
-                            src="https://images.unsplash.com/photo-1603039997315-6dcb72ec1204"
-                            alt="Qlink 2024"
+        <>
+            {
+                !userInfo?.account_verified && <RiderVerificationBanner />
+            }
+            {
+                userInfo?.account_verified && <div className="container mx-auto p-2 lg:p-6 space-y-6">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="relative h-12 w-12 rounded-full overflow-hidden">
+                                <img
+                                    src="https://images.unsplash.com/photo-1603039997315-6dcb72ec1204"
+                                    alt="Qlink 2024"
 
-                            className="object-cover"
-                        />
-                    </div>
-                    <div>
-                        <div className="flex items-center gap-2">
-                            <h2 className="font-semibold">Qlink 2024</h2>
-                            <Badge className="bg-green-100 text-green-700">
-                                Active
-                            </Badge>
+                                    className="object-cover"
+                                />
+                            </div>
+                            <div>
+                                <div className="flex items-center gap-2">
+                                    <h2 className="font-semibold">Qlink 2024</h2>
+                                    <Badge className="bg-green-100 text-green-700">
+                                        Active
+                                    </Badge>
+                                </div>
+                                <p className="text-sm text-muted-foreground">VN 225893</p>
+                            </div>
                         </div>
-                        <p className="text-sm text-muted-foreground">VN 225893</p>
+                        <div className="flex gap-2 flex-col md:flex-row">
+                            <Button variant="outline">View Detail</Button>
+                            <Button variant="destructive">Make a report</Button>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                        <DashboardStatusIndicatorCard label="Total Payment" icon="clock" value={formatCurrency(320000)} />
+                        <DashboardStatusIndicatorCard label="Amount this week" icon="clock" value={formatCurrency(21000)} />
+                        <DashboardStatusIndicatorCard label="Outstanding" icon="clock" value={formatCurrency(0)} />
+                        <DashboardStatusIndicatorCard label="Active Repairs" icon="bike" value="3" />
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                        <div className="lg:col-span-3 text-nowrap">
+                            <Card>
+                                <div className="p-4 border-b">
+                                    <h3 className="font-semibold">Status of Payment</h3>
+                                </div>
+                                <Table>
+                                    <TableHeader>
+                                        <TableRow>
+                                            <TableHead>Week</TableHead>
+                                            <TableHead>Amount</TableHead>
+                                            <TableHead>Outstanding</TableHead>
+                                            <TableHead>Delayed Fine</TableHead>
+                                            <TableHead>Status</TableHead>
+                                        </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                        {paymentData.map((row, index) => (
+                                            <TableRow key={index}>
+                                                <TableCell>{row.week}</TableCell>
+                                                <TableCell>N{row.amount.toLocaleString()}</TableCell>
+                                                <TableCell className={row.outstanding > 0 ? 'text-red-600' : ''}>
+                                                    {row.outstanding > 0 ? `N${row.outstanding.toLocaleString()}` : 'N0.00'}
+                                                </TableCell>
+                                                <TableCell className={row.delayedFine > 0 ? 'text-red-600' : ''}>
+                                                    {row.delayedFine > 0 ? `N${row.delayedFine.toLocaleString()}` : 'N0.00'}
+                                                </TableCell>
+                                                <TableCell>
+                                                    <Badge
+                                                        variant={row.status === 'Paid' ? 'secondary' : 'default'}
+                                                        className={row.status === 'Paid' ? 'bg-gray-100' : 'bg-black'}
+                                                    >
+                                                        {row.status}
+                                                    </Badge>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </Card>
+                        </div>
+                        <div>
+                            <CircularProgress />
+                        </div>
                     </div>
                 </div>
-                <div className="flex gap-2 flex-col md:flex-row">
-                    <Button variant="outline">View Detail</Button>
-                    <Button variant="destructive">Make a report</Button>
-                </div>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                <DashboardStatusIndicatorCard label="Total Payment" icon="clock" value={formatCurrency(320000)} />
-                <DashboardStatusIndicatorCard label="Amount this week" icon="clock" value={formatCurrency(21000)} />
-                <DashboardStatusIndicatorCard label="Outstanding" icon="clock" value={formatCurrency(0)} />
-                <DashboardStatusIndicatorCard label="Active Repairs" icon="bike" value="3" />
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                <div className="lg:col-span-3 text-nowrap">
-                    <Card>
-                        <div className="p-4 border-b">
-                            <h3 className="font-semibold">Status of Payment</h3>
-                        </div>
-                        <Table>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>Week</TableHead>
-                                    <TableHead>Amount</TableHead>
-                                    <TableHead>Outstanding</TableHead>
-                                    <TableHead>Delayed Fine</TableHead>
-                                    <TableHead>Status</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {paymentData.map((row, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell>{row.week}</TableCell>
-                                        <TableCell>N{row.amount.toLocaleString()}</TableCell>
-                                        <TableCell className={row.outstanding > 0 ? 'text-red-600' : ''}>
-                                            {row.outstanding > 0 ? `N${row.outstanding.toLocaleString()}` : 'N0.00'}
-                                        </TableCell>
-                                        <TableCell className={row.delayedFine > 0 ? 'text-red-600' : ''}>
-                                            {row.delayedFine > 0 ? `N${row.delayedFine.toLocaleString()}` : 'N0.00'}
-                                        </TableCell>
-                                        <TableCell>
-                                            <Badge
-                                                variant={row.status === 'Paid' ? 'secondary' : 'default'}
-                                                className={row.status === 'Paid' ? 'bg-gray-100' : 'bg-black'}
-                                            >
-                                                {row.status}
-                                            </Badge>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </Card>
-                </div>
-                <div>
-                    <CircularProgress />
-                </div>
-            </div>
-        </div>
+            }
+        </>
     )
 }
 

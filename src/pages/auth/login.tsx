@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,7 +50,7 @@ export default function Login() {
 
     useEffect(() => {
         (async () => {
-            await AuthService.getCurrentUser().then((res) => {
+            await AuthService.getCurrentUser().then((res: any) => {
                 const userType = res.profile.account_type;
                 setTimeout(() => {
                     window.location.href = `/${userType}/dashboard`
@@ -80,7 +81,7 @@ export default function Login() {
                                 value={USER_ROLES.RIDER}
                                 className="data-[state=on]:bg-white data-[state=on]:text-black rounded-md px-3 py-2 text-sm transition-colors"
                             >
-                                Riders
+                                Rider
                             </ToggleGroupItem>
                         </ToggleGroup>
                     </div>
