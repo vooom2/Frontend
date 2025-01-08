@@ -82,7 +82,7 @@ export default function RiderProfileSettings() {
                             </CardContent>
                         </Card>
 
-                        <Card>
+                        {/* <Card>
                             <CardContent className="p-4">
                                 <div className="relative aspect-[1.6] w-full">
                                     <img
@@ -95,7 +95,7 @@ export default function RiderProfileSettings() {
                                     </div>
                                 </div>
                             </CardContent>
-                        </Card>
+                        </Card> */}
                     </div>
                 </div>
             </div>

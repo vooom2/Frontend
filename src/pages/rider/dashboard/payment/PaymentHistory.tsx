@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -9,75 +10,37 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator";
-import { Link } from "react-router";
 import formatCurrency from "@/utils/formatCurrency";
+import useRiderDashboardStatStore from "@/stores/rider_store/rider_dashboard_stats.store";
+import useRiderPaymentStore from "@/stores/rider_store/rider_payments_store";
+import RiderServices from "@/api/rider.services";
+import { useEffect } from "react";
+import { getLocalFriendlyDate } from "@/utils/utils";
 
 export default function PaymentHistory() {
-    const paymentData = [
-        {
-            week: "Week 4 November",
-            amount: 21500,
-            outstanding: 0,
-            delayedFine: 0,
-            status: "Make Payment",
-        },
-        {
-            week: "Week 4 October",
-            amount: 21500,
-            outstanding: 0,
-            delayedFine: 0,
-            status: "Paid",
-        },
-        {
-            week: "Week 3 October",
-            amount: 21500,
-            outstanding: 3500,
-            delayedFine: 0,
-            status: "Paid",
-        },
-        {
-            week: "Week 2 October",
-            amount: 21500,
-            outstanding: 0,
-            delayedFine: 3500,
-            status: "Paid",
-        },
-        {
-            week: "Week 1 October",
-            amount: 21500,
-            outstanding: 0,
-            delayedFine: 0,
-            status: "Paid",
-        },
-        {
-            week: "Week 4 September",
-            amount: 21500,
-            outstanding: 0,
-            delayedFine: 0,
-            status: "Paid",
-        },
-        {
-            week: "Week 3 September",
-            amount: 21500,
-            outstanding: 3500,
-            delayedFine: 0,
-            status: "Paid",
-        },
-        {
-            week: "Week 2 September",
-            amount: 21500,
-            outstanding: 0,
-            delayedFine: 3500,
-            status: "Paid",
-        },
-        {
-            week: "Week 1 September",
-            amount: 21500,
-            outstanding: 0,
-            delayedFine: 0,
-            status: "Paid",
-        },
-    ];
+
+    const stats = useRiderDashboardStatStore((state) => state.stats);
+    const setStats = useRiderDashboardStatStore((state) => state.setStats);
+    const setPayments = useRiderPaymentStore((state) => state.setPayments);
+    const payments = useRiderPaymentStore((state) => state.payments);
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            const res = (await RiderServices.getDashboardStat()) as { data: any };
+            if (res != null) {
+                setStats(res.data);
+            }
+        };
+        const fetchPayments = async () => {
+            const res = (await RiderServices.getPayments()) as { data: any };
+            if (res != null) {
+                setPayments(res.docs);
+            }
+        };
+
+        fetchStats();
+        fetchPayments();
+    }, []);
 
     return (
         <div className="container mx-auto p-2 lg:p-6 space-y-6">
@@ -86,24 +49,28 @@ export default function PaymentHistory() {
                     bg="bg-black"
                     label="Total Payment"
                     icon="clock"
-                    value={formatCurrency(312000)}
+                    value={formatCurrency(parseInt(stats?.total_payments ?? ""))}
 
                 />
                 <DashboardStatusIndicatorCard
                     label="Amount this week"
                     icon="clock"
-                    value={formatCurrency(112000)}
+                    value={formatCurrency(parseInt(stats?.weekly_due ?? ""))}
+
                 />
                 <DashboardStatusIndicatorCard
                     label="Outstanding"
                     icon="clock"
-                    value={formatCurrency(0)}
+                    value={formatCurrency(
+                        parseInt(stats?.outstanding_payments ?? "")
+                    )}
 
                 />
                 <DashboardStatusIndicatorCard
-                    label="Active Repairs"
+                    label="Inspection Count"
                     icon="bike"
-                    value="3"
+                    value={formatCurrency(stats?.inspection_count ?? 0)}
+
                 />
             </div>
 
@@ -116,54 +83,92 @@ export default function PaymentHistory() {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>Week</TableHead>
+                                    <TableHead>Date</TableHead>
+                                    <TableHead>Description</TableHead>
                                     <TableHead>Amount</TableHead>
-                                    <TableHead>Outstanding</TableHead>
-                                    <TableHead>Delayed Fine</TableHead>
+                                    <TableHead>Overdue Charges</TableHead>
                                     <TableHead>Status</TableHead>
                                 </TableRow>
                             </TableHeader>
-                            <TableBody>
-                                {paymentData.map((row, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell>{row.week}</TableCell>
-                                        <TableCell>{formatCurrency(row.amount)}</TableCell>
-                                        <TableCell
-                                            className={row.outstanding > 0 ? "text-red-600" : ""}
+                            {!payments ? (
+                                <TableBody className="animate-pulse">
+                                    {[...Array(3)].map((_, index) => (
+                                        <TableRow
+                                            key={index}
+                                            className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                                                }`}
                                         >
-                                            {row.outstanding > 0
-                                                ? formatCurrency(row.outstanding)
-                                                : formatCurrency(0)}
-                                        </TableCell>
-                                        <TableCell
-                                            className={row.delayedFine > 0 ? "text-red-600" : ""}
-                                        >
-                                            {row.delayedFine > 0
-                                                ? formatCurrency(row.delayedFine)
-                                                : formatCurrency(0)}
-                                        </TableCell>
-                                        <TableCell>
-                                            <Link
-                                                to={
-                                                    row.status != "Paid" ? "pay/0" : ""
+                                            <TableCell>
+                                                <div className="h-4 bg-gray-200 rounded w-24"></div>
+                                            </TableCell>
+                                            <TableCell>
+                                                <div className="h-4 bg-gray-200 rounded w-24"></div>
+                                            </TableCell>
+                                            <TableCell>
+                                                <div className="h-4 bg-gray-200 rounded w-20"></div>
+                                            </TableCell>
+                                            <TableCell>
+                                                <div className="h-4 bg-gray-200 rounded w-16"></div>
+                                            </TableCell>
+                                            <TableCell>
+                                                <div className="h-4 bg-gray-200 rounded w-24"></div>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            ) : payments.length > 0 ? (
+                                <TableBody>
+                                    {payments.map((payment, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell>
+                                                {getLocalFriendlyDate(payment.createdAt)}
+                                            </TableCell>
+                                            <TableCell>{payment.description}</TableCell>
+                                            <TableCell>
+                                                {formatCurrency(payment.payment_amount)}
+                                            </TableCell>
+                                            <TableCell
+                                                className={
+                                                    payment.overdue_charges > 0
+                                                        ? "text-red-600"
+                                                        : ""
                                                 }
                                             >
+                                                {formatCurrency(payment.overdue_charges)
+                                                }
+
+                                            </TableCell>
+
+                                            <TableCell>
                                                 <Badge
                                                     variant={
-                                                        row.status === "Paid" ? "secondary" : "default"
+                                                        payment.payment_status === "completed"
+                                                            ? "secondary"
+                                                            : "default"
                                                     }
                                                     className={
-                                                        row.status === "Paid" ? "bg-gray-100" : "bg-black"
+                                                        payment.payment_status !== "completed"
+                                                            ? "text-orange-500 bg-orange-100"
+                                                            : "text-green-500 bg-green-100"
                                                     }
                                                 >
-                                                    {row.status}
+                                                    {payment.payment_status}
                                                 </Badge>
-                                            </Link>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            ) : (
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell colSpan={5} className="text-center">
+                                            No payment history
                                         </TableCell>
                                     </TableRow>
-                                ))}
-                            </TableBody>
+                                </TableBody>
+                            )}
                         </Table>
+
                     </Card>
                 </div>
             </div>
