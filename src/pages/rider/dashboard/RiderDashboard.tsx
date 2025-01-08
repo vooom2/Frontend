@@ -14,6 +14,7 @@ import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator
 import formatCurrency from "@/utils/formatCurrency"
 import RiderVerificationBanner from "@/components/rider_verification_banner"
 import useUserStore from "@/stores/user_store"
+import VerifyingAccount from "./rider_verification/verifying_account"
 
 function CircularProgress() {
     return (
@@ -65,11 +66,12 @@ export default function RiderDashboard() {
     return (
         <>
             {
-                !userInfo?.account_verified && <RiderVerificationBanner />
+                (!userInfo?.account_verified && !userInfo?.verification_started) && <RiderVerificationBanner />
             }
             {
-                userInfo?.account_verified && <div className="container mx-auto p-2 lg:p-6 space-y-6">
-                    <div className="flex items-center justify-between">
+                (userInfo?.account_verified || userInfo?.verification_started) && <div className="container mx-auto p-2 lg:p-6 space-y-6">
+                    {/* Assigned bike info */}
+                    <div className="flex items-center justify-between hidden">
                         <div className="flex items-center gap-3">
                             <div className="relative h-12 w-12 rounded-full overflow-hidden">
                                 <img
@@ -95,14 +97,17 @@ export default function RiderDashboard() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                        <DashboardStatusIndicatorCard label="Total Payment" icon="clock" value={formatCurrency(320000)} />
-                        <DashboardStatusIndicatorCard label="Amount this week" icon="clock" value={formatCurrency(21000)} />
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                        <DashboardStatusIndicatorCard label="Total Payment" icon="clock" value={formatCurrency(0)} />
+                        <DashboardStatusIndicatorCard label="Amount this week" icon="clock" value={formatCurrency(0)} />
                         <DashboardStatusIndicatorCard label="Outstanding" icon="clock" value={formatCurrency(0)} />
-                        <DashboardStatusIndicatorCard label="Active Repairs" icon="bike" value="3" />
+
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                    {/* Verifiying account banner */}
+                    {!userInfo?.account_verified && <VerifyingAccount />}
+
+                    {userInfo?.account_verified && <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                         <div className="lg:col-span-3 text-nowrap">
                             <Card>
                                 <div className="p-4 border-b">
@@ -146,7 +151,7 @@ export default function RiderDashboard() {
                         <div>
                             <CircularProgress />
                         </div>
-                    </div>
+                    </div>}
                 </div>
             }
         </>

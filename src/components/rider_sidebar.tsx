@@ -20,7 +20,7 @@ interface SidebarProps {
 
 const navigation = [
     { name: "Dashboard", href: `/${USER_ROLES.RIDER}/dashboard`, tag: "/dashboard", icon: LayoutDashboard },
-    { name: "Rent Bike", href: `/${USER_ROLES.RIDER}/dashboard/rent/available`, tag: "/rent", icon: Bike },
+    // { name: "Rent Bike", href: `/${USER_ROLES.RIDER}/dashboard/rent/available`, tag: "/rent", icon: Bike },
     { name: "Payment History", href: `/${USER_ROLES.RIDER}/dashboard/payments`, tag: "/payments", icon: CreditCard },
     { name: "Fleet Manager", href: `/${USER_ROLES.RIDER}/dashboard/fleet`, tag: "/fleet", icon: Users },
     { name: "Complaint", href: `/${USER_ROLES.RIDER}/dashboard/complaints`, tag: "/complaints", icon: FileText },

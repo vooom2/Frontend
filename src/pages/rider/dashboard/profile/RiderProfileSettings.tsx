@@ -1,26 +1,25 @@
-import { Trash2 } from "lucide-react";
+import { Trash2, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RiderProfile from "./rider_profile";
 import RiderWithdrawalSettings from "./rider_withdrawal_settings";
 import RiderSecuritySettings from "./rider_security_settings";
+import useUserStore from "@/stores/user_store";
 
 export default function RiderProfileSettings() {
 
+    const userInfo = useUserStore((state) => state.userInfo);
     return (
         <div className="container mx-auto p-4">
             <div className="grid gap-8 md:grid-cols-[1fr,300px]">
                 <div className="space-y-6">
                     {/* Profile Avatar */}
                     <div className="flex items-center gap-4">
-                        <div className="relative h-16 w-16">
-                            <img
-                                src="https://randomuser.me/api/portraits/men/30.jpg"
-                                alt="Profile"
-                                className="rounded-full object-cover"
-                            />
-                        </div>
+                        {userInfo?.img ? <div className="relative h-20 w-20 bg-white border flex items-center justify-center rounded-full"
+                            style={{ backgroundImage: `url(${userInfo.img})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}
+
+                        /> : <User size={20} />}
                     </div>
 
                     {/* Tabs and Form */}
@@ -63,12 +62,13 @@ export default function RiderProfileSettings() {
                     <div className="space-y-4">
                         <Card>
                             <CardContent className="p-4">
-                                <div className="relative aspect-square w-full">
-                                    <img
-                                        src="https://randomuser.me/api/portraits/men/30.jpg"
+                                <div className="relative aspect-square w-full flex items-center">
+                                    {userInfo?.img && <img
+                                        src={userInfo?.img}
                                         alt="Profile preview"
                                         className="rounded-lg object-cover w-full"
-                                    />
+                                    />}
+
                                     <div className="absolute bottom-2 right-2 flex gap-2">
                                         <Button
                                             size="icon"

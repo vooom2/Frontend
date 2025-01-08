@@ -14,6 +14,7 @@ import AuthService from "@/api/auth.services";
 import notify from "@/utils/toast";
 import CircularLoader from "@/components/circular_loader";
 import { handleAxiosError } from "@/utils/axios";
+import UserService from "@/api/user.services";
 
 type Inputs = {
     email: string;
@@ -50,7 +51,7 @@ export default function Login() {
 
     useEffect(() => {
         (async () => {
-            await AuthService.getCurrentUser().then((res: any) => {
+            await UserService.getCurrentUser().then((res: any) => {
                 const userType = res.profile.account_type;
                 setTimeout(() => {
                     window.location.href = `/${userType}/dashboard`

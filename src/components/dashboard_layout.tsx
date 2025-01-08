@@ -19,15 +19,15 @@ export default function DashboardLayout() {
     useEffect(() => {
         const fetchUserInfo = async () => {
             const res = await UserService.getCurrentUser() as { profile: any };
-            updateUserInfo(res.profile);
+            if (res != null) {
+                updateUserInfo(res.profile);
+            }
             setState(false);
         };
 
         fetchUserInfo();
         const intervalId = setInterval(fetchUserInfo, 5000);
-
         return () => clearInterval(intervalId);
-
     }, []);
     return (
         <LoadingOverlay isLoading={isLoading}>

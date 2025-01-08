@@ -1,23 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Requirements from "./requirements";
 import ProfileForm from "./profile_form";
 import DocumentUpload from "./document_upload";
 import GuarantorForm from "./guarantor_form";
-import Verifying from "./verifying_account";
+import VerifyingAccount from "./verifying_account";
 import { useNavigate } from "react-router";
+import useUserStore from "@/stores/user_store";
 
 export default function SetupAccount() {
     const [currentStep, setCurrentStep] = useState(0);
     const navigate = useNavigate();
+    const userInfo = useUserStore((state) => state.userInfo);
 
     const handleStepChange = (index: number) => {
         if (index > 4) {
-            navigate("/dashboard");
+            navigate(`/${userInfo?.account_type}/dashboard`);
             return;
         }
         setCurrentStep(index);
     }
-
+    useEffect(() => {
+        if (!userInfo?.verification_started) {
+            handleStepChange(0);
+        } else {
+            handleStepChange(4);
+        }
+    }, [userInfo?.verification_started])
     return (
         <div className="mt-10 py-6 flex items-center justify-center ">
             <div className="max-w-4xl w-full">
@@ -31,7 +39,7 @@ export default function SetupAccount() {
                 </div>
 
                 {/* Progress Indicator */}
-                <div className="mt-4 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 bg-black py-3 px-4 sm:px-6 rounded-md justify-around">
+                <div className="mt-4 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 bg-black py-3 px-4 sm:px-6 rounded-2xl justify-around">
                     <Step completed={currentStep > 0} label="Personal Verification" />
                     <Separator />
                     <Step completed={currentStep > 1} label="National Verification" />
@@ -40,21 +48,22 @@ export default function SetupAccount() {
                 </div>
 
                 {currentStep == 0 && <Requirements />}
-                {currentStep == 1 && <ProfileForm />}
-                {currentStep == 2 && <DocumentUpload />}
-                {currentStep == 3 && <GuarantorForm />}
-                {currentStep >= 4 && <Verifying />}
+                {currentStep == 1 && <ProfileForm handleStepChange={handleStepChange} />}
+                {currentStep == 2 && <DocumentUpload handleStepChange={handleStepChange} />}
+                {currentStep == 3 && <GuarantorForm handleStepChange={handleStepChange} />}
+                {currentStep >= 4 && <VerifyingAccount />}
 
                 {/* Next Button */}
-                <div className="mt-6 text-center">
-                    <button
-                        className="max-w-3xl w-full mx-auto bg-black text-white py-3 rounded-md hover:bg-gray-800 transition"
-                        onClick={() => handleStepChange(currentStep + 1)}
-                    >
-                        {currentStep <= 3 ? "Next" : "View Dashboard"}
-                    </button>
-                </div>
-
+                {(currentStep === 0 || currentStep === 4) && (
+                    <div className="mt-6 text-center">
+                        <button
+                            className="max-w-3xl w-full mx-auto bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition"
+                            onClick={() => handleStepChange(currentStep + 1)}
+                        >
+                            {currentStep === 0 ? "Next" : "View Dashboard"}
+                        </button>
+                    </div>
+                )}
                 {/* Pagination Dots */}
                 <div className="flex justify-center items-center mt-6 gap-3">
                     <span className={`w-10 h-1 ${currentStep >= 1 ? 'bg-black' : 'bg-gray-300'} rounded-full transition-all`}></span>

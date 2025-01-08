@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select";
 import { TabsContent } from "@/components/ui/tabs";
 import useUserStore from "@/stores/user_store";
+import nigerianStates from "@/utils/states_list";
 
 function RiderProfile() {
     const userInfo = useUserStore((state) => state.userInfo);
@@ -23,8 +24,8 @@ function RiderProfile() {
                         <div className="relative">
                             <Input
                                 id="fullName"
-                                placeholder="Full Name"
-                                defaultValue="Full Name"
+                                className="capitalize"
+                                value={userInfo?.full_name}
                             />
                             <User className="absolute right-3 top-2.5 h-5 w-5 text-muted-foreground" />
                         </div>
@@ -34,13 +35,14 @@ function RiderProfile() {
                         <Input
                             id="email"
                             type="email"
-                            defaultValue="emmataylor@gmail.com"
+                            value={userInfo?.email}
+                            readOnly
                         />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="phone">Phone Number</Label>
                         <div className="flex gap-2">
-                            <Select defaultValue="234">
+                            <Select defaultValue="234" disabled>
                                 <SelectTrigger className="w-[100px]">
                                     <SelectValue />
                                 </SelectTrigger>
@@ -48,42 +50,43 @@ function RiderProfile() {
                                     <SelectItem value="234">+234</SelectItem>
                                 </SelectContent>
                             </Select>
-                            <Input id="phone" defaultValue="08065650633" disabled value={userInfo.phone_number} />
+                            <Input id="phone" readOnly value={userInfo?.phone_number} />
                         </div>
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="occupation">Occupation</Label>
-                        <Input id="occupation" defaultValue="Business Man" />
+                        <Input id="occupation" value={userInfo?.occupation ?? "Not specified"} />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="address">Address</Label>
                         <div className="relative">
                             <Input
                                 id="address"
-                                defaultValue="3, Wuse street, Abuja"
+                                value={userInfo?.address ?? "Not specified"}
                             />
                             <MapPin className="absolute right-3 top-2.5 h-5 w-5 text-muted-foreground" />
                         </div>
                     </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="city">City</Label>
-                        <Input id="city" defaultValue="Wuse" />
-                    </div>
+
                     <div className="space-y-2">
                         <Label htmlFor="state">State</Label>
-                        <Select defaultValue="lagos">
+                        <Select defaultValue={userInfo?.state ?? "Not specified"} disabled>
                             <SelectTrigger>
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="lagos">Lagos</SelectItem>
-                                <SelectItem value="abuja">Abuja</SelectItem>
+                                {
+                                    nigerianStates.map((state, index) => (
+                                        <SelectItem key={index} value={state.name}>{state.name}</SelectItem>
+                                    ))
+
+                                }
                             </SelectContent>
                         </Select>
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="country">Country</Label>
-                        <Select defaultValue="nigeria">
+                        <Select defaultValue="nigeria" disabled>
                             <SelectTrigger>
                                 <SelectValue />
                             </SelectTrigger>

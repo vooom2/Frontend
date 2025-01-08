@@ -1,5 +1,5 @@
 import image from '../../../../assets/images/verifying.png';
-function Verifying() {
+function VerifyingAccount() {
     return (
         <div className="text-center px-4 my-10">
             <img src={image} alt="" className='w-64 h-64 object-contain mx-auto' />
@@ -9,4 +9,4 @@ function Verifying() {
     )
 }
 
-export default Verifying
+export default VerifyingAccount

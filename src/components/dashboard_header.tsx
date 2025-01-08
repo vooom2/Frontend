@@ -9,6 +9,7 @@ import {
 import { Link, useLocation } from 'react-router'
 import { USER_ROLES } from '@/utils/constant'
 import useUserStore from '@/stores/user_store'
+import { Skeleton } from './ui/skeleton'
 
 function DashboardHeader() {
     const location = useLocation();
@@ -45,14 +46,15 @@ function DashboardHeader() {
                             <Popover>
                                 <PopoverTrigger asChild>
                                     <div>
-                                        <Bell />
-                                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold h-4 w-4 flex items-center justify-center rounded-full">
-                                            2
+                                        <Bell className='cursor-pointer' />
+                                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold h-4 w-4 flex items-center justify-center rounded-full hidden">
+
                                         </span>
                                     </div>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-80">
-
+                                <PopoverContent className="w-80 space-y-2">
+                                    <Skeleton className="h-4 w-full" />
+                                    <Skeleton className="h-4 w-full" />
                                 </PopoverContent>
                             </Popover>
 

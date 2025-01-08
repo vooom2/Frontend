@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from "axios";
 import { USER_ACCESS_TOKEN } from "./appstrings";
 
+
 // Base Axios instance configuration
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: "https://voom-engine.onrender.com/api",
@@ -29,7 +30,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response?.status === 401 || error.response?.status === 400) {
+    if (error.response?.status === 401 || error.response?.status === 403) {
       localStorage.removeItem(USER_ACCESS_TOKEN);
       if(window.location.pathname !== "/auth/login"){
         window.location.href = "/auth/login";
