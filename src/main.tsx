@@ -6,7 +6,7 @@ import DashboardLayout from "./components/dashboard_layout.tsx";
 import Signup from "./pages/auth/signup.tsx";
 import Login from "./pages/auth/login.tsx";
 import { USER_ROLES } from "./utils/constant.tsx";
-import { BikeApplication, BikeApplicationFinale, BikeHistory, ComplaintForm, FleetManager, Inspection, InspectionBikeDetails, ListedBikes, MakePayment, MotorcycleRental, MotorcycleRentalDetails, OwnerAccountVerified, OwnerBikeDetails, OwnerDashboard, OwnerProfileSettings, OwnerReport, OwnerSetupAccount, OwnerVerificationBanner, OwnerWallet, OwnerWithdrawalForm, PaymentHistory, RiderComplaints, RiderDashboard, RiderProfileSettings, RiderSetupAccount, VehicleRegistration } from "./utils/pages_exports.tsx";
+import { BikeApplication, BikeApplicationFinale, BikeHistory, ComplaintForm, FleetManager, Inspection, InspectionBikeDetails, ListedBikes, MakePayment, MotorcycleRental, MotorcycleDetails, OwnerAccountVerified, OwnerBikeDetails, OwnerDashboard, OwnerProfileSettings, OwnerReport, OwnerSetupAccount, OwnerVerificationBanner, OwnerWallet, OwnerWithdrawalForm, PaymentHistory, RiderComplaints, RiderDashboard, RiderProfileSettings, RiderSetupAccount, VehicleRegistration } from "./utils/pages_exports.tsx";
 import { Toaster } from "react-hot-toast";
 
 createRoot(document.getElementById("root")!).render(
@@ -45,11 +45,9 @@ createRoot(document.getElementById("root")!).render(
         {/* Riders */}
         <Route element={<DashboardLayout />} path={`${USER_ROLES.RIDER}/dashboard`}>
           <Route index element={<RiderDashboard />} />
-          {/* <Route path="unverified" element={<RiderVerificationBanner />} /> */}
-          <Route path="rent/available" element={<MotorcycleRental />} />
-          <Route path="rent/available/:id" element={<MotorcycleRentalDetails />} />
-          <Route path="rent/available/:id/apply" element={<BikeApplication />} />
-          <Route path="rent/available/:id/apply/success" element={<BikeApplicationFinale />} />
+
+          <Route path="vehicle/:id" element={<MotorcycleDetails />} />
+          <Route path="vehicle/pending/:id" element={<MotorcycleDetails />} />
 
           <Route path="payments" element={<PaymentHistory />} />
           <Route path="payments/pay/:id" element={<MakePayment />} />

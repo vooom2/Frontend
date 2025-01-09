@@ -1,44 +1,74 @@
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Link } from "react-router"
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useRiderPendingVehicleStore } from "@/stores/rider_store/rider_pending_vehicle_store";
+import useUserStore from "@/stores/user_store";
+import formatCurrency from "@/utils/formatCurrency";
+import UserService from "@/api/user.services";
+import { useState } from "react";
+import CircularLoader from "@/components/circular_loader";
+import notify from "@/utils/toast";
+
 
 export default function BikeApplication() {
-  const payments = [
-    { amount: 40000, duration: "2 weeks" },
-    { amount: 20000, duration: "1 week" },
-    { amount: 10000, duration: "2 weeks" },
-  ]
+  const vehicle = useRiderPendingVehicleStore((state) => state.pendingVehicle);
+  const userInfo = useUserStore((state) => state.userInfo);
+  const payments = [{ amount: formatCurrency(40000), duration: "2 weeks" }];
+  const [isLoading, setIsLoading] = useState(false);
+
+  const submitDownPayment = async () => {
+    try {
+      setIsLoading(true);
+      const res = await UserService.makeVehicleDownPayment();
+      if (res) {
+        notify("Redirecting to paystack....");
+        setTimeout(() => {
+          window.location.href = res.payment_url.data.authorization_url;
+        }, 2000);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <div className="max-w-3xl mt-20 mx-auto p-4">
       <Card className="p-6 space-y-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-semibold">Application for bike</h1>
+          <h1 className="text-xl font-semibold">Downpayment for Bike</h1>
         </div>
 
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative w-12 h-12 rounded-lg overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1603039997315-6dcb72ec1204"
-                alt="Qlink 2024"
-
+                src={vehicle?.vehicle_images[0]}
+                alt={vehicle?.make}
                 className="object-cover"
               />
             </div>
             <div>
-              <p className="font-medium">Qlink 2024</p>
-              <p className="text-sm text-gray-500">VN 125893</p>
+              <p className="font-medium">{vehicle?.make}</p>
+              <p className="text-sm text-gray-500">{vehicle?.vehicle_number}</p>
             </div>
           </div>
           <div className="flex flex-col items-center">
             <Avatar>
-              <AvatarImage src="https://randomuser.me/api/portraits/men/1.jpg" alt="Dan Igwe" />
-              <AvatarFallback>DI</AvatarFallback>
+              <AvatarImage src={userInfo!.img!} alt="profile_picture" />
+              <AvatarFallback>
+                {userInfo!.full_name.split(" ")[0]}
+              </AvatarFallback>
             </Avatar>
-            <h2 className="text-sm mt-2 font-semibold">Dan Igwe</h2>
+            <h2 className="text-sm mt-2 font-semibold capitalize">
+              {userInfo?.full_name}
+            </h2>
           </div>
         </div>
 
@@ -52,7 +82,7 @@ export default function BikeApplication() {
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center gap-2">
                     <span className="font-medium">
-                      N{payment.amount.toLocaleString()}
+                      {payment.amount.toLocaleString()}
                     </span>
                     <span className="text-sm text-gray-500">
                       ({payment.duration})
@@ -68,17 +98,19 @@ export default function BikeApplication() {
           <div className="flex justify-between mb-4">
             <span className="font-medium">Total</span>
             <span className="font-medium">
-              N{payments.reduce((sum, p) => sum + p.amount, 0).toLocaleString()}
+              {payments[0].amount}
             </span>
           </div>
-          <Link to="success">
-            <Button className="w-full bg-black text-white hover:bg-gray-900" size="lg">
-              Proceed
-            </Button>
-          </Link>
+          <Button
+            className="w-full bg-black text-white hover:bg-gray-900"
+            size="lg"
+            onClick={submitDownPayment}
+          >
+            {isLoading ? <CircularLoader color="white" /> : "Proceed"}
+
+          </Button>
         </div>
       </Card>
     </div>
-  )
+  );
 }
-

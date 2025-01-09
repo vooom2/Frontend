@@ -11,7 +11,7 @@ export interface Motorcycle {
   
   export interface StatusIndicator {
     label: string;
-    value: string | number;
+    value?: string | number | null;
     icon: 'clock' | 'bike';
     bg?: string;
   }

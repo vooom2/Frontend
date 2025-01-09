@@ -22,6 +22,7 @@ import { Link } from "react-router";
 import RiderServices from "@/api/rider.services";
 import { useEffect } from "react";
 import useRiderComplaintStore from "@/stores/rider_store/rider_complaints_store";
+import { getLocalFriendlyDate } from "@/utils/utils";
 
 interface Report {
     ticketNo: string;
@@ -68,7 +69,6 @@ export default function RiderComplaints() {
 
         fetchInfo();
     }, []);
-    console.log(complaints);
     return (
         <div className="container mx-auto px-2 md:px-4 py-8 w-full relative">
             <div className="flex justify-between items-start sm:items-center mb-6">
@@ -114,10 +114,10 @@ export default function RiderComplaints() {
                                             className={`text-nowrap ${index % 2 === 0 ? "bg-white" : "bg-gray-50"
                                                 }`}
                                         >
-                                            <TableCell className="font-medium">
+                                            <TableCell className="uppercase font-medium">
                                                 {complaint._id}
                                             </TableCell>
-                                            <TableCell>{complaint.time}</TableCell>
+                                            <TableCell>{getLocalFriendlyDate(complaint.date) + complaint.time}</TableCell>
                                             <TableCell>{complaint.category}</TableCell>
                                             <TableCell>
                                                 <StatusBadge status={complaint.status} />
@@ -134,25 +134,19 @@ export default function RiderComplaints() {
                                                             View
                                                         </Button>
                                                     </DialogTrigger>
-                                                    <DialogContent>
+                                                    <DialogContent className="bg-blue-900">
                                                         <DialogHeader>
                                                             <DialogTitle>Electrical Failure</DialogTitle>
                                                         </DialogHeader>
-                                                        <DialogDescription>
-                                                            Duis tempor sit qui non ad laborum adipisicing. Esse
-                                                            velit quis incididunt consequat veniam labore tempor
-                                                            sint duis anim ex tempor sunt et. Do consectetur
-                                                            nostrud culpa qui minim quis duis dolor do dolore
-                                                            veniam ea aliquip laborum. Do culpa occaecat aliqua
-                                                            magna irure cupidatat esse anim dolor. Consectetur
-                                                            ea cillum fugiat magna dolor culpa ex quis deserunt.
-                                                            Nostrud do mollit eiusmod dolore aliquip Lorem
-                                                            eiusmod nisi nisi nostrud esse voluptate laborum.
-                                                            Cupidatat commodo occaecat nostrud occaecat
-                                                            excepteur pariatur dolore tempor amet.
+                                                        <DialogDescription className="text-wrap bg-red-100 w-full relative">
+                                                            <div className="overflow-y-auto">
+                                                                <p className="text-wrap break-words w-1/2 whitespace-pre-wrap">
+                                                                    {complaint.detail}
+                                                                </p>
+                                                            </div>
                                                             <div>
                                                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-                                                                    {images.map((src, index) => (
+                                                                    {complaint.images.map((src, index) => (
                                                                         <img
                                                                             key={index}
                                                                             src={src}

@@ -24,7 +24,7 @@ const navigation = [
     { name: "Payment History", href: `/${USER_ROLES.RIDER}/dashboard/payments`, tag: "/payments", icon: CreditCard },
     { name: "Fleet Manager", href: `/${USER_ROLES.RIDER}/dashboard/fleet`, tag: "/fleet", icon: Users },
     { name: "Complaint", href: `/${USER_ROLES.RIDER}/dashboard/complaints`, tag: "/complaints", icon: FileText },
-    { name: "Bike History", href: `/${USER_ROLES.RIDER}/dashboard/bikes`, tag: "/bikes", icon: Bike },
+    // { name: "Bike History", href: `/${USER_ROLES.RIDER}/dashboard/bikes`, tag: "/bikes", icon: Bike },
     { name: "Profile", href: `/${USER_ROLES.RIDER}/dashboard/profile`, tag: "/profile", icon: User },
 ];
 

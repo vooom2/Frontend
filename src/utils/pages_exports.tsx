@@ -16,7 +16,8 @@ export { default as RiderDashboard } from '../pages/rider/dashboard/RiderDashboa
 export { default as RiderSetupAccount } from '../pages/rider/dashboard/rider_verification/RiderSetupAccount.tsx'
 export { default as RiderVerificationBanner } from '../components/rider_verification_banner.tsx'
 export { default as MotorcycleRental } from '../pages/rider/dashboard/rentals/MotorcycleRental.tsx';
-export { default as MotorcycleRentalDetails } from '../pages/rider/dashboard/rentals/MotorcycleRentalDetails.tsx';
+export { default as MotorcycleDetails } from '../pages/rider/dashboard/rentals/MotorcycleDetails.tsx';
+export { default as PendingMotorcycleDetails } from '../pages/rider/dashboard/rentals/PendingMotorcycleDetails.tsx';
 export { default as BikeApplication } from '../pages/rider/dashboard/rentals/BikeApplication.tsx';
 export { default as BikeApplicationFinale } from '../pages/rider/dashboard/rentals/bike_application_finale.tsx';
 export { default as PaymentHistory } from '../pages/rider/dashboard/payment/PaymentHistory.tsx';

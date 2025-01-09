@@ -49,27 +49,26 @@ export default function PaymentHistory() {
                     bg="bg-black"
                     label="Total Payment"
                     icon="clock"
-                    value={formatCurrency(parseInt(stats?.total_payments ?? ""))}
+                    value={stats ? formatCurrency(parseInt(stats?.total_payments ?? "")) : null}
 
                 />
                 <DashboardStatusIndicatorCard
                     label="Amount this week"
                     icon="clock"
-                    value={formatCurrency(parseInt(stats?.weekly_due ?? ""))}
+                    value={stats ? formatCurrency(parseInt(stats?.weekly_due)) : null}
 
                 />
                 <DashboardStatusIndicatorCard
                     label="Outstanding"
                     icon="clock"
-                    value={formatCurrency(
-                        parseInt(stats?.outstanding_payments ?? "")
-                    )}
+                    value={stats ? formatCurrency(
+                        parseInt(stats?.outstanding_payments)) : null}
 
                 />
                 <DashboardStatusIndicatorCard
                     label="Inspection Count"
                     icon="bike"
-                    value={formatCurrency(stats?.inspection_count ?? 0)}
+                    value={stats ? formatCurrency(stats?.inspection_count ?? 0) : null}
 
                 />
             </div>

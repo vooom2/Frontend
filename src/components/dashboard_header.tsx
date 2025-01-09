@@ -10,6 +10,7 @@ import { Link, useLocation } from 'react-router'
 import { USER_ROLES } from '@/utils/constant'
 import useUserStore from '@/stores/user_store'
 import { Skeleton } from './ui/skeleton'
+import { Input } from './ui/input'
 
 function DashboardHeader() {
     const location = useLocation();
@@ -35,7 +36,7 @@ function DashboardHeader() {
                     <div className="flex items-center gap-4 flex-none md:flex-1 justify-end">
                         {/* Search Input */}
                         <div className="relative w-full hidden lg:block">
-                            <input
+                            <Input
                                 type="text"
                                 placeholder="Search Notification..."
                                 className="h-10 px-4 py-2 rounded-lg border text-sm bg-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary w-full"
@@ -61,13 +62,15 @@ function DashboardHeader() {
                         </div>
 
                         {/* Contact Fleet Manager Button */}
-                        {location.pathname.indexOf(`${USER_ROLES.RIDER}`) != -1 && <Button
-                            size="sm"
-                            className="bg-onprimary hover:bg-onprimary/90 text-white whitespace-nowrap hidden md:block"
-                        >
-                            Contact Fleet Manager
-                        </Button>
-
+                        {location.pathname.indexOf(`${USER_ROLES.RIDER}`) != -1 &&
+                            <Link to={`/${USER_ROLES.RIDER}/dashboard/fleet`}>
+                                <Button
+                                    size="sm"
+                                    className="bg-onprimary hover:bg-onprimary/90 text-white whitespace-nowrap hidden md:block"
+                                >
+                                    Contact Fleet Manager
+                                </Button>
+                            </Link>
                         }
                         {/* Host vehicle fbutton */}
                         {location.pathname.indexOf(`${USER_ROLES.OWNER}`) != -1 &&
