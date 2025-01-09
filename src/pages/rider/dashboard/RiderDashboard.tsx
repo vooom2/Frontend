@@ -17,7 +17,7 @@ import RiderVerificationBanner from "@/components/rider_verification_banner";
 import useUserStore from "@/stores/user_store";
 import VerifyingAccount from "./rider_verification/verifying_account";
 import useRiderDashboardStatStore from "@/stores/rider_store/rider_dashboard_stats.store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import RiderServices from "@/api/rider.services";
 import useRiderPaymentStore from "@/stores/rider_store/rider_payments_store";
 import { getLocalFriendlyDate } from "@/utils/utils";
@@ -27,6 +27,8 @@ import { useNavigate } from "react-router";
 import image from '@/assets/images/verifying.png';
 import { useRiderPendingVehicleStore } from "@/stores/rider_store/rider_pending_vehicle_store";
 import PendingMotorcycleDetails from "./rentals/PendingMotorcycleDetails";
+import notify from "@/utils/toast";
+import LoadingOverlay from "@/components/loading_overlay";
 
 
 export default function RiderDashboard() {
@@ -37,9 +39,28 @@ export default function RiderDashboard() {
     const payments = useRiderPaymentStore((state) => state.payments);
 
     const setVehicle = useRiderVehicleStore((state) => state.setVehicle);
+    const vehicleDetailsLoaded = useRiderVehicleStore((state) => state.hasLoaded);
     const { setPendingVehicle, pendingVehicle } = useRiderPendingVehicleStore((state) => state);
     const vehicle = useRiderVehicleStore((state) => state.vehicle);
     const navigate = useNavigate();
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const makePayment = async (id: string) => {
+        try {
+            setIsLoading(true);
+            const res = await UserService.makePayment(id);
+            if (res) {
+                notify("Redirecting to paystack....");
+                setTimeout(() => {
+                    window.location.href = res.data.authorization_url;
+                }, 2000);
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     useEffect(() => {
         const fetchStats = async () => {
             const res = (await RiderServices.getDashboardStat()) as { data: any };
@@ -73,9 +94,8 @@ export default function RiderDashboard() {
         fetchPendingVehicles();
     }, []);
 
-
     return (
-        <>
+        <LoadingOverlay isLoading={isLoading} >
             {userInfo &&
                 !userInfo?.account_verified &&
                 !userInfo?.verification_started && <RiderVerificationBanner />}
@@ -108,7 +128,7 @@ export default function RiderDashboard() {
                                 <Button variant="outline"
                                     onClick={() => navigate(`vehicle/${vehicle._id}`)}
                                 >View Detail</Button>
-                                <Button variant="destructive">Make a report</Button>
+                                <Button variant="destructive" onClick={() => navigate("complaints/create")}>Make a report</Button>
                             </div>
                         </div>
                     ) : (
@@ -175,6 +195,7 @@ export default function RiderDashboard() {
                                                 <TableHead>Amount</TableHead>
                                                 <TableHead>Overdue Charges</TableHead>
                                                 <TableHead>Status</TableHead>
+                                                <TableHead>Actions</TableHead>
                                             </TableRow>
                                         </TableHeader>
                                         {!payments ? (
@@ -240,6 +261,14 @@ export default function RiderDashboard() {
                                                                 {payment.payment_status}
                                                             </Badge>
                                                         </TableCell>
+                                                        <TableCell>
+                                                            {payment.payment_status === "pending" && (
+                                                                <Badge onClick={() => makePayment(payment._id)} className="cursor-pointer">
+                                                                    Make Payment
+                                                                </Badge>
+                                                            )}
+
+                                                        </TableCell>
                                                     </TableRow>
                                                 ))}
                                             </TableBody>
@@ -263,7 +292,7 @@ export default function RiderDashboard() {
                         </div>
                     )
                     }
-                    {userInfo.account_verified && !vehicle && <div className="text-center px-4 my-10">
+                    {userInfo.account_verified && !vehicle && vehicleDetailsLoaded && <div className="text-center px-4 my-10">
                         <img src={image} alt="" className='w-64 h-64 object-contain mx-auto' />
                         <h2 className="text-xl md:text-2xl font-bold">Just hold a little longer, you will be assigned a bike!</h2>
                     </div>}
@@ -272,7 +301,7 @@ export default function RiderDashboard() {
 
                 </div>
             )}
-        </>
+        </LoadingOverlay>
     );
 }
 

@@ -61,6 +61,15 @@ const UserService = {
       return null;
     }
   },
+  makePayment: async (id:string):Promise<object | null> => {
+    try {
+      const response = await axiosInstance.post("/user/rider/payments", {payment_id: id});
+      return {...response.data};
+    } catch (error) {
+      notify(handleAxiosError(error), "error");
+      return null;
+    }
+  },
   
 };
 export default UserService;

@@ -1,9 +1,8 @@
-import { Trash2, User } from "lucide-react";
+import { Trash2, Upload, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RiderProfile from "./rider_profile";
-import RiderWithdrawalSettings from "./rider_withdrawal_settings";
 import RiderSecuritySettings from "./rider_security_settings";
 import useUserStore from "@/stores/user_store";
 
@@ -31,12 +30,12 @@ export default function RiderProfileSettings() {
                             >
                                 Account
                             </TabsTrigger>
-                            <TabsTrigger
+                            {/* <TabsTrigger
                                 value="withdrawal"
                                 className="rounded-none border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent"
                             >
                                 Withdrawal
-                            </TabsTrigger>
+                            </TabsTrigger> */}
                             <TabsTrigger
                                 value="security"
                                 className="rounded-none border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent"
@@ -45,19 +44,19 @@ export default function RiderProfileSettings() {
                             </TabsTrigger>
                         </TabsList>
                         <RiderProfile />
-                        <RiderWithdrawalSettings />
+                        {/* <RiderWithdrawalSettings /> */}
                         <RiderSecuritySettings />
                     </Tabs>
                 </div>
 
                 {/* Right Side Preview */}
                 <div className="space-y-4">
-                    <Button
+                    {/* <Button
                         variant="default"
                         className="w-full bg-black hover:bg-black/90"
                     >
                         Update
-                    </Button>
+                    </Button> */}
 
                     <div className="space-y-4">
                         <Card>
@@ -75,7 +74,7 @@ export default function RiderProfileSettings() {
                                             variant="secondary"
                                             className="h-8 w-8 bg-white hover:bg-white/90"
                                         >
-                                            <Trash2 className="h-4 w-4" />
+                                            <Upload className="h-4 w-4" />
                                         </Button>
                                     </div>
                                 </div>

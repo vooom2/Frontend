@@ -31,10 +31,12 @@ interface Vehicle {
 
 interface VehicleStore {
     vehicle?: Vehicle | null;    
+    hasLoaded: boolean;
     setVehicle: (vehicle: Vehicle) => void;
 }
 
 export const useRiderVehicleStore = create<VehicleStore>((set) => ({
     vehicle: null,
-    setVehicle: (vehicle) => set({ vehicle: vehicle }),
+    hasLoaded: false,
+    setVehicle: (vehicle) => set({ vehicle: vehicle, hasLoaded: true }),
 }));

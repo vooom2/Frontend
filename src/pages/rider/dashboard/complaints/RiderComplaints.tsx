@@ -117,7 +117,7 @@ export default function RiderComplaints() {
                                             <TableCell className="uppercase font-medium">
                                                 {complaint._id}
                                             </TableCell>
-                                            <TableCell>{getLocalFriendlyDate(complaint.date) + complaint.time}</TableCell>
+                                            <TableCell>{getLocalFriendlyDate(complaint.date) + ". " + complaint.time}</TableCell>
                                             <TableCell>{complaint.category}</TableCell>
                                             <TableCell>
                                                 <StatusBadge status={complaint.status} />
@@ -134,16 +134,15 @@ export default function RiderComplaints() {
                                                             View
                                                         </Button>
                                                     </DialogTrigger>
-                                                    <DialogContent className="bg-blue-900">
+                                                    <DialogContent>
                                                         <DialogHeader>
-                                                            <DialogTitle>Electrical Failure</DialogTitle>
+                                                            <DialogTitle>{complaint.category}</DialogTitle>
                                                         </DialogHeader>
-                                                        <DialogDescription className="text-wrap bg-red-100 w-full relative">
-                                                            <div className="overflow-y-auto">
-                                                                <p className="text-wrap break-words w-1/2 whitespace-pre-wrap">
-                                                                    {complaint.detail}
-                                                                </p>
-                                                            </div>
+                                                        <DialogDescription className="text-wrap">
+                                                            <p className="text-wrap break-words w-auto max-w-[400px]">
+                                                                {complaint.detail}
+                                                            </p>
+
                                                             <div>
                                                                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
                                                                     {complaint.images.map((src, index) => (
