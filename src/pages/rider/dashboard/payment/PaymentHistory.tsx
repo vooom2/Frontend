@@ -162,14 +162,14 @@ export default function PaymentHistory() {
                                                 <TableCell>
                                                     <Badge
                                                         variant={
-                                                            payment.payment_status === "completed"
+                                                            payment.payment_status === "paid"
                                                                 ? "secondary"
                                                                 : "default"
                                                         }
                                                         className={
-                                                            payment.payment_status !== "completed"
+                                                            `capitalize  ${payment.payment_status !== "paid"
                                                                 ? "text-orange-500 bg-orange-100"
-                                                                : "text-green-500 bg-green-100"
+                                                                : "text-green-500 bg-green-100"}`
                                                         }
                                                     >
                                                         {payment.payment_status}

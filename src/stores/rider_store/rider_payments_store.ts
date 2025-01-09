@@ -7,7 +7,7 @@ interface Payment {
   payment_amount: number
   description: string
   payment_due_date: string
-  payment_status: 'pending' | 'completed'
+  payment_status: 'pending' | 'paid'
   reference: string | null
   overdue_charges: number
   payment_date: string
