@@ -66,7 +66,16 @@ export default function GuarantorForm({ handleStepChange }: { handleStepChange: 
             setUploading(true);
             const urls = await handleImagesUpload();
             if (urls) {
-                const response = await UserService.uploadVerification({ primaryID: urls.workId, secondaryID: urls.nationalId, guarantor_documents: guarantor_documents });
+                const response = await UserService.uploadVerification({
+                  primaryID,
+                  secondaryID,
+                  guarantor_documents: {
+                    ...guarantor_documents,
+                    img: urls.facial,
+                    workID: urls.workId,
+                    primaryID: urls.nationalId,
+                  },
+                });
                 if (response) {
                     notify("Verification document submitted successfully", "success");
                     handleStepChange(4);
