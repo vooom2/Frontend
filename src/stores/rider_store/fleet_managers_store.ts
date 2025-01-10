@@ -9,6 +9,8 @@ interface FleetManager {
   role: string;
   avatar: string;
   state: string;
+  lga: string;
+  location: string;
 }
 
 interface FleetManagersStore {
