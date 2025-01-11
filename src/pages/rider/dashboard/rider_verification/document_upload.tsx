@@ -48,7 +48,7 @@ export default function DocumentUpload({ handleStepChange }: { handleStepChange:
             setIsLoading(true);
             const url1 = await MediaServices.uploadSingleFile(driverLicense);
             updatePrimaryID(url1.url);
-            const url2 = await MediaServices.uploadSingleFile(driverLicense);
+            const url2 = await MediaServices.uploadSingleFile(otherDocument);
             updateSecondaryID(url2.url);
             handleStepChange(3);
         } finally {
