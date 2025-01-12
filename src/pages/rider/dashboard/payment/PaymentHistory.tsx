@@ -9,7 +9,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator";
+import { DashboardInfoCard } from "@/components/dashboard_info_card";
 import formatCurrency from "@/utils/formatCurrency";
 import useRiderDashboardStatStore from "@/stores/rider_store/rider_dashboard_stats.store";
 import useRiderPaymentStore from "@/stores/rider_store/rider_payments_store";
@@ -68,27 +68,27 @@ export default function PaymentHistory() {
 
             <div className="container mx-auto p-2 lg:p-6 space-y-6">
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                    <DashboardStatusIndicatorCard
+                    <DashboardInfoCard
                         bg="bg-black"
                         label="Total Payment"
                         icon="clock"
                         value={stats ? formatCurrency(parseInt(stats?.total_payments ?? "")) : null}
 
                     />
-                    <DashboardStatusIndicatorCard
+                    <DashboardInfoCard
                         label="Amount this week"
                         icon="clock"
                         value={stats ? formatCurrency(parseInt(stats?.weekly_due)) : null}
 
                     />
-                    <DashboardStatusIndicatorCard
+                    <DashboardInfoCard
                         label="Outstanding"
                         icon="clock"
                         value={stats ? formatCurrency(
                             parseInt(stats?.outstanding_payments)) : null}
 
                     />
-                    <DashboardStatusIndicatorCard
+                    <DashboardInfoCard
                         label="Inspection Count"
                         icon="bike"
                         value={stats ? formatCurrency(stats?.inspection_count ?? 0) : null}

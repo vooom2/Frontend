@@ -8,7 +8,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator"
+import { DashboardInfoCard } from "@/components/dashboard_info_card"
 import formatCurrency from "@/utils/formatCurrency"
 import { Button } from "@/components/ui/button"
 import { Download, Wallet } from "lucide-react"
@@ -78,10 +78,10 @@ export default function OwnerWallet() {
                 </Link>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                <DashboardStatusIndicatorCard bg="bg-black" label="Available Withdrawal" icon="clock" value={formatCurrency(200000)} />
-                <DashboardStatusIndicatorCard label="Total Withdrawn" icon="clock" value={formatCurrency(1290000)} />
-                <DashboardStatusIndicatorCard label="Amount Weekly" icon="clock" value={formatCurrency(0)} />
-                <DashboardStatusIndicatorCard label="Outstanding" icon="clock" value={formatCurrency(2000)} />
+                <DashboardInfoCard bg="bg-black" label="Available Withdrawal" icon="clock" value={formatCurrency(200000)} />
+                <DashboardInfoCard label="Total Withdrawn" icon="clock" value={formatCurrency(1290000)} />
+                <DashboardInfoCard label="Amount Weekly" icon="clock" value={formatCurrency(0)} />
+                <DashboardInfoCard label="Outstanding" icon="clock" value={formatCurrency(2000)} />
             </div>
             <div className="flex justify-between pt-10">
                 <h2 className="text-xl font-semibold">Withdrawal History</h2>

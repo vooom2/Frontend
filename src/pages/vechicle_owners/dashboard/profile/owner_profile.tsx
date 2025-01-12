@@ -79,7 +79,6 @@ function OwnerProfile() {
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value="lagos">Lagos</SelectItem>
-                                <SelectItem value="abuja">Abuja</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>

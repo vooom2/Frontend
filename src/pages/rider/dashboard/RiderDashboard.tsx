@@ -11,7 +11,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator";
+import { DashboardInfoCard } from "@/components/dashboard_info_card";
 import formatCurrency from "@/utils/formatCurrency";
 import RiderVerificationBanner from "@/components/rider_verification_banner";
 import useUserStore from "@/stores/user_store";
@@ -151,26 +151,26 @@ export default function RiderDashboard() {
                     )}
 
                     {!pendingVehicle && <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                        <DashboardStatusIndicatorCard
+                        <DashboardInfoCard
                             label="Total Payment"
                             icon="clock"
                             value={
                                 stats ? formatCurrency(parseInt(stats?.total_payments)) : null
                             }
                         />
-                        <DashboardStatusIndicatorCard
+                        <DashboardInfoCard
                             label="Amount this week"
                             icon="clock"
                             value={stats ? formatCurrency(parseInt(stats?.weekly_due)) : null}
                         />
-                        <DashboardStatusIndicatorCard
+                        <DashboardInfoCard
                             label="Outstanding"
                             icon="clock"
                             value={stats ? formatCurrency(
                                 parseInt(stats?.outstanding_payments)
                             ) : null}
                         />
-                        <DashboardStatusIndicatorCard
+                        <DashboardInfoCard
                             label="Inspection Count"
                             icon="clock"
                             value={stats ? formatCurrency(stats?.inspection_count) : null}

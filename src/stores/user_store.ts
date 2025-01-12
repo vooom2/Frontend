@@ -30,15 +30,15 @@ type UserStore = {
     verification_documents: any[];
     guarantor_documents: any[];
     createdAt: string;
-  withdrawal_pin: string | null;
-  wallet: any;
+    withdrawal_pin: string | null;
+    wallet: any;
   };
-  updateInfo: (info: UserStore['userInfo']) => void;
+  updateInfo: (info: UserStore["userInfo"]) => void;
   getInfo: () => Promise<void>;
 };
 
 const useUserStore = create<UserStore>((set) => ({
-  userInfo:  undefined,
+  userInfo: undefined,
   updateInfo: (info) => {
     set({ userInfo: info });
   },
@@ -49,6 +49,5 @@ const useUserStore = create<UserStore>((set) => ({
     }
   },
 }));
-
 
 export default useUserStore;

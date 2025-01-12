@@ -1,4 +1,4 @@
-import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator"
+import { DashboardInfoCard } from "@/components/dashboard_info_card"
 import { Button } from "@/components/ui/button"
 import { APP_NAME } from "@/utils/constant"
 import { FileWarning } from "lucide-react"
@@ -13,6 +13,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Card } from "@/components/ui/card"
+import formatCurrency from "@/utils/formatCurrency"
 
 
 interface Vehicle {
@@ -105,10 +106,10 @@ export default function OwnerDashboard() {
     return (
         <div className="container mx-auto p-2 lg:p-6 space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                <DashboardStatusIndicatorCard label="Total Withdrawn" icon="clock" value="N234,000" />
-                <DashboardStatusIndicatorCard label="Amount this week" icon="clock" value="N21,000" />
-                <DashboardStatusIndicatorCard label="Active bikes" icon="clock" value="0" />
-                <DashboardStatusIndicatorCard label="Inactive bikes" icon="bike" value="0" />
+                <DashboardInfoCard label="Total Withdrawn" icon="clock" value={formatCurrency(0)} />
+                <DashboardInfoCard label="Amount this week" icon="clock" value={formatCurrency(0)} />
+                <DashboardInfoCard label="Active bikes" icon="clock" value={formatCurrency(0)} />
+                <DashboardInfoCard label="Inactive bikes" icon="bike" value={formatCurrency(0)} />
             </div>
             <div className="grid lg:grid-cols-[1fr,400px] gap-6">
                 {/* Vehicle Status Table */}

@@ -2,7 +2,7 @@ import { Clock, Bike } from 'lucide-react'
 import { StatusIndicator } from "../types/motorcycle"
 import { Skeleton } from './ui/skeleton';
 
-export function DashboardStatusIndicatorCard({ label, value, icon, bg, }: StatusIndicator) {
+export function DashboardInfoCard({ label, value, icon, bg, }: StatusIndicator) {
     return (
         <div className={`p-4 py-5 rounded-2xl shadow-sm ${bg ?? "bg-white"}`}>
             <div className="flex justify-between items-start">
