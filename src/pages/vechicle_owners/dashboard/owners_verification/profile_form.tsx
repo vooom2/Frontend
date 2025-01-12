@@ -13,6 +13,7 @@ import MediaServices from "@/api/media.services";
 import notify from "@/utils/toast";
 import LoadingOverlay from "@/components/loading_overlay";
 import UserService from "@/api/user.services";
+import nigerianStates from "@/utils/states_list";
 
 interface Inputs {
   gender: string;
@@ -174,7 +175,7 @@ export default function ProfileForm({
                 </label>
                 <input
                   type="text"
-                  placeholder="Rider"
+                  placeholder="Business man"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm px-3 py-2"
                   {...register("occupation", { required: true })}
                 />
@@ -221,11 +222,14 @@ export default function ProfileForm({
                       defaultValue={field.value}
                     >
                       <SelectTrigger className="mt-1 w-full">
-                        <SelectValue placeholder="Select country" />
+                        <SelectValue placeholder="Select State" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="abuja">Abuja</SelectItem>
-                        <SelectItem value="lagos">Lagos</SelectItem>
+                        {
+                          nigerianStates.map((state, i) => {
+                            return <SelectItem value={state.name}>{state.name}</SelectItem>
+                          })
+                        }
                       </SelectContent>
                     </Select>
                   )}

@@ -75,7 +75,7 @@ export default function RiderDashboard() {
             }
         };
         const fetchApprovedVehicles = async () => {
-            const res = (await UserService.getVehicle()) as { vehicle: any };
+            const res = (await UserService.getRiderVehicle()) as { vehicle: any };
             if (res != null) {
                 setVehicle(res.vehicle);
             }

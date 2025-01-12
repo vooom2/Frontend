@@ -49,7 +49,6 @@ function DashboardHeader() {
                                     <div>
                                         <Bell className='cursor-pointer' />
                                         <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold h-4 w-4 flex items-center justify-center rounded-full hidden">
-
                                         </span>
                                     </div>
                                 </PopoverTrigger>
