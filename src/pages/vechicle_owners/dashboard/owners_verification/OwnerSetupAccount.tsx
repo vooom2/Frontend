@@ -19,61 +19,72 @@ export default function OwnerSetupAccount() {
     };
 
     return (
-        <div className="mt-10 py-6 flex items-center justify-center ">
-            <div className="w-full">
-                {/* Header Section */}
-                <div className="text-center">
-                    <h1 className="text-2xl md:text-4xl font-bold">Setup Account</h1>
-                    <p className="text-sm text-gray-600 mt-2">
-                        We need to verify your identity and this requires that you upload
-                        some documents for review.
-                    </p>
-                </div>
+      <div className="mt-10 py-6 flex items-center justify-center ">
+        <div className="w-full">
+          {/* Header Section */}
+          <div className="text-center">
+            <h1 className="text-2xl md:text-4xl font-bold">Setup Account</h1>
+            <p className="text-sm text-gray-600 mt-2">
+              We need to verify your identity and this requires that you upload
+              some documents for review.
+            </p>
+          </div>
 
-                {/* Progress Indicator */}
-                <div className="max-w-4xl mx-auto mt-4 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 bg-black py-3 px-4 sm:px-6 rounded-2xl justify-around">
-                    <Step completed={currentStep > 0} label="Personal Verification" />
-                    <Separator />
-                    <Step completed={currentStep > 1} label="National Verification" />
-                    <Separator />
-                    <Step completed={currentStep > 2} label="Choose plan" />
-                </div>
+          {/* Progress Indicator */}
+          <div className="max-w-4xl mx-auto mt-4 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 bg-black py-3 px-4 sm:px-6 rounded-2xl justify-around">
+            <Step completed={currentStep > 0} label="Personal Verification" />
+            <Separator />
+            <Step completed={currentStep > 1} label="National Verification" />
+            <Separator />
+            <Step completed={currentStep > 2} label="Choose plan" />
+          </div>
 
-                {currentStep == 0 && <Requirements />}
-                {currentStep == 1 && <ProfileForm />}
-                {currentStep == 2 && <DocumentUpload />}
-                {currentStep == 3 && <ChoosePlan onSelect={(i) => handleStepChange(i)} />}
-                {currentStep >= 4 && <OwnerAccountVerified />}
+          {currentStep == 0 && <Requirements />}
+          {currentStep == 1 && (
+            <ProfileForm handleStepChange={handleStepChange} />
+          )}
+          {currentStep == 2 && (
+            <DocumentUpload handleStepChange={handleStepChange} />
+          )}
+          {currentStep == 3 && (
+            <ChoosePlan handleStepChange={handleStepChange} />
+          )}
+          {currentStep >= 4 && <OwnerAccountVerified />}
 
-                {/* Next Button */}
+          {/* Next Button */}
 
-                {currentStep != 3 && <div className="mt-6 text-center">
-                    <button
-                        className="max-w-3xl w-full mx-auto bg-black text-white py-3 rounded-3xl hover:bg-gray-800 transition"
-                        onClick={() => handleStepChange(currentStep + 1)}
-                    >
-                        {currentStep < 3 ? "Next" : "Done"}
-                    </button>
-                </div>}
-
-
-                {/* Pagination Dots */}
-                <div className="flex justify-center items-center mt-6 gap-3">
-                    <span
-                        className={`w-10 h-1 ${currentStep >= 1 ? "bg-black" : "bg-gray-300"
-                            } rounded-full transition-all`}
-                    ></span>
-                    <span
-                        className={`w-10 h-1 ${currentStep >= 2 ? "bg-black" : "bg-gray-300"
-                            } rounded-full transition-all`}
-                    ></span>
-                    <span
-                        className={`w-10 h-1 ${currentStep >= 3 ? "bg-black" : "bg-gray-300"
-                            } rounded-full transition-all`}
-                    ></span>
-                </div>
+          {currentStep != 3 && currentStep != 1 && currentStep != 2 && (
+            <div className="mt-6 text-center">
+              <button
+                className="max-w-3xl w-full mx-auto bg-black text-white py-3 rounded-3xl hover:bg-gray-800 transition"
+                onClick={() => handleStepChange(currentStep + 1)}
+              >
+                {currentStep < 3 ? "Next" : "Done"}
+              </button>
             </div>
+          )}
+
+          {/* Pagination Dots */}
+          <div className="flex justify-center items-center mt-6 gap-3">
+            <span
+              className={`w-10 h-1 ${
+                currentStep >= 1 ? "bg-black" : "bg-gray-300"
+              } rounded-full transition-all`}
+            ></span>
+            <span
+              onClick={() => handleStepChange(1)}
+              className={`w-10 h-1 ${
+                currentStep >= 2 ? "bg-black" : "bg-gray-300"
+              } rounded-full transition-all`}
+            ></span>
+            <span
+              className={`w-10 h-1 ${
+                currentStep >= 3 ? "bg-black" : "bg-gray-300"
+              } rounded-full transition-all`}
+            ></span>
+          </div>
         </div>
+      </div>
     );
 }
 
