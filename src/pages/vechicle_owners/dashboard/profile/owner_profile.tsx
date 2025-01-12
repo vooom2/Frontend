@@ -16,7 +16,7 @@ function OwnerProfile() {
 
     return (
         <TabsContent value="account" className="mt-6">
-            <form className="space-y-6">
+            <form className="space-y-6 capitalize">
                 <div className="grid gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
                         <Label htmlFor="fullName">Full Name</Label>
@@ -35,14 +35,15 @@ function OwnerProfile() {
                         <Input
                             id="email"
                             type="email"
-                            disabled
+                            readOnly
+                            placeholder="Email address"
                             defaultValue={userInfo?.email}
                         />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="phone">Phone Number</Label>
                         <div className="flex gap-2">
-                            <Select defaultValue="234" disabled>
+                            <Select defaultValue="234">
                                 <SelectTrigger className="w-[100px]">
                                     <SelectValue />
                                 </SelectTrigger>
@@ -50,26 +51,27 @@ function OwnerProfile() {
                                     <SelectItem value="234">+234</SelectItem>
                                 </SelectContent>
                             </Select>
-                            <Input id="phone" defaultValue="08065650633" disabled value={userInfo?.phone_number} />
+                            <Input id="phone" placeholder="phone number" readOnly value={userInfo?.phone_number} />
                         </div>
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="occupation">Occupation</Label>
-                        <Input id="occupation" defaultValue="Business Man" />
+                        <Input id="occupation" defaultValue={userInfo?.occupation ?? "Not specified"} />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="address">Address</Label>
                         <div className="relative">
                             <Input
                                 id="address"
-                                defaultValue="3, Wuse street, Abuja"
+                                defaultValue={userInfo?.address ?? "Not specified"}
+                                readOnly
                             />
                             <MapPin className="absolute right-3 top-2.5 h-5 w-5 text-muted-foreground" />
                         </div>
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="city">City</Label>
-                        <Input id="city" defaultValue="Wuse" />
+                        <Input id="city" defaultValue={userInfo?.city ?? ""} placeholder="e.g Ikeja" />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="state">State</Label>
@@ -84,7 +86,7 @@ function OwnerProfile() {
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="country">Country</Label>
-                        <Select defaultValue="nigeria">
+                        <Select defaultValue="nigeria" disabled>
                             <SelectTrigger>
                                 <SelectValue />
                             </SelectTrigger>

@@ -1,4 +1,4 @@
-import { Trash2, Upload, User } from "lucide-react";
+import { Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,10 +15,11 @@ export default function RiderProfileSettings() {
                 <div className="space-y-6">
                     {/* Profile Avatar */}
                     <div className="flex items-center gap-4">
-                        {userInfo?.img ? <div className="relative h-20 w-20 bg-white border flex items-center justify-center rounded-full"
-                            style={{ backgroundImage: `url(${userInfo.img})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}
-
-                        /> : <User size={20} />}
+                        <img
+                            src={userInfo?.img ? userInfo.img : "https://ui-avatars.com/api/?name=" + userInfo?.full_name}
+                            alt="Profile preview"
+                            className="rounded-lg object-cover w-20 h-20"
+                        />
                     </div>
 
                     {/* Tabs and Form */}
@@ -62,11 +63,11 @@ export default function RiderProfileSettings() {
                         <Card>
                             <CardContent className="p-4">
                                 <div className="relative aspect-square w-full flex items-center">
-                                    {userInfo?.img && <img
-                                        src={userInfo?.img}
+                                    <img
+                                        src={userInfo?.img ? userInfo.img : "https://ui-avatars.com/api/?name=" + userInfo?.full_name}
                                         alt="Profile preview"
                                         className="rounded-lg object-cover w-full"
-                                    />}
+                                    />
 
                                     <div className="absolute bottom-2 right-2 flex gap-2">
                                         <Button

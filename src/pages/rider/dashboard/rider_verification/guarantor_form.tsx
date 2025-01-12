@@ -28,8 +28,8 @@ export default function GuarantorForm({ handleStepChange }: { handleStepChange: 
             guarantor_documents: guarantor_documents,
         },
     });
-    const [uploading, setUploading] = useState(false);
 
+    const [uploading, setUploading] = useState(false);
 
     const [photos, setPhotos] = useState<{ [key: string]: File | null }>({
         facial: null,
@@ -67,14 +67,14 @@ export default function GuarantorForm({ handleStepChange }: { handleStepChange: 
             const urls = await handleImagesUpload();
             if (urls) {
                 const response = await UserService.uploadVerification({
-                  primaryID,
-                  secondaryID,
-                  guarantor_documents: {
-                    ...guarantor_documents,
-                    img: urls.facial,
-                    workID: urls.workId,
-                    primaryID: urls.nationalId,
-                  },
+                    primaryID,
+                    secondaryID,
+                    guarantor_documents: {
+                        ...guarantor_documents,
+                        img: urls.facial,
+                        workID: urls.workId,
+                        primaryID: urls.nationalId,
+                    },
                 });
                 if (response) {
                     notify("Verification document submitted successfully", "success");
@@ -212,7 +212,6 @@ export default function GuarantorForm({ handleStepChange }: { handleStepChange: 
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectItem value="male">Male</SelectItem>
-                                        <SelectItem value="female">Female</SelectItem>
                                     </SelectContent>
                                 </Select>
                             )}

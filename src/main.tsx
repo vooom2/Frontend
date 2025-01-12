@@ -6,7 +6,7 @@ import DashboardLayout from "./components/dashboard_layout.tsx";
 import Signup from "./pages/auth/signup.tsx";
 import Login from "./pages/auth/login.tsx";
 import { USER_ROLES } from "./utils/constant.tsx";
-import { BikeHistory, ComplaintForm, FleetManager, Inspection, InspectionBikeDetails, ListedBikes, MakePayment, MotorcycleDetails, OwnerAccountVerified, OwnerBikeDetails, OwnerDashboard, OwnerProfileSettings, OwnerReport, OwnerSetupAccount, OwnerVerificationBanner, OwnerWallet, OwnerWithdrawalForm, PaymentHistory, RiderComplaints, RiderDashboard, RiderProfileSettings, RiderSetupAccount, VehicleRegistration } from "./utils/pages_exports.tsx";
+import { BikeHistory, ComplaintForm, FleetManager, Inspection, InspectionBikeDetails, ListedBikes, MakePayment, MotorcycleDetails, OwnerAccountVerified, OwnerBikeDetails, OwnerDashboard, OwnerProfileSettings, OwnerReport, OwnerSetupAccount, OwnerWallet, OwnerWithdrawalForm, PaymentHistory, RiderComplaints, RiderDashboard, RiderProfileSettings, RiderSetupAccount, VehicleRegistration } from "./utils/pages_exports.tsx";
 import { Toaster } from "react-hot-toast";
 
 createRoot(document.getElementById("root")!).render(
@@ -20,7 +20,6 @@ createRoot(document.getElementById("root")!).render(
         {/* Vechicle owners */}
         <Route element={<DashboardLayout />} path={`${USER_ROLES.OWNER}/dashboard`}>
           <Route index element={<OwnerDashboard />} />
-          <Route path="unverified" element={<OwnerVerificationBanner />} />
 
           <Route path="setupaccount" element={<OwnerSetupAccount />} />
 

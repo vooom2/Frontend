@@ -1,24 +1,28 @@
-"use client"
-
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import { Eye, EyeOff, Check, X } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { TabsContent } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
+import AuthService from "@/api/auth.services"
+import notify from "@/utils/toast"
+import CircularLoader from "@/components/circular_loader"
 
 interface PasswordRequirement {
     text: string
     met: boolean
 }
 
-export default function RiderSecuritySettings() {
+export default function OwnerSecuritySettings() {
     const [showCurrentPassword, setShowCurrentPassword] = useState(false)
     const [showNewPassword, setShowNewPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [passwordStrength, setPasswordStrength] = useState(0)
+    const [currentPassword, setCurrentPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
+    const [confirmNewPassword, setConfirmNewPassword] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
     const passwordRequirements: PasswordRequirement[] = [
         { text: "At least 8 characters long", met: newPassword.length >= 8 },
@@ -41,6 +45,26 @@ export default function RiderSecuritySettings() {
         updatePasswordStrength(value)
     }
 
+    const handleUpdatePassword = async (e: FormEvent<HTMLFormElement>) => {
+        try {
+            e.preventDefault();
+            setIsLoading(true)
+            if (newPassword !== confirmNewPassword) {
+                notify("Passwords do not match", "error")
+                return;
+            }
+            const res = await AuthService.changePassword({
+                oldPassword: currentPassword,
+                newPassword: newPassword,
+            });
+            if (res != null) {
+                notify("Password updated successfully", "success")
+            }
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     return (
         <TabsContent value="security" className="space-y-8 mt-8">
             <div className="max-w-2xl">
@@ -51,7 +75,7 @@ export default function RiderSecuritySettings() {
                     </p>
                 </div>
 
-                <div className="mt-6 space-y-6">
+                <form className="mt-6 space-y-6" onSubmit={(e) => handleUpdatePassword(e)}>
                     {/* Current Password */}
                     <div className="space-y-2">
                         <Label htmlFor="currentPassword">Current Password</Label>
@@ -60,6 +84,8 @@ export default function RiderSecuritySettings() {
                                 id="currentPassword"
                                 type={showCurrentPassword ? "text" : "password"}
                                 className="pr-10"
+                                onChange={(e) => setCurrentPassword(e.target.value)}
+                                required
                             />
                             <Button
                                 type="button"
@@ -87,6 +113,7 @@ export default function RiderSecuritySettings() {
                                 className="pr-10"
                                 value={newPassword}
                                 onChange={(e) => handlePasswordChange(e.target.value)}
+                                required
                             />
                             <Button
                                 type="button"
@@ -140,6 +167,8 @@ export default function RiderSecuritySettings() {
                                 id="confirmPassword"
                                 type={showConfirmPassword ? "text" : "password"}
                                 className="pr-10"
+                                required
+                                onChange={(e) => setConfirmNewPassword(e.target.value)}
                             />
                             <Button
                                 type="button"
@@ -157,10 +186,10 @@ export default function RiderSecuritySettings() {
                         </div>
                     </div>
 
-                    <Button className="w-full sm:w-auto">
-                        Update Password
+                    <Button className="w-full sm:w-40">
+                        {isLoading ? <CircularLoader color="white" /> : "Update Password"}
                     </Button>
-                </div>
+                </form>
             </div>
         </TabsContent>
     )

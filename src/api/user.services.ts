@@ -34,42 +34,80 @@ const UserService = {
     }
   },
 
-  getVehicle: async ():Promise<object | null> => {
+  getVehicle: async (): Promise<object | null> => {
     try {
       const response = await axiosInstance.get("/user/rider/vehicle");
-      return {...response.data};
+      return { ...response.data };
     } catch (error) {
       console.error(error);
       return null;
     }
   },
-  getPendingVehicle: async ():Promise<object | null> => {
+  getPendingVehicle: async (): Promise<object | null> => {
     try {
       const response = await axiosInstance.get("/user/rider/vehicle/pending");
-      return {...response.data};
+      return { ...response.data };
     } catch (error) {
       console.error(error);
       return null;
     }
   },
-  makeVehicleDownPayment: async ():Promise<object | null> => {
+  makeVehicleDownPayment: async (): Promise<object | null> => {
     try {
-      const response = await axiosInstance.post("/user/rider/vehicle/downpayment");
-      return {...response.data};
+      const response = await axiosInstance.post(
+        "/user/rider/vehicle/downpayment"
+      );
+      return { ...response.data };
     } catch (error) {
       notify(handleAxiosError(error), "error");
       return null;
     }
   },
-  makePayment: async (id:string):Promise<object | null> => {
+  makePayment: async (id: string): Promise<object | null> => {
     try {
-      const response = await axiosInstance.post("/user/rider/payments", {payment_id: id});
-      return {...response.data};
+      const response = await axiosInstance.post("/user/rider/payments", {
+        payment_id: id,
+      });
+      return { ...response.data };
     } catch (error) {
       notify(handleAxiosError(error), "error");
       return null;
     }
   },
-  
+
+  getBankAccounts: async (): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.get("/user/owner/banks");
+      return { ...response.data };
+    } catch (error) {
+      notify(handleAxiosError(error), "error");
+      return null;
+    }
+  },
+
+  addBankAccount: async (data: {
+    account_number: string;
+    account_name: string;
+    bank_code: string;
+    bank_name: string;
+  }): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.post("/user/owner/banks/add", data);
+      return { ...response.data };
+    } catch (error) {
+      notify(handleAxiosError(error), "error");
+      return null;
+    }
+  },
+removeBankAccount: async (id: string): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.delete(`/user/owner/banks/${id}`);
+      return { ...response.data };
+    } catch (error) {
+      notify(handleAxiosError(error), "error");
+      return null;
+    }
+  },
+
 };
 export default UserService;

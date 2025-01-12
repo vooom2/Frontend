@@ -63,6 +63,19 @@ const AuthService = {
     }
     await UserService.getCurrentUser();
   },
+
+  changePassword: async (data:{
+    oldPassword: string;
+    newPassword: string;
+  }):Promise<object | null> => {
+    try {
+      const response = await axiosInstance.put("/auth/change-password", data);
+      return {...response.data};
+    } catch (error) {
+      notify(handleAxiosError(error), "error");
+      return null;
+    }
+  },
   
   logout: (): void => {
     localStorage.removeItem(USER_ACCESS_TOKEN)

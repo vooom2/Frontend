@@ -23,6 +23,7 @@ type UserStore = {
     occupation?: string | null;
     address?: string | null;
     state?: string | null;
+    city?: string | null;
     img?: string | null;
     protection_plan_subscription: any;
     vehicle: any;
