@@ -16,13 +16,14 @@ export default function Inspection() {
     useEffect(() => {
         const fetchInfo = async () => {
             const res = await OwnerServices.getOwnerVehicles() as { vehicles: any }
-            console.log(res);
+
             if (res != null) {
                 vehicleStore.addVehicle(res.vehicles);
             }
         };
         fetchInfo();
     }, []);
+    console.log(vehicleStore.vehicles);
     return (
         <div className="w-full container mx-auto p-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
@@ -61,10 +62,10 @@ export default function Inspection() {
                         </div>
                         <div className="flex items-center gap-2">
                             <Avatar className="w-12 h-12 rounded-full">
-                                <AvatarImage src={vehicle.rider.img} className="rounded-full" />
+                                <AvatarImage src={vehicle.rider?.img} className="rounded-full" />
                                 <AvatarFallback>
                                     <img
-                                        src={"https://ui-avatars.com/api/?name=" + vehicle.rider.full_name}
+                                        src={"https://ui-avatars.com/api/?name=" + vehicle?.rider?.full_name}
                                         alt="Profile preview"
                                         className="rounded-lg object-cover w-20"
                                     />
@@ -72,7 +73,7 @@ export default function Inspection() {
                             </Avatar>
                             <div className="flex flex-col gap-1">
                                 <span className="text-sm font-medium">
-                                    {vehicle.rider.full_name}
+                                    {vehicle?.rider?.full_name}
                                 </span>
                                 <span className="text-sm font-medium text-muted-foreground">
                                     Rider

@@ -63,7 +63,7 @@ export default function OwnerDashboard() {
         fetchStats();
         fetchWalletInfo();
     }, []);
-
+    console.log(vehiclesStore?.vehicles);
     return (
         <div>
             {userInfo && hasLoaded && userInfo.account_verified && (
@@ -139,7 +139,7 @@ export default function OwnerDashboard() {
                                                                 <TableCell>
                                                                     {vehicle.remittance?.length}
                                                                 </TableCell>
-                                                                <TableCell>{vehicle.rider.full_name}</TableCell>
+                                                                <TableCell>{vehicle?.rider?.full_name ?? "Not assigned"}</TableCell>
                                                             </TableRow>
                                                         ))
                                                     ) : (

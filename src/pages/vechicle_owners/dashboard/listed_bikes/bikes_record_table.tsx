@@ -112,7 +112,7 @@ export default function BikesRecordTable() {
     }, []);
 
     return (
-        <div className="container mx-auto px-2 md:px-4 py-8 md:w-full relative">
+        <div className="container mx-auto px-0 md:px-4 py-8 md:w-full relative">
             <Card className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                 <div className="lg:col-span-4 rounded-md overflow-clip">
                     <Table>
@@ -145,7 +145,7 @@ export default function BikesRecordTable() {
                                             <StatusBadge status={vehicle.chasis_state} />
                                         </TableCell>
                                         <TableCell>{vehicle.remittance?.length}</TableCell>
-                                        <TableCell>{vehicle.rider.full_name}</TableCell>
+                                        <TableCell>{vehicle.rider?.full_name ?? "Not assigned"}</TableCell>
                                         <TableCell>
                                             <Link to={`${index}`}>
                                                 <Button
