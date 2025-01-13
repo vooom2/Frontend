@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -10,83 +11,37 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog"
+import { useEffect } from "react"
+import { useOwnerReportsStore } from "@/stores/owner_store/owner_reports_store"
+import { getLocalFriendlyDate } from "@/utils/utils"
+import OwnerServices from "@/api/owner.services"
+import emptyImg from "@/assets/images/no_data.png";
 
-
-interface Report {
-    id: number
-    datetime: string
-    priority: "Low" | "Medium" | "High"
-    message: string
-}
-
-const reports: Report[] = [
-    {
-        id: 1,
-        datetime: "04-03-2024 - 9:30am",
-        priority: "Low",
-        message: "There is an ongoing maintenance on your vehicle with Registration number #8905674, it will be b....."
-    },
-    {
-        id: 2,
-        datetime: "04-03-2024 - 9:30am",
-        priority: "Medium",
-        message: "Your vehicle #58738392 has been returned by the rider therefore inactive till another rider pick....."
-    },
-    {
-        id: 3,
-        datetime: "04-03-2024 - 9:30am",
-        priority: "High",
-        message: "Vehicle #729483 was involved in a ghastly accident"
-    },
-    {
-        id: 4,
-        datetime: "04-03-2024 - 9:30am",
-        priority: "Low",
-        message: "There is an ongoing maintenance on your vehicle with Registration number #8905674, it will be b....."
-    },
-    {
-        id: 5,
-        datetime: "04-03-2024 - 9:30am",
-        priority: "Medium",
-        message: "Your vehicle #58738392 has been returned by the rider therefore inactive till another rider pick....."
-    },
-    {
-        id: 6,
-        datetime: "04-03-2024 - 9:30am",
-        priority: "High",
-        message: "Vehicle #729483 was involved in a ghastly accident"
-    },
-    {
-        id: 7,
-        datetime: "04-03-2024 - 9:30am",
-        priority: "Low",
-        message: "There is an ongoing maintenance on your vehicle with Registration number #8905674, it will be b....."
-    },
-    {
-        id: 8,
-        datetime: "04-03-2024 - 9:30am",
-        priority: "Medium",
-        message: "Your vehicle #58738392 has been returned by the rider therefore inactive till another rider pick....."
-    },
-    {
-        id: 9,
-        datetime: "04-03-2024 - 9:30am",
-        priority: "High",
-        message: "Vehicle #729483 was involved in a ghastly accident"
-    },
-]
 
 export default function OwnerReport() {
-    const getPriorityStyle = (priority: Report["priority"]) => {
+    const getPriorityStyle = (priority: any) => {
         switch (priority) {
-            case "High":
+            case "high":
                 return "bg-red-100 text-red-700 hover:bg-red-100"
-            case "Medium":
+            case "medium":
                 return "bg-yellow-100 text-yellow-700 hover:bg-yellow-100"
-            case "Low":
+            case "low":
                 return "bg-gray-100 text-gray-700 hover:bg-gray-100"
         }
     }
+
+    const reportStore = useOwnerReportsStore((state) => state);
+
+    useEffect(() => {
+        const fetchInfo = async () => {
+            const res = await OwnerServices.getOwnerReports()
+            if (res != null) {
+                reportStore.updateReports(res);
+            }
+        };
+
+        fetchInfo();
+    }, []);
 
     return (
         <div className="w-full container mx-auto p-4">
@@ -101,14 +56,37 @@ export default function OwnerReport() {
                                 <TableHead className="w-[180px] text-white">Date / Time</TableHead>
                                 <TableHead className="w-[100px] text-white">Priority</TableHead>
                                 <TableHead className="text-white">Report</TableHead>
-                                <TableHead className="w-[120px] text-right text-white">Action</TableHead>
+                                <TableHead className="w-[120px] text-center text-white">Action</TableHead>
                             </TableRow>
                         </TableHeader>
-                        <TableBody>
-                            {reports.map((report) => (
+                        {!reportStore.reports && <TableBody className="animate-pulse">
+                            {[...Array(3)].map((_, index) => (
+                                <TableRow
+                                    key={index}
+                                    className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                                        }`}
+                                >
+                                    <TableCell>
+                                        <div className="h-4 bg-gray-200 rounded w-24"></div>
+                                    </TableCell>
+                                    <TableCell>
+                                        <div className="h-4 bg-gray-200 rounded w-24"></div>
+                                    </TableCell>
+                                    <TableCell>
+                                        <div className="h-4 bg-gray-200 rounded w-20"></div>
+                                    </TableCell>
+                                    <TableCell>
+                                        <div className="h-4 bg-gray-200 rounded w-16"></div>
+                                    </TableCell>
+
+                                </TableRow>
+                            ))}
+                        </TableBody>}
+                        {reportStore.reports && reportStore.reports.length > 0 && <TableBody>
+                            {reportStore.reports.map((report) => (
                                 <TableRow key={report.id}>
                                     <TableCell className="font-medium">
-                                        {report.datetime}
+                                        {getLocalFriendlyDate(report.createdAt)}
                                     </TableCell>
                                     <TableCell>
                                         <Badge
@@ -122,7 +100,7 @@ export default function OwnerReport() {
                                         </Badge>
                                     </TableCell>
                                     <TableCell className="max-w-[400px] truncate">
-                                        {report.message}
+                                        {report.description}
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <Dialog>
@@ -139,7 +117,7 @@ export default function OwnerReport() {
                                                 <DialogHeader>
                                                     <DialogTitle>Report Details</DialogTitle>
                                                     <DialogDescription>
-                                                        <p><strong>Message:</strong> {report.message}</p>
+                                                        <p><strong>Message:</strong> {report.description}</p>
                                                     </DialogDescription>
                                                 </DialogHeader>
                                                 <DialogClose asChild>
@@ -150,7 +128,16 @@ export default function OwnerReport() {
                                     </TableCell>
                                 </TableRow>
                             ))}
-                        </TableBody>
+                        </TableBody>}
+                        {reportStore.reports && reportStore.reports.length === 0 && (
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell colSpan={4} className="text-center">
+                                        <img src={emptyImg} className="w-52 mx-auto" />{" "}
+                                    </TableCell>
+                                </TableRow>
+                            </TableBody>
+                        )}
                     </Table>
                 </div>
             </div>

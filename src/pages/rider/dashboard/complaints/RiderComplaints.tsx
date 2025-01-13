@@ -32,11 +32,6 @@ interface Report {
     fleetManager: string;
 }
 
-const images = [
-    "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204",
-    "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204",
-    "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204",
-];
 
 function StatusBadge({ status }: { status: Report["status"] }) {
     const styles = {

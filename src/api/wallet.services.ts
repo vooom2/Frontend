@@ -25,9 +25,24 @@ const WalletServices = {
       return null;
     }
   },
-
- 
-
+  getOwnerWalletStat: async (): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.get("/user/owner/wallet");
+      return { ...response.data };
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
+  getOwnerWalletHistroy: async (): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.get("/wallet/history");
+      return { ...response.data };
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
 
 };
 

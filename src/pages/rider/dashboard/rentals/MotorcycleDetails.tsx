@@ -11,7 +11,7 @@ export default function MotorcycleDetails() {
     const vehicle = useRiderVehicleStore((state) => state.vehicle);
     useEffect(() => {
         const fetchApprovedVehicles = async () => {
-            const res = (await UserService.getVehicle()) as { vehicle: any };
+            const res = (await UserService.getRiderVehicle()) as { vehicle: any };
             if (res != null) {
                 setVehicle(res.vehicle);
             }

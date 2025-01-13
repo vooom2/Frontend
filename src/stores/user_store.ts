@@ -34,19 +34,21 @@ type UserStore = {
     withdrawal_pin: string | null;
     wallet: any;
   };
+  hasLoaded: boolean,
   updateInfo: (info: UserStore["userInfo"]) => void;
   getInfo: () => Promise<void>;
 };
 
 const useUserStore = create<UserStore>((set) => ({
   userInfo: undefined,
+  hasLoaded: false,
   updateInfo: (info) => {
-    set({ userInfo: info });
+    set({ userInfo: info, hasLoaded: true });
   },
   getInfo: async () => {
     const response: any = await UserService.getCurrentUser();
     if (response.data["okay"]) {
-      set({ userInfo: response.data["profile"] });
+      set({ userInfo: response.data["profile"], hasLoaded: true });
     }
   },
 }));

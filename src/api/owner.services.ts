@@ -14,6 +14,33 @@ const OwnerServices = {
       return null;
     }
   },
+  getOwnerVehicles: async (): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.get("/user/owner/vehicles");
+      return { ...response.data };
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
+  getOwnerReports: async (): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.get("/user/owner/reports");
+      return { ...response.data };
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
+  getOwnerVehicleStats: async (): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.get("/user/owner/vehicles/stats");
+      return { ...response.data };
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
 };
 
 export default OwnerServices;
