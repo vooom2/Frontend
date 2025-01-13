@@ -172,7 +172,7 @@ export default function BikesRecordTable() {
                                             <h3 className="text-base sm:text-lg font-medium mb-3">
                                                 You have no vehicle listed on {APP_NAME}
                                             </h3>
-                                            <Link to="host">
+                                            <Link to="/owner/dashboard/host">
                                                 <Button className="rounded-3xl bg-black px-4 py-2 text-sm sm:text-base">
                                                     Host your vehicle
                                                 </Button>
