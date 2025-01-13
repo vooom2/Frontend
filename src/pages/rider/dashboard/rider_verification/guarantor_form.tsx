@@ -161,246 +161,246 @@ export default function GuarantorForm({ handleStepChange }: { handleStepChange: 
 
 
     return (
-        <div className="flex items-center justify-center md:px-4 my-10">
-            <form
-                className="w-full max-w-3xl rounded-lg md:py-6 space-y-6"
-                onSubmit={handleSubmit(onSubmit)}
-            >
-                {/* Full name */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Full Name
-                    </label>
-                    <Controller
-                        name="guarantor_documents.full_name"
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                {...field}
-                                placeholder="Jane Doe"
-                                className="mt-1 block w-full border rounded-md sm:text-sm px-3 py-2"
-                                onChange={(e) => {
-                                    field.onChange(e);
-                                    updateGuarantorInfo("full_name", e.target.value);
-                                }}
-                                required
-                            />
-                        )}
-                    />
-                </div>
+      <div className="flex items-center justify-center md:px-4 my-10">
+        <form
+          className="w-full max-w-3xl rounded-lg md:py-6 space-y-6"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          {/* Full name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Full Name
+            </label>
+            <Controller
+              name="guarantor_documents.full_name"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="Jane Doe"
+                  className="mt-1 block w-full border rounded-md sm:text-sm px-3 py-2"
+                  onChange={(e) => {
+                    field.onChange(e);
+                    updateGuarantorInfo("full_name", e.target.value);
+                  }}
+                  required
+                />
+              )}
+            />
+          </div>
 
-                {/* Gender */}
-                <div className="grid grid-cols-2 gap-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                            Gender
-                        </label>
-                        <Controller
-                            name="guarantor_documents.gender"
-                            control={control}
-                            render={({ field }) => (
-                                <Select
-                                    value={field.value}
-                                    onValueChange={(value) => {
-                                        field.onChange(value);
-                                        updateGuarantorInfo("gender", value);
-                                    }}
-                                    required
-                                >
-                                    <SelectTrigger className="mt-1 w-full">
-                                        <SelectValue placeholder="Select gender" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="male">Male</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            )}
-                        />
-                    </div>
-                </div>
+          {/* Gender */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Gender
+              </label>
+              <Controller
+                name="guarantor_documents.gender"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    value={field.value}
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      updateGuarantorInfo("gender", value);
+                    }}
+                    required
+                  >
+                    <SelectTrigger className="mt-1 w-full">
+                      <SelectValue placeholder="Select gender" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="male">Male</SelectItem>
+                      <SelectItem value="female">Female</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+            </div>
+          </div>
 
-                {/* Phone Number */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Phone number
-                    </label>
-                    <Controller
-                        name="guarantor_documents.phone_number"
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                {...field}
-                                placeholder="+234 900 000 0000"
-                                className="mt-1 block w-full border rounded-md sm:text-sm px-3 py-2"
-                                maxLength={11}
-                                minLength={10}
-                                prefix="+234"
-                                onChange={(e) => {
-                                    field.onChange(e);
-                                    updateGuarantorInfo("phone_number", e.target.value);
-                                }}
-                                required
-                            />
-                        )}
-                    />
-                </div>
+          {/* Phone Number */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Phone number
+            </label>
+            <Controller
+              name="guarantor_documents.phone_number"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="+234 900 000 0000"
+                  className="mt-1 block w-full border rounded-md sm:text-sm px-3 py-2"
+                  maxLength={11}
+                  minLength={10}
+                  prefix="+234"
+                  onChange={(e) => {
+                    field.onChange(e);
+                    updateGuarantorInfo("phone_number", e.target.value);
+                  }}
+                  required
+                />
+              )}
+            />
+          </div>
 
-                {/* Email */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Email Address
-                    </label>
-                    <Controller
-                        name="guarantor_documents.email"
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                {...field}
-                                type="email"
-                                placeholder="jane@email.com"
-                                className="mt-1 block w-full border rounded-md sm:text-sm px-3 py-2"
-                                onChange={(e) => {
-                                    field.onChange(e);
-                                    updateGuarantorInfo("email", e.target.value);
-                                }}
-                                required
-                            />
-                        )}
-                    />
-                </div>
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Email Address
+            </label>
+            <Controller
+              name="guarantor_documents.email"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  type="email"
+                  placeholder="jane@email.com"
+                  className="mt-1 block w-full border rounded-md sm:text-sm px-3 py-2"
+                  onChange={(e) => {
+                    field.onChange(e);
+                    updateGuarantorInfo("email", e.target.value);
+                  }}
+                  required
+                />
+              )}
+            />
+          </div>
 
-                {/* Organization */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Organization name
-                    </label>
-                    <Controller
-                        name="guarantor_documents.organization"
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                {...field}
-                                placeholder="Organization name"
-                                className="mt-1 block w-full border rounded-md sm:text-sm px-3 py-2"
-                                onChange={(e) => {
-                                    field.onChange(e);
-                                    updateGuarantorInfo("organization", e.target.value);
-                                }}
-                                required
-                            />
-                        )}
-                    />
-                </div>
+          {/* Organization */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Organization name
+            </label>
+            <Controller
+              name="guarantor_documents.organization"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="Organization name"
+                  className="mt-1 block w-full border rounded-md sm:text-sm px-3 py-2"
+                  onChange={(e) => {
+                    field.onChange(e);
+                    updateGuarantorInfo("organization", e.target.value);
+                  }}
+                  required
+                />
+              )}
+            />
+          </div>
 
-                {/* Location */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Organization Location
-                    </label>
-                    <Controller
-                        name="guarantor_documents.location"
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                {...field}
-                                placeholder="Organization location"
-                                className="mt-1 block w-full border rounded-md sm:text-sm px-3 py-2"
-                                onChange={(e) => {
-                                    field.onChange(e);
-                                    updateGuarantorInfo("location", e.target.value);
-                                }}
-                                required
-                            />
-                        )}
-                    />
-                </div>
+          {/* Location */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Organization Location
+            </label>
+            <Controller
+              name="guarantor_documents.location"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="Organization location"
+                  className="mt-1 block w-full border rounded-md sm:text-sm px-3 py-2"
+                  onChange={(e) => {
+                    field.onChange(e);
+                    updateGuarantorInfo("location", e.target.value);
+                  }}
+                  required
+                />
+              )}
+            />
+          </div>
 
-                {/* Country and State */}
-                <div className="grid grid-cols-2 gap-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                            Country
-                        </label>
-                        <Select defaultValue="nigeria">
-                            <SelectTrigger className="mt-1 w-full">
-                                <SelectValue placeholder="Nigeria" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="nigeria">Nigeria</SelectItem>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                            State
-                        </label>
-                        <Controller
-                            name="guarantor_documents.state"
-                            control={control}
-                            render={({ field }) => (
-                                <Select
-                                    value={field.value}
-                                    onValueChange={(value) => {
-                                        field.onChange(value);
-                                        updateGuarantorInfo("state", value);
-                                    }}
-                                    required
-                                    defaultValue="abuja"
-                                >
-                                    <SelectTrigger className="mt-1 w-full">
-                                        <SelectValue placeholder="Select state" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {nigerianStates.map((state, index) => (
-                                            <SelectItem key={index} value={state.name}>
-                                                {state.name}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
-                            )}
-                        />
-                    </div>
-                </div>
+          {/* Country and State */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Country
+              </label>
+              <Select defaultValue="nigeria">
+                <SelectTrigger className="mt-1 w-full">
+                  <SelectValue placeholder="Nigeria" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="nigeria">Nigeria</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                State
+              </label>
+              <Controller
+                name="guarantor_documents.state"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    value={field.value}
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      updateGuarantorInfo("state", value);
+                    }}
+                    required
+                    defaultValue="abuja"
+                  >
+                    <SelectTrigger className="mt-1 w-full">
+                      <SelectValue placeholder="Select state" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {nigerianStates.map((state, index) => (
+                        <SelectItem key={index} value={state.name}>
+                          {state.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+            </div>
+          </div>
 
-                {/* Address */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Home address
-                    </label>
-                    <Controller
-                        name="guarantor_documents.address"
-                        control={control}
-                        render={({ field }) => (
-                            <Input
-                                {...field}
-                                placeholder="3, Wuse street, Abuja"
-                                className="mt-1 block w-full sm:text-sm px-3 py-2"
-                                onChange={(e) => {
-                                    field.onChange(e);
-                                    updateGuarantorInfo("address", e.target.value);
-                                }}
-                                required
-                            />
-                        )}
-                    />
-                </div>
+          {/* Address */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Home address
+            </label>
+            <Controller
+              name="guarantor_documents.address"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  placeholder="3, Wuse street, Abuja"
+                  className="mt-1 block w-full sm:text-sm px-3 py-2"
+                  onChange={(e) => {
+                    field.onChange(e);
+                    updateGuarantorInfo("address", e.target.value);
+                  }}
+                  required
+                />
+              )}
+            />
+          </div>
 
-                {/* File upload sections */}
-                <div className="space-y-4">
-                    {renderUploadArea('facial', 'Facial photo')}
-                    {renderUploadArea('workId', 'Work ID Card')}
-                    {renderUploadArea('nationalId', 'National ID')}
-                </div>
+          {/* File upload sections */}
+          <div className="space-y-4">
+            {renderUploadArea("facial", "Facial photo")}
+            {renderUploadArea("workId", "Work ID Card")}
+            {renderUploadArea("nationalId", "National ID")}
+          </div>
 
-                <button
-                    type="submit"
-                    className="max-w-3xl w-full mx-auto bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition flex items-center justify-center"
-
-                >
-                    {uploading ? <CircularLoader color="white" /> : "Submit"}
-                </button>
-            </form>
-        </div>
+          <button
+            type="submit"
+            className="max-w-3xl w-full mx-auto bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition flex items-center justify-center"
+          >
+            {uploading ? <CircularLoader color="white" /> : "Submit"}
+          </button>
+        </form>
+      </div>
     );
 }
