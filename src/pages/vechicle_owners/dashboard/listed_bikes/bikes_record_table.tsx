@@ -164,7 +164,7 @@ export default function BikesRecordTable() {
                         {
                             vehiclesStore.vehicles && vehiclesStore.vehicles.length === 0 && <TableBody>
                                 <TableRow>
-                                    <TableCell colSpan={4} className="text-center py-6">
+                                    <TableCell colSpan={7} className="text-center py-6">
                                         <div className="flex flex-col items-center justify-center py-6 sm:py-8 text-center">
                                             <div className="rounded-full bg-blue-100 md:p-6 p-4 mb-4 w-fit">
                                                 <FileWarning className="md:h-[8rem] md:w-[8rem] h-16 w-16 text-blue-500" />
@@ -172,7 +172,7 @@ export default function BikesRecordTable() {
                                             <h3 className="text-base sm:text-lg font-medium mb-3">
                                                 You have no vehicle listed on {APP_NAME}
                                             </h3>
-                                            <Link to="host">
+                                            <Link to="/owner/dashboard/host">
                                                 <Button className="rounded-3xl bg-black px-4 py-2 text-sm sm:text-base">
                                                     Host your vehicle
                                                 </Button>

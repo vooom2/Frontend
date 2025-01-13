@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { USER_ROLES } from "@/utils/constant";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -13,11 +13,10 @@ export default function VehicleRegistration() {
   const navigate = useNavigate();
 
   const steps = [
-    { number: 1, label: 'Vehicle details' },
-    { number: 2, label: 'Vehicle registration' },
-    { number: 3, label: 'Vehicle features' },
-  ]
-
+    { number: 1, label: "Vehicle details" },
+    { number: 2, label: "Vehicle registration" },
+    { number: 3, label: "Vehicle features" },
+  ];
 
   const handleStepChange = (index: number) => {
     if (index > 3) {
@@ -39,38 +38,60 @@ export default function VehicleRegistration() {
               <div className="flex flex-col items-center w-full sm:w-auto">
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-semibold
-                ${currentStep >= index
-                      ? 'bg-green-500 text-white'
-                      : 'border border-gray-200 text-gray-400'}`}
+                ${
+                  currentStep >= index
+                    ? "bg-green-500 text-white"
+                    : "border border-gray-200 text-gray-400"
+                }`}
                 >
                   {step.number}
                 </div>
-                <span className={`text-sm mt-2 text-center
-              ${currentStep >= index ? 'text-black' : 'text-gray-400'}`}>
+                <span
+                  className={`text-sm mt-2 text-center
+              ${currentStep >= index ? "text-black" : "text-gray-400"}`}
+                >
                   {step.label}
                 </span>
               </div>
               {index < steps.length - 1 && (
-                <div className={`${currentStep > index ? "bg-green-500" : "bg-gray-200"} hidden sm:block w-24 h-0.5 `} />
+                <div
+                  className={`${
+                    currentStep > index ? "bg-green-500" : "bg-gray-200"
+                  } hidden sm:block w-24 h-0.5 `}
+                />
               )}
             </React.Fragment>
           ))}
         </div>
-
       </div>
-      {currentStep == 0 && <VehicleDetailsForm />}
-      {currentStep == 1 && <VehicleDocumentsUpload />}
-      {currentStep == 2 && <VehicleFeatures />}
+      {currentStep == 0 && (
+        <VehicleDetailsForm
+          handleStepChange={handleStepChange}
+          currentStep={currentStep}
+        />
+      )}
+      {currentStep == 1 && (
+        <VehicleDocumentsUpload
+          handleStepChange={handleStepChange}
+          currentStep={currentStep}
+        />
+      )}
+      {currentStep == 2 && (
+        <VehicleFeatures
+          handleStepChange={handleStepChange}
+          currentStep={currentStep}
+        />
+      )}
       {currentStep > 2 && <VehicleRegistrationFinale />}
 
-      <div className="flex justify-center mt-8 max-w-2xl mx-auto">
+      {/* <div className="flex justify-center mt-8 max-w-2xl mx-auto">
         <Button
           className="w-full max-w-3xl bg-black text-white hover:bg-black/90"
           onClick={() => handleStepChange(currentStep + 1)}
         >
           {currentStep <= 2 ? "Next" : "Done"}
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }
