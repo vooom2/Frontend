@@ -13,7 +13,7 @@ const WalletServices = {
   },
 
   initiateWithdrawal: async (data: {
-    ammount: string;
+    amount: string;
     bank_account_id: string;
     withdrawal_pin: string;
   }): Promise<object | null> => {
@@ -25,6 +25,19 @@ const WalletServices = {
       return null;
     }
   },
+
+  updatepin: async (data: {
+    pin: string;
+  }): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.post(`/wallet/set-pin`, data);
+      return { ...response.data };
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  },
+
   getOwnerWalletStat: async (): Promise<object | null> => {
     try {
       const response = await axiosInstance.get("/user/owner/wallet");

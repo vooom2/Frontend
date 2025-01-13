@@ -21,8 +21,8 @@ export default function DashboardLayout() {
             const res = await UserService.getCurrentUser() as { profile: any };
             if (res != null) {
                 updateUserInfo(res.profile);
+                setState(false);
             }
-            setState(false);
         };
 
         fetchUserInfo();

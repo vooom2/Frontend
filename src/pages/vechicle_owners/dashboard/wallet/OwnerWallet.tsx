@@ -48,7 +48,6 @@ export default function OwnerWallet() {
             const res = (await WalletServices.getOwnerWalletHistroy()) as {
                 history: any;
             };
-            console.log(res);
             if (res != null) {
                 walletHistoryStore.setHistory(res.history);
             }

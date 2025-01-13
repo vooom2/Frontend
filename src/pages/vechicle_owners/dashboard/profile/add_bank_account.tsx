@@ -25,6 +25,7 @@ import UtilsServices from "@/api/utils.services";
 import UserService from "@/api/user.services";
 import CircularLoader from "@/components/circular_loader";
 import notify from "@/utils/toast";
+import useUserStore from "@/stores/user_store";
 
 type Bank = {
     id: string;
@@ -49,7 +50,7 @@ function AddBankAccount() {
     const [isLoading, setIsLoading] = useState(false);
     const { control, handleSubmit, register } = useForm();
 
-
+    const userInfo = useUserStore((state) => state.userInfo);
 
     const submit = async (data: any) => {
         try {
@@ -115,7 +116,6 @@ function AddBankAccount() {
                     <div className="flex gap-2 items-center">
                         <p className="text-xs text-white font-semibold" >Add account</p>
                         <Plus size={18} color='white' />
-
                     </div>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
