@@ -14,6 +14,24 @@ const OwnerServices = {
       return null;
     }
   },
+
+  hostVehicle: async (data: {
+    [key: string]: string | number;
+  }): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.post(
+        "/user/owner/host-vehicle",
+        data
+      );
+      if (response.status != 200 && response.status != 201) {
+        window.location.href = "/auth/login";
+        notify("Not unauthorized", "error");
+      }
+      return response.data;
+    } catch {
+      return null;
+    }
+  },
 };
 
 export default OwnerServices;
