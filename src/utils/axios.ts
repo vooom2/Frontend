@@ -4,11 +4,11 @@ import { USER_ACCESS_TOKEN } from "./appstrings";
 
 // Base Axios instance configuration
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASEURL,
-  timeout: 10000,
+  baseURL: "https://voom-engine.onrender.com/api",
+  timeout: 10000, 
   headers: {
     "Content-Type": "application/json",
-    Authorization: `${localStorage.getItem(USER_ACCESS_TOKEN)}`,
+    "Authorization": `${localStorage.getItem(USER_ACCESS_TOKEN)}`,
   },
 });
 
