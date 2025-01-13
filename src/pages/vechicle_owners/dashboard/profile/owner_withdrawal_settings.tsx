@@ -39,9 +39,10 @@ export default function OwnerWithdrawalSettings() {
 
     useEffect(() => {
         const fetchAccounts = async () => {
-            const res = (await UserServices.getBankAccounts()) as { data: any };
+            const res = (await UserServices.getBankAccounts()) as { bankAccounts: any };
+            console.log(res);
             if (res != null) {
-                ownerBankStore.setAccounts(res.data);
+                ownerBankStore.setAccounts(res.bankAccounts);
             }
         };
         fetchAccounts();
@@ -119,7 +120,7 @@ export default function OwnerWithdrawalSettings() {
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
                                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                        <AlertDialogAction onClick={() => deleteAccount(account.id)}>Continue</AlertDialogAction>
+                                        <AlertDialogAction onClick={() => deleteAccount(account._id)}>Continue</AlertDialogAction>
                                     </AlertDialogFooter>
                                 </AlertDialogContent>
                             </AlertDialog>

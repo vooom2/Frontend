@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 export type AccountDetails =  {
-    id: string;
+    _id: string;
     account_number: string;
     account_name: string;
     bank_code: string;
@@ -22,7 +22,7 @@ const useOwnerAccountStore = create<OwnerAccounts>((set) => ({
     accounts: null,
     hasLoaded: false,
    setAccounts: (data) => set(() => ({accounts: data, hasLoaded: true})),
-    removeAccount: (id) => set((state) => ({accounts: state.accounts?.filter((account) => account.id !== id)}))
+    removeAccount: (id) => set((state) => ({accounts: state.accounts?.filter((account) => account._id !== id)}))
 }));
 
 export default useOwnerAccountStore;
