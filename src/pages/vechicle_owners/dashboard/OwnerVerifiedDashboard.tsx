@@ -1,4 +1,3 @@
-import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator";
 import { Button } from "@/components/ui/button";
 import { APP_NAME } from "@/utils/constant";
 import { Link } from "react-router";
@@ -15,6 +14,7 @@ import { Card } from "@/components/ui/card";
 import { RiBikeLine } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import OwnerServices from "@/api/owner.services";
+import { DashboardStatusIndicatorCard } from "@/components/home_status_indicator";
 
 interface Vehicle {
   regNumber: string;
@@ -127,14 +127,14 @@ const OwnerVerifiedDashboard = () => {
                         className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
                       >
                         <TableCell className="font-medium">
-                          {vehicle.regNumber}
+                          {vehicle?.regNumber}
                         </TableCell>
                         <TableCell>
-                          <StatusBadge status={vehicle.healthStatus} />
+                          <StatusBadge status={vehicle?.healthStatus} />
                         </TableCell>
-                        <TableCell>{vehicle.weeklyRemittance}</TableCell>
-                        <TableCell>{vehicle.amount}</TableCell>
-                        <TableCell>{vehicle.rider}</TableCell>
+                        <TableCell>{vehicle?.weeklyRemittance}</TableCell>
+                        <TableCell>{vehicle?.amount}</TableCell>
+                        <TableCell>{vehicle?.rider}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

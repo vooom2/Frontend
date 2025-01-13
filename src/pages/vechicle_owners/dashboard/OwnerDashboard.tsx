@@ -64,153 +64,157 @@ export default function OwnerDashboard() {
     }, []);
 
     return (
-        <div>
-            {userInfo && hasLoaded && userInfo.account_verified && (
-                <>
-                    <div className="container mx-auto p-2 lg:p-6 space-y-6">
-                        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                            <DashboardInfoCard
-                                label="Total Withdrawn"
-                                icon="clock"
-                                value={formatCurrency(walletStore?.totalWithdrawn)}
-                            />
-                            <DashboardInfoCard
-                                label="Amount this week"
-                                icon="clock"
-                                value={formatCurrency(walletStore?.totalThisWeek)}
-                            />
-                            <DashboardInfoCard
-                                label="Active bikes"
-                                icon="clock"
-                                value={vehiclesStatStore?.totalActiveVehicles}
-                            />
-                            <DashboardInfoCard
-                                label="Inactive bikes"
-                                icon="bike"
-                                value={vehiclesStatStore?.totalInactiveVehicles}
-                            />
-                        </div>
-                        <div className="grid lg:grid-cols-[1fr,400px] gap-6">
-                            {/* Vehicle Status Table */}
-                            <div className="space-y-4">
-                                <h2 className="text-xl font-semibold">Status of Vehicles</h2>
-                                <Card className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                                    <div className="lg:col-span-4 rounded-md overflow-clip">
-                                        <Table>
-                                            <TableHeader className="bg-black">
-                                                <TableRow>
-                                                    <TableHead className="text-white">
-                                                        Date Registered
-                                                    </TableHead>
-                                                    <TableHead className="text-white">
-                                                        Plate Number
-                                                    </TableHead>
-                                                    <TableHead className="text-white">Model</TableHead>
-                                                    <TableHead className="text-white">Status</TableHead>
-                                                    <TableHead className="text-white">
-                                                        No. of Remmittance
-                                                    </TableHead>
-                                                    <TableHead className="text-white">
-                                                        Assisnged Rider
-                                                    </TableHead>
-                                                </TableRow>
-                                            </TableHeader>
-                                            {vehiclesStore.vehicles ? (
-                                                <TableBody>
-                                                    {vehiclesStore?.vehicles.length > 0 ? (
-                                                        vehiclesStore.vehicles.map((vehicle, index) => (
-                                                            <TableRow
-                                                                key={index}
-                                                                className={
-                                                                    index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                                                                }
-                                                            >
-                                                                <TableCell>
-                                                                    {getLocalFriendlyDate(vehicle.createdAt)}
-                                                                </TableCell>
-                                                                <TableCell className="font-medium">
-                                                                    {vehicle.plate_number}
-                                                                </TableCell>
-                                                                <TableCell>{vehicle.model}</TableCell>
-                                                                <TableCell>
-                                                                    <StatusBadge status={vehicle.chasis_state} />
-                                                                </TableCell>
-                                                                <TableCell>
-                                                                    {vehicle.remittance?.length}
-                                                                </TableCell>
-                                                                <TableCell>{vehicle.rider.full_name}</TableCell>
-                                                            </TableRow>
-                                                        ))
-                                                    ) : (
-                                                        <TableRow>
-                                                            <TableCell
-                                                                colSpan={5}
-                                                                className="text-center py-6"
-                                                            >
-                                                                <div className="flex flex-col items-center justify-center py-6 sm:py-8 text-center">
-                                                                    <div className="rounded-full bg-blue-100 md:p-6 p-4 mb-4 w-fit">
-                                                                        <FileWarning className="md:h-[8rem] md:w-[8rem] h-16 w-16 text-blue-500" />
-                                                                    </div>
-                                                                    <h3 className="text-base sm:text-lg font-medium mb-3">
-                                                                        You have no vehicle listed on {APP_NAME}
-                                                                    </h3>
-                                                                    <Link to="host">
-                                                                        <Button className="rounded-3xl bg-black px-4 py-2 text-sm sm:text-base">
-                                                                            Host your vehicle
-                                                                        </Button>
-                                                                    </Link>
-                                                                </div>
-                                                            </TableCell>
-                                                        </TableRow>
-                                                    )}
-                                                </TableBody>
-                                            ) :
-                                                <TableBody className="animate-pulse">
-                                                    {[...Array(3)].map((_, index) => (
-                                                        <TableRow
-                                                            key={index}
-                                                            className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                                                                }`}
-                                                        >
-                                                            <TableCell>
-                                                                <div className="h-4 bg-gray-200 rounded w-24"></div>
-                                                            </TableCell>
-                                                            <TableCell>
-                                                                <div className="h-4 bg-gray-200 rounded w-24"></div>
-                                                            </TableCell>
-                                                            <TableCell>
-                                                                <div className="h-4 bg-gray-200 rounded w-20"></div>
-                                                            </TableCell>
-                                                            <TableCell>
-                                                                <div className="h-4 bg-gray-200 rounded w-16"></div>
-                                                            </TableCell>
-                                                            <TableCell>
-                                                                <div className="h-4 bg-gray-200 rounded w-16"></div>
-                                                            </TableCell>
-                                                            <TableCell>
-                                                                <div className="h-4 bg-gray-200 rounded w-16"></div>
-                                                            </TableCell>
-
-                                                        </TableRow>
-                                                    ))}
-                                                </TableBody>
-                                            }
-                                        </Table>
+      <div>
+        {userInfo && hasLoaded && userInfo.account_verified && (
+          <>
+            <div className="container mx-auto p-2 lg:p-6 space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                <DashboardInfoCard
+                  label="Total Withdrawn"
+                  icon="clock"
+                  value={formatCurrency(walletStore?.totalWithdrawn)}
+                />
+                <DashboardInfoCard
+                  label="Amount this week"
+                  icon="clock"
+                  value={formatCurrency(walletStore?.totalThisWeek)}
+                />
+                <DashboardInfoCard
+                  label="Active bikes"
+                  icon="clock"
+                  value={vehiclesStatStore?.totalActiveVehicles}
+                />
+                <DashboardInfoCard
+                  label="Inactive bikes"
+                  icon="bike"
+                  value={vehiclesStatStore?.totalInactiveVehicles}
+                />
+              </div>
+              <div className="grid lg:grid-cols-[1fr,400px] gap-6">
+                {/* Vehicle Status Table */}
+                <div className="space-y-4">
+                  <h2 className="text-xl font-semibold">Status of Vehicles</h2>
+                  <Card className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                    <div className="lg:col-span-4 rounded-md overflow-clip">
+                      <Table>
+                        <TableHeader className="bg-black">
+                          <TableRow>
+                            <TableHead className="text-white">
+                              Date Registered
+                            </TableHead>
+                            <TableHead className="text-white">
+                              Plate Number
+                            </TableHead>
+                            <TableHead className="text-white">Model</TableHead>
+                            <TableHead className="text-white">Status</TableHead>
+                            <TableHead className="text-white">
+                              No. of Remmittance
+                            </TableHead>
+                            <TableHead className="text-white">
+                              Assisnged Rider
+                            </TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        {vehiclesStore.vehicles ? (
+                          <TableBody>
+                            {vehiclesStore?.vehicles.length > 0 ? (
+                              vehiclesStore.vehicles.map((vehicle, index) => (
+                                <TableRow
+                                  key={index}
+                                  className={
+                                    index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                                  }
+                                >
+                                  <TableCell>
+                                    {getLocalFriendlyDate(vehicle.createdAt)}
+                                  </TableCell>
+                                  <TableCell className="font-medium">
+                                    {vehicle.plate_number}
+                                  </TableCell>
+                                  <TableCell>{vehicle.model}</TableCell>
+                                  <TableCell>
+                                    <StatusBadge
+                                      status={vehicle.chasis_state}
+                                    />
+                                  </TableCell>
+                                  <TableCell>
+                                    {vehicle.remittance?.length}
+                                  </TableCell>
+                                  <TableCell>
+                                    {vehicle?.rider?.full_name}
+                                  </TableCell>
+                                </TableRow>
+                              ))
+                            ) : (
+                              <TableRow>
+                                <TableCell
+                                  colSpan={5}
+                                  className="text-center py-6"
+                                >
+                                  <div className="flex flex-col items-center justify-center py-6 sm:py-8 text-center">
+                                    <div className="rounded-full bg-blue-100 md:p-6 p-4 mb-4 w-fit">
+                                      <FileWarning className="md:h-[8rem] md:w-[8rem] h-16 w-16 text-blue-500" />
                                     </div>
-                                </Card>
-                            </div>
+                                    <h3 className="text-base sm:text-lg font-medium mb-3">
+                                      You have no vehicle listed on {APP_NAME}
+                                    </h3>
+                                    <Link to="host">
+                                      <Button className="rounded-3xl bg-black px-4 py-2 text-sm sm:text-base">
+                                        Host your vehicle
+                                      </Button>
+                                    </Link>
+                                  </div>
+                                </TableCell>
+                              </TableRow>
+                            )}
+                          </TableBody>
+                        ) : (
+                          <TableBody className="animate-pulse">
+                            {[...Array(3)].map((_, index) => (
+                              <TableRow
+                                key={index}
+                                className={`${
+                                  index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                                }`}
+                              >
+                                <TableCell>
+                                  <div className="h-4 bg-gray-200 rounded w-24"></div>
+                                </TableCell>
+                                <TableCell>
+                                  <div className="h-4 bg-gray-200 rounded w-24"></div>
+                                </TableCell>
+                                <TableCell>
+                                  <div className="h-4 bg-gray-200 rounded w-20"></div>
+                                </TableCell>
+                                <TableCell>
+                                  <div className="h-4 bg-gray-200 rounded w-16"></div>
+                                </TableCell>
+                                <TableCell>
+                                  <div className="h-4 bg-gray-200 rounded w-16"></div>
+                                </TableCell>
+                                <TableCell>
+                                  <div className="h-4 bg-gray-200 rounded w-16"></div>
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        )}
+                      </Table>
+                    </div>
+                  </Card>
+                </div>
 
-                            {/* Notifications Panel */}
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-center">
-                                    <h2 className="text-xl font-semibold">Notifications</h2>
-                                    <button className="text-orange-500 text-sm hover:underline">
-                                        View All
-                                    </button>
-                                </div>
-                                <Card className="p-4">
-                                    <div className="space-y-4">
-                                        {/* {notifications.map((notification) => (
+                {/* Notifications Panel */}
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <h2 className="text-xl font-semibold">Notifications</h2>
+                    <button className="text-orange-500 text-sm hover:underline">
+                      View All
+                    </button>
+                  </div>
+                  <Card className="p-4">
+                    <div className="space-y-4">
+                      {/* {notifications.map((notification) => (
                                             <div key={notification.id} className="flex gap-3">
                                                 <NotificationIcon type={notification.type} />
                                                 <div className="flex-1">
@@ -223,23 +227,23 @@ export default function OwnerDashboard() {
                                                 </div>
                                             </div>
                                         ))} */}
-                                        <Skeleton className="h-4 w-full" />
-                                        <Skeleton className="h-4 w-full" />
-                                    </div>
-                                </Card>
-                            </div>
-                        </div>
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-full" />
                     </div>
-                </>
-            )}
-            {userInfo &&
-                !userInfo?.verification_started &&
-                !userInfo?.account_verified && <OwnerVerificationBanner />}
-            {userInfo &&
-                !userInfo.account_verified &&
-                userInfo?.verification_started && <VerifyingAccount />}
-            {!userInfo && <DashboardSkeleton />}
-        </div>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+        {userInfo &&
+          !userInfo?.verification_started &&
+          !userInfo?.account_verified && <OwnerVerificationBanner />}
+        {userInfo &&
+          !userInfo.account_verified &&
+          userInfo?.verification_started && <VerifyingAccount />}
+        {!userInfo && <DashboardSkeleton />}
+      </div>
     );
 }
 
