@@ -37,6 +37,7 @@ export default function OwnerDashboard() {
     useEffect(() => {
         const fetchVehicles = async () => {
             const res = (await OwnerServices.getOwnerVehicles()) as { vehicles: any };
+            console.log(res);
             if (res != null) {
                 vehiclesStore.addVehicle(res.vehicles);
             }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
     Dialog,
     DialogContent,
@@ -109,7 +110,11 @@ function AddBankAccount() {
         <div className="bg-onprimary cursor-pointer hover:opacity-90 rounded-full p-2">
             <Dialog>
                 <DialogTrigger asChild>
-                    <Plus size={18} color='white' />
+                    <div className="flex gap-2 items-center">
+                        <p className="text-xs text-white font-semibold" >Add account</p>
+                        <Plus size={18} color='white' />
+
+                    </div>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <form onSubmit={handleSubmit(resolvedAccountDetails ? submit : resolveAccount)}>
@@ -127,6 +132,8 @@ function AddBankAccount() {
                                 <Input
                                     id="account number"
                                     placeholder="0123456789"
+                                    minLength={10}
+                                    maxLength={10}
                                     required
                                     {...register('account_number')}
                                     onChange={() => setResolvedAccountDetails(null)}

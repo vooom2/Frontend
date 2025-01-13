@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -19,10 +19,31 @@ import {
     InputOTPGroup,
     InputOTPSlot,
 } from "@/components/ui/input-otp"
-import formatCurrency from "@/utils/formatCurrency"
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp"
+import useOwnerAccountStore, { AccountDetails } from "@/stores/owner_store/owner_accounts_store"
+import useUserStore from "@/stores/user_store"
+import { useEffect, useState } from "react"
+import UserService from "@/api/user.services"
+import AddBankAccount from "../profile/add_bank_account"
 
 export default function OwnerWithdrawalForm() {
+    const userInfo = useUserStore((state) => state.userInfo);
+    const ownerBankStore = useOwnerAccountStore((state) => state);
+    const [selectedAccount, setSelectedAccount] = useState<AccountDetails | null>(null)
+
+    useEffect(() => {
+        const fetchAccounts = async () => {
+            const res = (await UserService.getBankAccounts()) as { bankAccounts: any };
+            console.log(res);
+            if (res != null) {
+                ownerBankStore.setAccounts(res.bankAccounts);
+            }
+        };
+        fetchAccounts();
+    }, []);
+
+    console.log(selectedAccount);
+
     return (
         <Card className="w-full max-w-3xl mx-auto shadow-none border-0 mt-20">
             <CardHeader>
@@ -33,53 +54,54 @@ export default function OwnerWithdrawalForm() {
 
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <Label htmlFor="accountName">Select withdrawal account</Label>
-                            <Input
-                                id="accountName"
-                                defaultValue="Ceaser Pilate"
-                                className="bg-muted"
-                                readOnly
-                            />
+                            <div className=" flex items-center justify-between">
+                                <Label htmlFor="accountName">Select Withdrawal Account</Label>
+                                <AddBankAccount />
+                            </div>
+
+                            <Select
+                                onValueChange={(value) => {
+                                    console.log(value)
+                                    setSelectedAccount(ownerBankStore.accounts?.find((account) => account.account_name === value) ?? null)
+                                }}
+                                required
+                            >
+                                <SelectTrigger className="mt-1 w-full">
+                                    <SelectValue placeholder="Select account" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {ownerBankStore.accounts?.map((account) => (
+                                        <SelectItem key={account.id} value={account.account_name}>
+                                            {account.account_name} - {account.bank_name} {(account.account_number)}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+
                         </div>
 
                         <div className="space-y-2">
                             <Label htmlFor="accountNumber">Account number</Label>
                             <Input
                                 id="accountNumber"
-                                defaultValue="0081766455"
+                                value={selectedAccount?.account_number ?? ""}
+                                readOnly placeholder="0123456789"
                             />
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <Label htmlFor="bank">Bank</Label>
-                                <Select defaultValue="ecobank">
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select bank" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="ecobank">Eco bank</SelectItem>
-                                        <SelectItem value="gtbank">GT Bank</SelectItem>
-                                        <SelectItem value="firstbank">First Bank</SelectItem>
-                                        <SelectItem value="uba">UBA</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                <Label htmlFor="bank">Bank name</Label>
+                                <Input value={selectedAccount?.bank_name ?? ""} placeholder="Bank name" readOnly />
                             </div>
 
                             <div className="space-y-2">
                                 <Label htmlFor="amount">Amount</Label>
                                 <Input
                                     id="amount"
-                                    defaultValue="N90,000"
+                                    placeholder="90,000"
                                 />
                             </div>
-                        </div>
-
-                        <div className="flex items-center space-x-2">
-                            <Checkbox id="saveDetails" />
-                            <Label htmlFor="saveDetails" className="text-sm">
-                                Save card details
-                            </Label>
                         </div>
                     </div>
                 </div>
@@ -87,7 +109,7 @@ export default function OwnerWithdrawalForm() {
                 <Dialog>
                     <DialogTrigger asChild>
                         <Button className="w-full">
-                            Withdraw {formatCurrency(90000)}
+                            Withdraw
                         </Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-md">

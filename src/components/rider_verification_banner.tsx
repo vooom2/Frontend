@@ -2,8 +2,11 @@ import { APP_NAME, USER_ROLES } from "@/utils/constant";
 import { FileWarning, X } from 'lucide-react';
 import { Button } from "./ui/button";
 import { Link } from "react-router";
+import useUserStore from "@/stores/user_store";
 
 export default function RiderVerificationBanner() {
+    const userInfo = useUserStore((state) => state.userInfo);
+
     return (
         <div className="px-4 py-6 sm:py-8">
             <div className="relative flex flex-col p-4 sm:p-6 bg-black text-white rounded-lg shadow-lg max-w-4xl mx-auto">
@@ -13,7 +16,7 @@ export default function RiderVerificationBanner() {
                 >
                     <X className="h-5 w-5" />
                 </button>
-                <p className="text-sm text-gray-200">Hi, Lorem Ipsum</p>
+                <p className="text-sm text-gray-200 capitalize">Hi, {userInfo?.full_name}</p>
                 <h2 className="text-xl sm:text-2xl md:text-4xl font-bold mt-1 pr-8">
                     Finish your account setup (0/3){" "}
                     <span aria-hidden="true" className="ml-2">→</span>

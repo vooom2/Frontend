@@ -1,10 +1,14 @@
 import { create } from "zustand";
 
-type AccountDetails =  {
+export type AccountDetails =  {
     id: string;
     account_number: string;
     account_name: string;
-
+    bank_code: string;
+    bank_name: string;
+    createdAt: string;
+    recipient_code: string;
+    user_id: string;
 }
 
 interface OwnerAccounts{

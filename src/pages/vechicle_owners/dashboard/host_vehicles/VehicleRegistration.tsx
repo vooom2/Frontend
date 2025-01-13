@@ -19,8 +19,10 @@ export default function VehicleRegistration() {
   ];
 
   const handleStepChange = (index: number) => {
-    if (index > 3) {
-      navigate(`/${USER_ROLES.OWNER}/dashboard`);
+    if (index >= 3) {
+      setTimeout(() => {
+        navigate(`/${USER_ROLES.OWNER}/dashboard`);
+      }, 3000)
     }
     setCurrentStep(index);
   };
@@ -38,11 +40,10 @@ export default function VehicleRegistration() {
               <div className="flex flex-col items-center w-full sm:w-auto">
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-semibold
-                ${
-                  currentStep >= index
-                    ? "bg-green-500 text-white"
-                    : "border border-gray-200 text-gray-400"
-                }`}
+                ${currentStep >= index
+                      ? "bg-green-500 text-white"
+                      : "border border-gray-200 text-gray-400"
+                    }`}
                 >
                   {step.number}
                 </div>
@@ -55,9 +56,8 @@ export default function VehicleRegistration() {
               </div>
               {index < steps.length - 1 && (
                 <div
-                  className={`${
-                    currentStep > index ? "bg-green-500" : "bg-gray-200"
-                  } hidden sm:block w-24 h-0.5 `}
+                  className={`${currentStep > index ? "bg-green-500" : "bg-gray-200"
+                    } hidden sm:block w-24 h-0.5 `}
                 />
               )}
             </React.Fragment>
