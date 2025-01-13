@@ -77,7 +77,8 @@ export default function RiderDashboard() {
         const fetchApprovedVehicles = async () => {
             const res = (await UserService.getRiderVehicle()) as { vehicle: any };
             if (res != null) {
-                setVehicle(res.vehicle);
+              // console.log("vihicoolart", vehicle);
+              setVehicle(res.vehicle);
             }
         };
         const fetchPendingVehicles = async () => {
