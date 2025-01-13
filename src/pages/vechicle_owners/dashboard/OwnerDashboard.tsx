@@ -26,7 +26,7 @@ import OwnerServices from "@/api/owner.services";
 import { useOwnerVehicleStatsStore } from "@/stores/owner_store/owner_vehicle_stat_store";
 import { useOwnerWalletStatsStore } from "@/stores/owner_store/owner_wallet_stat_store";
 import WalletServices from "@/api/wallet.services";
-import { getLocalFriendlyDate } from "@/utils/utils";
+// import { getLocalFriendlyDate } from "@/utils/utils";
 
 export default function OwnerDashboard() {
     const { userInfo, hasLoaded } = useUserStore((state) => state);
@@ -63,7 +63,7 @@ export default function OwnerDashboard() {
         fetchStats();
         fetchWalletInfo();
     }, []);
-    console.log(vehiclesStore?.vehicles);
+
     return (
         <div>
             {userInfo && hasLoaded && userInfo.account_verified && (
@@ -91,7 +91,7 @@ export default function OwnerDashboard() {
                                 value={vehiclesStatStore?.totalInactiveVehicles}
                             />
                         </div>
-                        <div className="grid lg:grid-cols-[1fr,400px] gap-6">
+                        <div className="grid lg:grid-cols-[1fr,400px] gap-6 pt-4">
                             {/* Vehicle Status Table */}
                             <div className="space-y-4">
                                 <h2 className="text-xl font-semibold">Status of Vehicles</h2>
@@ -100,9 +100,9 @@ export default function OwnerDashboard() {
                                         <Table>
                                             <TableHeader className="bg-black">
                                                 <TableRow>
-                                                    <TableHead className="text-white">
-                                                        Date Registered
-                                                    </TableHead>
+                                                    {/* <TableHead className="text-white">
+                            Date Registered
+                          </TableHead> */}
                                                     <TableHead className="text-white">
                                                         Plate Number
                                                     </TableHead>
@@ -126,20 +126,30 @@ export default function OwnerDashboard() {
                                                                     index % 2 === 0 ? "bg-white" : "bg-gray-50"
                                                                 }
                                                             >
-                                                                <TableCell>
-                                                                    {getLocalFriendlyDate(vehicle.createdAt)}
-                                                                </TableCell>
+                                                                {/* <TableCell>
+                                  {getLocalFriendlyDate(vehicle.createdAt)}
+                                </TableCell> */}
                                                                 <TableCell className="font-medium">
-                                                                    {vehicle.plate_number}
+                                                                    {vehicle?.vehicle_number || "-"}
                                                                 </TableCell>
-                                                                <TableCell>{vehicle.model}</TableCell>
                                                                 <TableCell>
-                                                                    <StatusBadge status={vehicle.chasis_state} />
+                                                                    {vehicle.make + " " + vehicle.model}
+                                                                </TableCell>
+                                                                <TableCell>
+                                                                    <StatusBadge
+                                                                        status={
+                                                                            vehicle.active_vehicle
+                                                                                ? "active"
+                                                                                : "inactive"
+                                                                        }
+                                                                    />
                                                                 </TableCell>
                                                                 <TableCell>
                                                                     {vehicle.remittance?.length}
                                                                 </TableCell>
-                                                                <TableCell>{vehicle?.rider?.full_name ?? "Not assigned"}</TableCell>
+                                                                <TableCell>
+                                                                    {vehicle?.rider?.full_name || "-"}
+                                                                </TableCell>
                                                             </TableRow>
                                                         ))
                                                     ) : (
@@ -165,7 +175,7 @@ export default function OwnerDashboard() {
                                                         </TableRow>
                                                     )}
                                                 </TableBody>
-                                            ) :
+                                            ) : (
                                                 <TableBody className="animate-pulse">
                                                     {[...Array(3)].map((_, index) => (
                                                         <TableRow
@@ -191,11 +201,10 @@ export default function OwnerDashboard() {
                                                             <TableCell>
                                                                 <div className="h-4 bg-gray-200 rounded w-16"></div>
                                                             </TableCell>
-
                                                         </TableRow>
                                                     ))}
                                                 </TableBody>
-                                            }
+                                            )}
                                         </Table>
                                     </div>
                                 </Card>
@@ -247,9 +256,9 @@ export default function OwnerDashboard() {
 function StatusBadge({ status }: { status: string }) {
     return (
         <Badge
-            className={`${status === "Good"
-                ? "bg-green-500 hover:bg-green-500"
-                : "bg-red-500 hover:bg-red-500"
+            className={`${status === "active"
+                    ? "bg-green-500 hover:bg-green-500"
+                    : "bg-red-500 hover:bg-red-500"
                 } text-white`}
         >
             {status}

@@ -77,7 +77,7 @@ export default function ProfileForm({
 
     try {
       console.log(data);
-      const payload = { ...data, img: uploadedImg };
+      const payload = { ...data, img: uploadedImg, occupation: "rider" };
 
       await UserService.updateProfile(payload)
         .then((res: object) => {
@@ -109,7 +109,7 @@ export default function ProfileForm({
                 Phone number
               </label>
               <div className="mt-1 opacity-80 block w-full border rounded-md sm:text-sm px-3 py-2">
-                {userInfo?.phone_number}
+                +234{userInfo?.phone_number}
               </div>
             </div>
 
@@ -225,11 +225,13 @@ export default function ProfileForm({
                         <SelectValue placeholder="Select State" />
                       </SelectTrigger>
                       <SelectContent>
-                        {
-                          nigerianStates.map((state, i) => {
-                            return <SelectItem value={state.name}>{state.name}</SelectItem>
-                          })
-                        }
+                        {nigerianStates.map((state, i) => {
+                          return (
+                            <SelectItem value={state.name}>
+                              {state.name}
+                            </SelectItem>
+                          );
+                        })}
                       </SelectContent>
                     </Select>
                   )}
