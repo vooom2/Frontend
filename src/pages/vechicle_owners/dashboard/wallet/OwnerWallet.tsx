@@ -105,17 +105,18 @@ export default function OwnerWallet() {
                                         <TableHead className="text-white font-medium">
                                             Date
                                         </TableHead>
+
                                         <TableHead className="text-white font-medium">
-                                            Withdrawal ID
-                                        </TableHead>
-                                        <TableHead className="text-white font-medium">
-                                            Amount
+                                            Reference
                                         </TableHead>
                                         <TableHead className="text-white font-medium">
                                             Status
                                         </TableHead>
                                         <TableHead className="text-white font-medium">
-                                            Reference
+                                            Amount
+                                        </TableHead>
+                                        <TableHead className="text-white font-medium">
+                                            Old Balance
                                         </TableHead>
                                         <TableHead className="text-white font-medium">
                                             New Balance
@@ -131,16 +132,16 @@ export default function OwnerWallet() {
                                                         {getLocalFriendlyDate(withdrawal.createdAt)}
                                                     </TableCell>
                                                     <TableCell>{withdrawal.reference}</TableCell>
-                                                    <TableCell className="text-green-500">
-                                                        N{withdrawal.amount.toLocaleString()}
-                                                    </TableCell>
                                                     <TableCell>
                                                         <Badge className={getStatusStyle(withdrawal.type)}>
                                                             {withdrawal.type}
                                                         </Badge>
                                                     </TableCell>
-                                                    <TableCell>{withdrawal.reference}</TableCell>
-                                                    <TableCell>{withdrawal.newBalance}</TableCell>
+                                                    <TableCell className="text-green-500">
+                                                        {formatCurrency(withdrawal.amount)}
+                                                    </TableCell>
+                                                    <TableCell>{formatCurrency(withdrawal.oldBalance)}</TableCell>
+                                                    <TableCell>{formatCurrency(withdrawal.newBalance)}</TableCell>
                                                 </TableRow>
                                             ))
                                         ) : (
