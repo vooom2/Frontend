@@ -11,7 +11,6 @@ export function DashboardInfoCard({ label, value, icon, bg, }: StatusIndicator) 
                     <div className='flex items-center justify-between w-full'>
                         {value ? <p className="text-xl md:text-2xl font-semibold">{value}</p>
                             : <Skeleton className="h-6 w-1/2 bg-gray-100" />
-
                         }
                         <div className={`p-4 rounded-lg ${icon === 'bike' ? 'bg-onprimary/10' : 'bg-onprimary/10'}`}>
                             {icon === 'clock' ? (

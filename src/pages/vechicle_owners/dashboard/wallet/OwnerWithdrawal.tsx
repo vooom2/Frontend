@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {
     Dialog,
@@ -31,23 +30,10 @@ export default function OwnerWithdrawalForm() {
             </CardHeader>
             <CardContent className="space-y-6">
                 <div className="space-y-4">
-                    <div>
-                        <Label className="text-center w-full block mb-4">Withdraw to:</Label>
-                        <RadioGroup defaultValue="bank" className="flex gap-4 justify-center">
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="bank" id="bank" />
-                                <Label htmlFor="bank">Bank</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="wallet" id="wallet" />
-                                <Label htmlFor="wallet">Wallet</Label>
-                            </div>
-                        </RadioGroup>
-                    </div>
 
                     <div className="space-y-4">
                         <div className="space-y-2">
-                            <Label htmlFor="accountName">Account Name</Label>
+                            <Label htmlFor="accountName">Select withdrawal account</Label>
                             <Input
                                 id="accountName"
                                 defaultValue="Ceaser Pilate"
@@ -57,7 +43,7 @@ export default function OwnerWithdrawalForm() {
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="accountNumber">Account Number</Label>
+                            <Label htmlFor="accountNumber">Account number</Label>
                             <Input
                                 id="accountNumber"
                                 defaultValue="0081766455"

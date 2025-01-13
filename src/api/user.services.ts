@@ -34,7 +34,7 @@ const UserService = {
     }
   },
 
-  getVehicle: async (): Promise<object | null> => {
+  getRiderVehicle: async (): Promise<object | null> => {
     try {
       const response = await axiosInstance.get("/user/rider/vehicle");
       return { ...response.data };
@@ -52,6 +52,7 @@ const UserService = {
       return null;
     }
   },
+
   makeVehicleDownPayment: async (): Promise<object | null> => {
     try {
       const response = await axiosInstance.post(
