@@ -144,7 +144,7 @@ export default function OwnerDashboard() {
                                                     ) : (
                                                         <TableRow>
                                                             <TableCell
-                                                                colSpan={5}
+                                                                colSpan={6}
                                                                 className="text-center py-6"
                                                             >
                                                                 <div className="flex flex-col items-center justify-center py-6 sm:py-8 text-center">
