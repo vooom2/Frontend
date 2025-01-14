@@ -14,6 +14,14 @@ const UserService = {
       return null;
     }
   },
+  getNotifications: async (): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.get("/user/notifications");
+      return response.data;
+    } catch {
+      return null;
+    }
+  },
 
   updateProfile: async (data: object): Promise<object> => {
     try {

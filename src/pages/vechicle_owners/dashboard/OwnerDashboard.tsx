@@ -19,13 +19,13 @@ import useUserStore from "@/stores/user_store";
 import DashboardSkeleton from "@/components/dashboard_skeleton";
 import OwnerVerificationBanner from "@/components/owners_verification_banner";
 import VerifyingAccount from "@/pages/rider/dashboard/rider_verification/verifying_account";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useEffect } from "react";
 import { useOwnerVehiclesStore } from "@/stores/owner_store/owner_vehicles_store";
 import OwnerServices from "@/api/owner.services";
 import { useOwnerVehicleStatsStore } from "@/stores/owner_store/owner_vehicle_stat_store";
 import { useOwnerWalletStatsStore } from "@/stores/owner_store/owner_wallet_stat_store";
 import WalletServices from "@/api/wallet.services";
+import NotificationPanel from "@/components/notification_panel";
 // import { getLocalFriendlyDate } from "@/utils/utils";
 
 export default function OwnerDashboard() {
@@ -45,7 +45,7 @@ export default function OwnerDashboard() {
 
         const fetchWalletInfo = async () => {
             const res = (await WalletServices.getOwnerWalletStat()) as { data: any };
-            console.log(res);
+
             if (res != null) {
                 walletStore.setStats(res.data);
             }
@@ -211,33 +211,7 @@ export default function OwnerDashboard() {
                             </div>
 
                             {/* Notifications Panel */}
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-center">
-                                    <h2 className="text-xl font-semibold">Notifications</h2>
-                                    <button className="text-orange-500 text-sm hover:underline">
-                                        View All
-                                    </button>
-                                </div>
-                                <Card className="p-4">
-                                    <div className="space-y-4">
-                                        {/* {notifications.map((notification) => (
-                                            <div key={notification.id} className="flex gap-3">
-                                                <NotificationIcon type={notification.type} />
-                                                <div className="flex-1">
-                                                    <p className="text-sm text-gray-600">
-                                                        {notification.message}
-                                                    </p>
-                                                    <span className="text-xs text-gray-400">
-                                                        {notification.time}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        ))} */}
-                                        <Skeleton className="h-4 w-full" />
-                                        <Skeleton className="h-4 w-full" />
-                                    </div>
-                                </Card>
-                            </div>
+                            <NotificationPanel />
                         </div>
                     </div>
                 </>

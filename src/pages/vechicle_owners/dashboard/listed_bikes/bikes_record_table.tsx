@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -9,7 +10,6 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { Link } from "react-router";
-// import formatCurrency from "@/utils/formatCurrency";
 import { Card } from "@/components/ui/card";
 import OwnerServices from "@/api/owner.services";
 import { useOwnerVehiclesStore } from "@/stores/owner_store/owner_vehicles_store";
@@ -17,73 +17,6 @@ import { useEffect } from "react";
 import { getLocalFriendlyDate } from "@/utils/utils";
 import { FileWarning } from "lucide-react";
 import { APP_NAME } from "@/utils/constant";
-
-interface Vehicle {
-    regNumber: string;
-    healthStatus: "Active" | "Inactive";
-    weeklyRemittance: string;
-    amount: number;
-    rider: string;
-    dateRegistered: string;
-    inspectionCount: number;
-}
-
-const vehicles: Vehicle[] = [
-    {
-        regNumber: "#1456 9808 456745",
-        healthStatus: "Active",
-        weeklyRemittance: "12-08-2024",
-        amount: 13500,
-        rider: "Magnus Igwe",
-        dateRegistered: "18-04-2024",
-        inspectionCount: 26,
-    },
-    {
-        regNumber: "#8907 9808 356282",
-        healthStatus: "Active",
-        weeklyRemittance: "13-08-2024",
-        amount: 13500,
-        rider: "Paul Ibe",
-        dateRegistered: "18-04-2024",
-        inspectionCount: 17,
-    },
-    {
-        regNumber: "#9005 9808 273782",
-        healthStatus: "Inactive",
-        weeklyRemittance: "Pending",
-        amount: 0,
-        rider: "Aliyu Umar",
-        dateRegistered: "18-04-2024",
-        inspectionCount: 20,
-    },
-    {
-        regNumber: "#1284 9808 903855",
-        healthStatus: "Active",
-        weeklyRemittance: "22-08-2024",
-        amount: 13500,
-        rider: "Ragnar Lotbrok",
-        dateRegistered: "18-04-2024",
-        inspectionCount: 14,
-    },
-    {
-        regNumber: "#8373 9808 367809",
-        healthStatus: "Active",
-        weeklyRemittance: "23-08-2024",
-        amount: 13500,
-        rider: "Floki Isiagu",
-        dateRegistered: "18-04-2024",
-        inspectionCount: 20,
-    },
-    {
-        regNumber: "#65730 9808 367809",
-        healthStatus: "Active",
-        weeklyRemittance: "30-08-2024",
-        amount: 13500,
-        rider: "Rollo Edie",
-        dateRegistered: "18-04-2024",
-        inspectionCount: 17,
-    },
-];
 
 function StatusBadge({ status }: { status: string }) {
     if (status === "Active") {
@@ -149,7 +82,7 @@ export default function BikesRecordTable() {
                                         <TableCell>{vehicle.remittance?.length}</TableCell>
                                         <TableCell>{vehicle?.rider?.full_name || "-"}</TableCell>
                                         <TableCell>
-                                            <Link to={`${index}`}>
+                                            <Link to={`${vehicle._id}`}>
                                                 <Button
                                                     variant="default"
                                                     size="sm"

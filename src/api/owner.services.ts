@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axiosInstance from "@/utils/axios";
 import notify from "@/utils/toast";
 
@@ -19,7 +20,6 @@ const OwnerServices = {
       const response = await axiosInstance.get("/user/owner/vehicles");
       return { ...response.data };
     } catch (error) {
-      console.error(error);
       return null;
     }
   },
@@ -28,7 +28,6 @@ const OwnerServices = {
       const response = await axiosInstance.get("/user/owner/reports");
       return { ...response.data };
     } catch (error) {
-      console.error(error);
       return null;
     }
   },
@@ -37,7 +36,6 @@ const OwnerServices = {
       const response = await axiosInstance.get("/user/owner/vehicles/stats");
       return { ...response.data };
     } catch (error) {
-      console.error(error);
       return null;
     }
   },
@@ -50,15 +48,35 @@ const OwnerServices = {
         "/user/owner/host-vehicle",
         data
       );
-      if (response.status != 200 && response.status != 201) {
-        window.location.href = "/auth/login";
-        notify("Not unauthorized", "error");
-      }
+      // if (response.status != 200 && response.status != 201) {
+      //   window.location.href = "/auth/login";
+      //   notify("Not unauthorized", "error");
+      // }
       return response.data;
     } catch {
       return null;
     }
   },
+  getVehicleDetails: async (id: string):Promise<object | null> => {
+    try {
+      const response = await axiosInstance.get(`/user/owner/vehicles/${id}`);
+
+      return { ...response.data };
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
+  getVehiclePayments: async (id: string):Promise<object | null> => {
+    try {
+      const response = await axiosInstance.get(`/user/owner/vehicles/payments/${id}`);
+    
+      return { ...response.data };
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
 };
 
 export default OwnerServices;

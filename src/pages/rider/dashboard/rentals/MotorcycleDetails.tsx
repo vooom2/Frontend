@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import UserService from "@/api/user.services";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";

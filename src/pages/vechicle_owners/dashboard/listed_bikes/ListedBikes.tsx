@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DashboardInfoCard } from '@/components/dashboard_info_card'
 import BikesRecordTable from './bikes_record_table'
 import { useOwnerVehicleStatsStore } from '@/stores/owner_store/owner_vehicle_stat_store'
