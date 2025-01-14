@@ -71,7 +71,7 @@ export default function OwnerBikeDetails() {
     useEffect(() => {
         const fetchDetails = async () => {
             const res = await OwnerServices.getVehicleDetails(id ?? "");
-
+            console.log(res);
             if (res != null) {
                 setVehicleDetails(res as OwnerBikeDetailsProps)
             }
@@ -79,8 +79,6 @@ export default function OwnerBikeDetails() {
 
         fetchDetails();
     }, [])
-
-
     return (
         <div className="mx-auto w-full space-y-8 relative container">
             {vehicleDetails && <>

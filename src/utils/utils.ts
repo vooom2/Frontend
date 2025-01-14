@@ -43,6 +43,15 @@ const formatFriendlyDate = (dateString: string): string => {
     });
   }
   
+ export const convertToLocalTime = (dateString: string): string => {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+  }
   export const getLocalFriendlyDate = (dateString: string): string => {
     const formattedDate = formatFriendlyDate(dateString);
     return addOrdinalSuffix(formattedDate);

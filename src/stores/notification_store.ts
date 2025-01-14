@@ -11,12 +11,12 @@ interface Notification {
 }
 
 interface NotificationStore {
-    notifications: Notification[]
+    notifications: Notification[] | null
     setNotifications: (notification: Notification[]) => void
 }
 
 export const useNotificationStore = create<NotificationStore>((set) => ({
-    notifications: [],
+    notifications: null,
     setNotifications: (notifications) =>
         set(() => ({
             notifications: notifications,

@@ -22,7 +22,6 @@ export default function Inspection() {
         };
         fetchInfo();
     }, []);
-    console.log(vehicleStore.vehicles);
     return (
         <div className="w-full container mx-auto p-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
@@ -84,7 +83,7 @@ export default function Inspection() {
                                 : "--"
                             }
                         </div>
-                        <Link to={`${index}`}>
+                        <Link to={`${vehicle._id}`}>
                             <Button variant="secondary" size="sm" className="w-full sm:w-auto">
                                 View Details
                             </Button>

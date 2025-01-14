@@ -16,6 +16,7 @@ import UserService from '@/api/user.services'
 import { useNotificationStore } from '@/stores/notification_store'
 import { Card } from './ui/card'
 import { NotificationIcon } from './notification_panel'
+import { convertToLocalTime, getLocalFriendlyDate } from '@/utils/utils'
 
 function DashboardHeader() {
   const location = useLocation();
@@ -64,13 +65,13 @@ function DashboardHeader() {
                 <PopoverTrigger asChild>
                   <div>
                     <Bell className="cursor-pointer" />
-                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold h-4 w-4 flex items-center justify-center rounded-full">
-                      {notificationStore.notifications.length}
-                    </span>
+                    {notificationStore.notifications && < span className="absolute -top-3 -right-2 bg-red-500 text-white text-[0.6rem] font-bold h-6 w-6 flex items-center justify-center rounded-full">
+                      {notificationStore.notifications.length > 99 ? '99+' : notificationStore.notifications.length}
+                    </span>}
                   </div>
                 </PopoverTrigger>
-                <PopoverContent className="w-80 space-y-2">
-                  <div>
+                <PopoverContent className="w-80 space-y-2 max-h-72 overflow-y-auto">
+                  <div className='space-y-2'>
                     {notificationStore.notifications ? notificationStore.notifications.length > 0 ? notificationStore.notifications.map((notification) => (
                       <div key={notification._id} className="flex gap-3">
                         <NotificationIcon type={notification.message} />
@@ -78,20 +79,18 @@ function DashboardHeader() {
                           <p className="text-sm text-gray-600">
                             {notification.message}
                           </p>
-                          <span className="text-xs text-gray-400">
-                            {notification.createdAt}
+                          <span className="text-[0.6rem] md:text-xs text-gray-400">
+                            {getLocalFriendlyDate(notification.createdAt)} {convertToLocalTime(notification.createdAt)}
                           </span>
                         </div>
                       </div>
                     )) :
                       <p className="text-xs text-center">Notification is empty!</p>
                       :
-                      <Card >
-                        <div className="space-y-4">
-                          <Skeleton className="h-4 w-full" />
-                          <Skeleton className="h-4 w-full" />
-                        </div>
-                      </Card>
+                      <div className="space-y-4">
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-full" />
+                      </div>
 
                     }
                   </div>
@@ -136,7 +135,7 @@ function DashboardHeader() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
