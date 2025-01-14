@@ -44,7 +44,10 @@ function DashboardHeader() {
             <h1 className="text-xl font-semibold">Dashboard</h1>
             <p className="text-xs md:text-sm text-muted-foreground ">
               Hi{" "}
-              <span className="capitalize"> {userInfo?.full_name ?? ""}</span>
+              <span className="capitalize">
+                {" "}
+                {userInfo?.full_name.split(" ")[0] ?? ""}
+              </span>
               👋, Welcome to your dashboard
             </p>
           </div>
@@ -65,34 +68,44 @@ function DashboardHeader() {
                 <PopoverTrigger asChild>
                   <div>
                     <Bell className="cursor-pointer" />
-                    {notificationStore.notifications && < span className="absolute -top-3 -right-2 bg-red-500 text-white text-[0.6rem] font-bold h-6 w-6 flex items-center justify-center rounded-full">
-                      {notificationStore.notifications.length > 99 ? '99+' : notificationStore.notifications.length}
-                    </span>}
+                    {notificationStore.notifications && (
+                      <span className="absolute -top-3 -right-2 bg-red-500 text-white text-[0.6rem] font-bold h-6 w-6 flex items-center justify-center rounded-full">
+                        {notificationStore.notifications.length > 99
+                          ? "99+"
+                          : notificationStore.notifications.length}
+                      </span>
+                    )}
                   </div>
                 </PopoverTrigger>
                 <PopoverContent className="w-80 space-y-2 max-h-72 overflow-y-auto">
-                  <div className='space-y-2'>
-                    {notificationStore.notifications ? notificationStore.notifications.length > 0 ? notificationStore.notifications.map((notification) => (
-                      <div key={notification._id} className="flex gap-3">
-                        <NotificationIcon type={notification.message} />
-                        <div className="flex-1">
-                          <p className="text-sm text-gray-600">
-                            {notification.message}
-                          </p>
-                          <span className="text-[0.6rem] md:text-xs text-gray-400">
-                            {getLocalFriendlyDate(notification.createdAt)} {convertToLocalTime(notification.createdAt)}
-                          </span>
-                        </div>
-                      </div>
-                    )) :
-                      <p className="text-xs text-center">Notification is empty!</p>
-                      :
+                  <div className="space-y-2">
+                    {notificationStore.notifications ? (
+                      notificationStore.notifications.length > 0 ? (
+                        notificationStore.notifications.map((notification) => (
+                          <div key={notification._id} className="flex gap-3">
+                            <NotificationIcon type={notification.message} />
+                            <div className="flex-1">
+                              <p className="text-sm text-gray-600">
+                                {notification.message}
+                              </p>
+                              <span className="text-[0.6rem] md:text-xs text-gray-400">
+                                {getLocalFriendlyDate(notification.createdAt)}{" "}
+                                {convertToLocalTime(notification.createdAt)}
+                              </span>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-xs text-center">
+                          Notification is empty!
+                        </p>
+                      )
+                    ) : (
                       <div className="space-y-4">
                         <Skeleton className="h-4 w-full" />
                         <Skeleton className="h-4 w-full" />
                       </div>
-
-                    }
+                    )}
                   </div>
                 </PopoverContent>
               </Popover>
@@ -135,7 +148,7 @@ function DashboardHeader() {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 
