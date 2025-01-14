@@ -36,7 +36,7 @@ type Vehicle = {
         gps: string;
         usbInput: string;
         usbOutput: string;
-    }[];
+    };
     verified_vehicle: boolean;
     active_vehicle: boolean;
     rider: {

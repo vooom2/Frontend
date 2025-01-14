@@ -37,7 +37,7 @@ type Vehicle = {
         gps: string;
         usbInput: string;
         usbOutput: string;
-    }[];
+    };
     verified_vehicle: boolean;
     active_vehicle: boolean;
     rider: {
@@ -160,7 +160,7 @@ export default function OwnerBikeDetails() {
                             <h2 className="text-lg font-semibold mb-4">Features</h2>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10">
 
-                                {Object.entries(vehicleDetails.vehicle.features[0]).map(([key, value], i) => (
+                                {Object.entries(vehicleDetails.vehicle.features).map(([key, value], i) => (
                                     <div key={i}>
                                         <p className="text-sm text-gray-500 capitalize">{key.replace(/_/g, ' ')}</p>
                                         <p className="font-medium">{value}</p>
