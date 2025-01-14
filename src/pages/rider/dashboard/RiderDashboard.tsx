@@ -111,7 +111,10 @@ export default function RiderDashboard() {
                   <div className="flex items-center gap-3">
                     <div className="relative h-12 w-12 rounded-full overflow-hidden">
                       <img
-                        src={vehicle.vehicle_images[0]}
+                        src={
+                          vehicle.vehicle_images[0] ||
+                          "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204"
+                        }
                         alt={vehicle.vehicle_number}
                         className="object-cover"
                       />
