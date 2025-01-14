@@ -16,12 +16,6 @@ import { useParams } from "react-router";
 import emptyImg from "@/assets/images/no_data.png";
 
 
-const thumbnails = [
-    "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204",
-    "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204",
-    "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204",
-];
-
 type Vehicle = {
     _id: string;
     vehicle_owner: string;
