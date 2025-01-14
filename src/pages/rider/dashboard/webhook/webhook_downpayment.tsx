@@ -7,7 +7,7 @@ import useUserStore from "@/stores/user_store";
  * Page displayed after a successful payment
  * Redirects the user to the rider dashboard
  */
-const WebhookSuccess = () => {
+const WebhookDownpay = () => {
   const navigate = useNavigate();
 
   const userInfo = useUserStore((state) => state.userInfo);
@@ -30,4 +30,4 @@ const WebhookSuccess = () => {
   );
 };
 
-export default WebhookSuccess;
+export default WebhookDownpay;

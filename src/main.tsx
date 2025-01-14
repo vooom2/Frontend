@@ -10,6 +10,7 @@ import { BikeHistory, ComplaintForm, FleetManager, Inspection, InspectionBikeDet
 import { Toaster } from "react-hot-toast";
 import WebhookSuccess from "./pages/rider/dashboard/webhook/webhook_success.tsx";
 import WebhookFailed from "./pages/rider/dashboard/webhook/webhook_failed.tsx";
+import WebhookDownpay from "./pages/rider/dashboard/webhook/webhook_downpayment.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -55,6 +56,7 @@ createRoot(document.getElementById("root")!).render(
 
           <Route path="paysuccess" element={<WebhookSuccess />} />
           <Route path="payfailed" element={<WebhookFailed />} />
+          <Route path="downpaysuccess" element={<WebhookDownpay />} />
 
           <Route path="vehicle/:id" element={<MotorcycleDetails />} />
           <Route path="vehicle/pending/:id" element={<MotorcycleDetails />} />
