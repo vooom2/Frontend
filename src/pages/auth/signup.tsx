@@ -6,8 +6,8 @@ import { Label } from "@/components/ui/label"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { Link } from "react-router";
-import deliveryman from "../../assets/images/delivery_man.jpeg"
-import logo from "../../assets/images/logo_white.png"
+import deliveryman from "@/assets/images/delivery_man.jpeg"
+import logo from "@/assets/images/logo_white.png"
 import notify from "@/utils/toast"
 import { handleAxiosError } from "@/utils/axios"
 import AuthService from "@/api/auth.services"
@@ -289,7 +289,7 @@ export default function Signup() {
 
                             <p className="text-sm text-center text-zinc-400">
                                 By clicking the "Create your account" button, you agree to{' '}
-                                <Link to="#" className="text-orange-500 hover:underline">
+                                <Link to="/policy" className="text-orange-500 hover:underline">
                                     Vooom's terms of acceptable use
                                 </Link>
                                 .

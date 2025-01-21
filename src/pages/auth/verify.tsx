@@ -48,7 +48,7 @@ export default function Verify() {
                         <img src={logo} alt="vooom logo" className="w-40" />
                     </div>
 
-                    <div className="space-y-6 w-full mx-auto ">
+                    <div className="space-y-6">
                         <div className="space-y-2">
                             <h2 className="text-2xl mt-20 font-semibold">Verify Email Address</h2>
                             <p className="text-sm text-onprimary">Check you email for a 6 digit verification code</p>

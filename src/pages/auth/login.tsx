@@ -34,7 +34,15 @@ export default function Login() {
         try {
             setIsLoading(true);
             const response = await AuthService.login(data);
+            console.log(response.profile.email_verified);
             if (response.userType == userType) {
+                if (!response.profile.email_verified) {
+                    notify("Email not verified, Otp sent to email for verification. Redirecting...", "error");
+                    setTimeout(() => {
+                        window.location.href = `/auth/verify?email=${data.email}`
+                    }, 3000)
+                    return;
+                }
                 notify("Login successful", "success");
                 setTimeout(() => {
                     window.location.href = `/${userType}/dashboard`
@@ -123,7 +131,7 @@ export default function Login() {
 
                             <p className="text-sm text-center text-zinc-400">
                                 By clicking the "login" button, you agree to{" "}
-                                <Link to="#" className="text-orange-500 hover:underline">
+                                <Link to="/policy" className="text-orange-500 hover:underline">
                                     Vooom's terms of acceptable use
                                 </Link>
                                 .

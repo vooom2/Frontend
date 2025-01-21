@@ -2,12 +2,11 @@
 import { USER_ACCESS_TOKEN } from "@/utils/appstrings";
 import axiosInstance, { handleAxiosError } from "@/utils/axios";
 import notify from "@/utils/toast";
-import { UserInfo } from "os";
 import UserService from "./user.services";
 
 interface LoginResponse {
   token: string;
-  user: {
+  profile: {
     id: string;
     name: string;
     email: string;
@@ -27,7 +26,7 @@ interface LoginResponse {
     verification_documents: unknown[];
     createdAt: string;
   };
-userType: string;
+  userType: string;
 }
 
 interface RegisterData {
@@ -44,45 +43,52 @@ interface LoginData {
 
 const AuthService = {
   register: async (data: RegisterData, userRole: string): Promise<void> => {
-    const response = await axiosInstance.post(`/auth/${userRole}/register`, data);
+    const response = await axiosInstance.post(
+      `/auth/${userRole}/register`,
+      data
+    );
     localStorage.setItem(USER_ACCESS_TOKEN, response.data.token);
     return response.data;
   },
 
   login: async (data: LoginData): Promise<LoginResponse> => {
-    const response = await axiosInstance.post<LoginResponse>("/auth/login", data);
-    localStorage.setItem(USER_ACCESS_TOKEN, response.data.token);
+    const response = await axiosInstance.post<LoginResponse>(
+      "/auth/login",
+      data
+    );
+    if (response.data.profile.email_verified) {
+      console.log("Email verified");
+      localStorage.setItem(USER_ACCESS_TOKEN, response.data.token);
+    }
     return response.data;
   },
 
-  authenticate: async() => {
+  authenticate: async () => {
     const getToken = localStorage.getItem(USER_ACCESS_TOKEN);
-    if(!getToken){
-      window.location.href= "/auth/login";
+    if (!getToken) {
+      window.location.href = "/auth/login";
       notify("Not unauthorized", "error");
     }
     await UserService.getCurrentUser();
   },
 
-  changePassword: async (data:{
+  changePassword: async (data: {
     oldPassword: string;
     newPassword: string;
-  }):Promise<object | null> => {
+  }): Promise<object | null> => {
     try {
       const response = await axiosInstance.put("/auth/change-password", data);
-      return {...response.data};
+      return { ...response.data };
     } catch (error) {
       notify(handleAxiosError(error), "error");
       return null;
     }
   },
-  
+
   logout: (): void => {
-    localStorage.removeItem(USER_ACCESS_TOKEN)
+    localStorage.removeItem(USER_ACCESS_TOKEN);
     window.location.href = "/auth/login";
   },
-
- 
 };
 
 export default AuthService;

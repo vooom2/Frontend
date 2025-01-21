@@ -12,6 +12,7 @@ import Verify from "./pages/auth/verify.tsx";
 import WebhookSuccess from "./pages/rider/dashboard/webhook/webhook_success.tsx";
 import WebhookFailed from "./pages/rider/dashboard/webhook/webhook_failed.tsx";
 import WebhookDownpay from "./pages/rider/dashboard/webhook/webhook_downpayment.tsx";
+import Policy from "./pages/landing_page/policy.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -22,12 +23,14 @@ createRoot(document.getElementById("root")!).render(
         <Route element={<Login />} path="auth/login" />
         <Route element={<Verify />} path="auth/verify" />
         <Route element={<Login />} path="/" />
+        <Route element={<Policy />} path="/policy" />
         {/* Vechicle owners */}
         <Route
           element={<DashboardLayout />}
           path={`${USER_ROLES.OWNER}/dashboard`}
         >
           <Route index element={<OwnerDashboard />} />
+
 
           <Route path="setupaccount" element={<OwnerSetupAccount />} />
 
