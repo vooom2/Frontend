@@ -25,7 +25,7 @@ const formatFriendlyDate = (dateString: string): string => {
     
     return new Intl.DateTimeFormat('en-US', {
       day: 'numeric',
-      month: 'long',
+      month: 'short',
       year: 'numeric'
     }).format(date);
   }
@@ -48,7 +48,6 @@ const formatFriendlyDate = (dateString: string): string => {
     return date.toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit',
       hour12: true
     });
   }

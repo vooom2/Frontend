@@ -8,11 +8,12 @@ import Login from "./pages/auth/login.tsx";
 import { USER_ROLES } from "./utils/constant.tsx";
 import { BikeHistory, ComplaintForm, FleetManager, Inspection, InspectionBikeDetails, ListedBikes, MakePayment, MotorcycleDetails, OwnerAccountVerified, OwnerBikeDetails, OwnerDashboard, OwnerProfileSettings, OwnerReport, OwnerSetupAccount, OwnerWallet, OwnerWithdrawalForm, PaymentHistory, RiderComplaints, RiderDashboard, RiderProfileSettings, RiderSetupAccount, VehicleRegistration } from "./utils/pages_exports.tsx";
 import { Toaster } from "react-hot-toast";
-import Verify from "./pages/auth/verify.tsx";
 import WebhookSuccess from "./pages/rider/dashboard/webhook/webhook_success.tsx";
 import WebhookFailed from "./pages/rider/dashboard/webhook/webhook_failed.tsx";
 import WebhookDownpay from "./pages/rider/dashboard/webhook/webhook_downpayment.tsx";
 import Policy from "./pages/landing_page/policy.tsx";
+import ForgotPassword from "./pages/auth/forgot_password.tsx";
+import ResetPassword from "./pages/auth/reset_password.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -20,10 +21,11 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <Routes>
         <Route element={<Signup />} path="auth/signup" />
-        <Route element={<Login />} path="auth/login" />
-        <Route element={<Verify />} path="auth/verify" />
         <Route element={<Login />} path="/" />
+        <Route element={<Login />} path="auth/login" />
+        <Route element={<ForgotPassword />} path="auth/forgotpassword" />
         <Route element={<Policy />} path="/policy" />
+        <Route element={<ResetPassword />} path="/verify" />
         {/* Vechicle owners */}
         <Route
           element={<DashboardLayout />}

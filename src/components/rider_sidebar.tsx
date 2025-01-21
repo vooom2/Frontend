@@ -5,7 +5,6 @@ import {
     CreditCard,
     Users,
     FileText,
-    Bike,
     User,
     LogOut,
 } from "lucide-react";

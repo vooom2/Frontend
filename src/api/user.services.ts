@@ -22,6 +22,14 @@ const UserService = {
       return null;
     }
   },
+  updateNotification: async (id :string): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.get(`/user/notifications/${id}`);
+      return response.data;
+    } catch {
+      return null;
+    }
+  },
 
   updateProfile: async (data: object): Promise<object> => {
     try {

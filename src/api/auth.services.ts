@@ -62,6 +62,46 @@ const AuthService = {
     }
     return response.data;
   },
+  forgotPassword: async (data: object): Promise<object | null> => {
+   try {
+     const response = await axiosInstance.post(
+       "/auth/pwreset",
+       data
+     );
+     return response.data;
+   } catch (error) {
+    notify(handleAxiosError(error), "error");
+    return null;
+   }
+  },
+
+  setPassword: async (data: object): Promise<object | null> => {
+    try {
+      const response = await axiosInstance.post(
+        "/auth/pwreset-new",
+        data
+      );
+      return response.data;
+    } catch (error) {
+     notify(handleAxiosError(error), "error");
+     return null;
+    }
+   },
+
+  verifyEmail: async (data: object): Promise<object | null> => {
+    try {
+      console.log(data);
+      const response = await axiosInstance.post(
+        "/auth/verify-otp",
+        data
+      );
+      return response.data;
+    } catch (error) {
+     notify(handleAxiosError(error), "error");
+     return null;
+    }
+   },
+
 
   authenticate: async () => {
     const getToken = localStorage.getItem(USER_ACCESS_TOKEN);

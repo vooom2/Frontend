@@ -14,7 +14,6 @@ import nigerianStates from "@/utils/states_list";
 
 function RiderProfile() {
     const userInfo = useUserStore((state) => state.userInfo);
-
     return (
         <TabsContent value="account" className="mt-6">
             <form className="space-y-6">
@@ -55,14 +54,17 @@ function RiderProfile() {
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="occupation">Occupation</Label>
-                        <Input id="occupation" value={userInfo?.occupation ?? "Not specified"} />
+                        <Input
+                            id="occupation"
+                            defaultValue={userInfo?.occupation ?? ""}
+                        />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="address">Address</Label>
                         <div className="relative">
                             <Input
                                 id="address"
-                                value={userInfo?.address ?? "Not specified"}
+                                defaultValue={userInfo?.address ?? ""}
                             />
                             <MapPin className="absolute right-3 top-2.5 h-5 w-5 text-muted-foreground" />
                         </div>
@@ -70,16 +72,15 @@ function RiderProfile() {
 
                     <div className="space-y-2">
                         <Label htmlFor="state">State</Label>
-                        <Select defaultValue={userInfo?.state ?? "Not specified"} disabled>
+                        <Select defaultValue={userInfo?.state ?? "Not specified"}>
                             <SelectTrigger>
-                                <SelectValue />
+                                <SelectValue placeholder='Select state' />
                             </SelectTrigger>
                             <SelectContent>
                                 {
                                     nigerianStates.map((state, index) => (
                                         <SelectItem key={index} value={state.name}>{state.name}</SelectItem>
                                     ))
-
                                 }
                             </SelectContent>
                         </Select>

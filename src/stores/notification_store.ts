@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-interface Notification {
+export interface Notification {
     _id: string
     message: string
     user: string
@@ -13,6 +13,7 @@ interface Notification {
 interface NotificationStore {
     notifications: Notification[] | null
     setNotifications: (notification: Notification[]) => void
+    updateNotification: (notification: Notification) => void 
 }
 
 export const useNotificationStore = create<NotificationStore>((set) => ({
@@ -21,5 +22,9 @@ export const useNotificationStore = create<NotificationStore>((set) => ({
         set(() => ({
             notifications: notifications,
         })),
-
+    updateNotification: (notification ) => {
+        set((state) =>({
+            notifications: state.notifications?.map((e) => e._id == notification._id ? {...notification, seen: true} : e)
+        }))
+    }
 }))

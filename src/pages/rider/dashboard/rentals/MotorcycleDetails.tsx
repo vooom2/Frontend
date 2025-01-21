@@ -21,9 +21,10 @@ export default function MotorcycleDetails() {
         fetchApprovedVehicles();
     }, []);
 
+    console.log(vehicle);
+
     return (
         <div>
-
             {vehicle ? <div className="max-w-6xl mx-auto p-4  space-y-8">
                 <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-4">
@@ -83,10 +84,10 @@ export default function MotorcycleDetails() {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10">
 
                                 {
-                                    vehicle.features.map((feature, i) => (
+                                    Object.entries(vehicle.features).map(([key, value], i) => (
                                         <div key={i}>
-                                            <p className="text-sm text-gray-500 capitalize">{feature}</p>
-                                            <p className="font-medium">Yes</p>
+                                            <p className="text-sm text-gray-500 capitalize">{key}</p>
+                                            <p className="font-medium capitalize">{value}</p>
                                         </div>
                                     ))
                                 }

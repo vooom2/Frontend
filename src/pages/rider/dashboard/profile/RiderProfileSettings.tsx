@@ -31,12 +31,7 @@ export default function RiderProfileSettings() {
                             >
                                 Account
                             </TabsTrigger>
-                            {/* <TabsTrigger
-                                value="withdrawal"
-                                className="rounded-none border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent"
-                            >
-                                Withdrawal
-                            </TabsTrigger> */}
+
                             <TabsTrigger
                                 value="security"
                                 className="rounded-none border-b-2 border-transparent data-[state=active]:border-black data-[state=active]:bg-transparent"
@@ -81,21 +76,6 @@ export default function RiderProfileSettings() {
                                 </div>
                             </CardContent>
                         </Card>
-
-                        {/* <Card>
-                            <CardContent className="p-4">
-                                <div className="relative aspect-[1.6] w-full">
-                                    <img
-                                        src="https://placehold.co/600x400/"
-                                        alt="NIN card"
-                                        className="rounded-lg object-cover w-full"
-                                    />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <Button className="bg-onprimary">Update NIN card/slip</Button>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card> */}
                     </div>
                 </div>
             </div>
