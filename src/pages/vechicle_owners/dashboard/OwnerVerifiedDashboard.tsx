@@ -67,6 +67,7 @@ const OwnerVerifiedDashboard = () => {
         console.log("API Response:", response);
 
         if (response.ok) {
+          console.log("Dashboard stats:", response);
           setDashboardStats(response.stats); // Removed optional chaining since we check response.ok
         }
       } catch (error) {

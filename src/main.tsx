@@ -9,6 +9,9 @@ import { USER_ROLES } from "./utils/constant.tsx";
 import { BikeHistory, ComplaintForm, FleetManager, Inspection, InspectionBikeDetails, ListedBikes, MakePayment, MotorcycleDetails, OwnerAccountVerified, OwnerBikeDetails, OwnerDashboard, OwnerProfileSettings, OwnerReport, OwnerSetupAccount, OwnerWallet, OwnerWithdrawalForm, PaymentHistory, RiderComplaints, RiderDashboard, RiderProfileSettings, RiderSetupAccount, VehicleRegistration } from "./utils/pages_exports.tsx";
 import { Toaster } from "react-hot-toast";
 import Verify from "./pages/auth/verify.tsx";
+import WebhookSuccess from "./pages/rider/dashboard/webhook/webhook_success.tsx";
+import WebhookFailed from "./pages/rider/dashboard/webhook/webhook_failed.tsx";
+import WebhookDownpay from "./pages/rider/dashboard/webhook/webhook_downpayment.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -20,7 +23,10 @@ createRoot(document.getElementById("root")!).render(
         <Route element={<Verify />} path="auth/verify" />
         <Route element={<Login />} path="/" />
         {/* Vechicle owners */}
-        <Route element={<DashboardLayout />} path={`${USER_ROLES.OWNER}/dashboard`}>
+        <Route
+          element={<DashboardLayout />}
+          path={`${USER_ROLES.OWNER}/dashboard`}
+        >
           <Route index element={<OwnerDashboard />} />
 
           <Route path="setupaccount" element={<OwnerSetupAccount />} />
@@ -44,8 +50,15 @@ createRoot(document.getElementById("root")!).render(
         </Route>
 
         {/* Riders */}
-        <Route element={<DashboardLayout />} path={`${USER_ROLES.RIDER}/dashboard`}>
+        <Route
+          element={<DashboardLayout />}
+          path={`${USER_ROLES.RIDER}/dashboard`}
+        >
           <Route index element={<RiderDashboard />} />
+
+          <Route path="paysuccess" element={<WebhookSuccess />} />
+          <Route path="payfailed" element={<WebhookFailed />} />
+          <Route path="downpaysuccess" element={<WebhookDownpay />} />
 
           <Route path="vehicle/:id" element={<MotorcycleDetails />} />
           <Route path="vehicle/pending/:id" element={<MotorcycleDetails />} />

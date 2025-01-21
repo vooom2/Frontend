@@ -28,15 +28,27 @@ function ListedBikes() {
         fetchStats();
     }, []);
     return (
-        <div className="container mx-auto p-2 lg:p-6 space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                <DashboardInfoCard label="Listed Bikes" icon="bike" value={vehiclesStatStore?.totalVehicles} />
-                <DashboardInfoCard label="Active bikes" icon="bike" value={vehiclesStatStore?.totalActiveVehicles} />
-                <DashboardInfoCard label="InActive bikes" icon="bike" value={vehiclesStatStore?.totalInactiveVehicles} />
-            </div>
-            <BikesRecordTable />
+      <div className="container mx-auto p-2 lg:p-6 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <DashboardInfoCard
+            label="Listed Bikes"
+            icon="bike"
+            value={vehiclesStatStore?.totalVehicles.toString()}
+          />
+          <DashboardInfoCard
+            label="Active bikes"
+            icon="bike"
+            value={vehiclesStatStore?.totalActiveVehicles.toString()}
+          />
+          <DashboardInfoCard
+            label="InActive bikes"
+            icon="bike"
+            value={vehiclesStatStore?.totalInactiveVehicles.toString()}
+          />
         </div>
-    )
+        <BikesRecordTable />
+      </div>
+    );
 }
 
 export default ListedBikes

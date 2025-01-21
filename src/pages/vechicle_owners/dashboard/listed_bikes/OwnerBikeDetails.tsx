@@ -80,167 +80,207 @@ export default function OwnerBikeDetails() {
         fetchDetails();
     }, [])
     return (
-        <div className="mx-auto w-full space-y-8 relative container">
-            {vehicleDetails && <>
-                <div className="grid md:grid-cols-2 gap-8">
-                    <div className="space-y-4">
-                        <Card className="bg-gray-100 p-6 space-y-4">
-                            <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
-                                <img
-                                    src={vehicleDetails.vehicle.vehicle_images[0]}
-                                    alt="vehicle image"
-                                    className="object-cover"
-                                />
-                            </div>
-                            <div className="grid grid-cols-4 gap-2">
-                                {vehicleDetails.vehicle.vehicle_images.slice(1).map((src, i) => (
-                                    <div key={i} className="relative aspect-square overflow-hidden rounded-lg">
-                                        <img
-                                            src={src}
-                                            alt={`Motorcycle view ${i + 2}`}
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-                        </Card>
-                        <Card className="bg-gray-100 p-6">
-                            <div className="flex items-center justify-between">
-                                <div className="w-full">
-                                    <div className="flex justify-between w-full">
-                                        <h1 className="text-2xl font-bold">{vehicleDetails.vehicle.model}</h1>
-                                        <Badge
-                                            variant="secondary"
-                                            className={
-                                                vehicleDetails.vehicle.verified_vehicle
-                                                    ? "bg-green-100 text-green-800"
-                                                    : "bg-red-100 text-red-800"
-                                            }
-                                        >
-                                            {vehicleDetails.vehicle.verified_vehicle ? "Assigned" : "Not assigned"}
-                                        </Badge>
-                                    </div>
-                                    <div className="flex gap-6 justify-between text-sm text-gray-500 mt-4">
-                                        <p className="space-y-2 text-center">Reg number
-                                            <span className="block font-bold text-bold text-black text-sm">{vehicleDetails.vehicle.vehicle_number}</span>
-                                        </p>
-                                        <p className="space-y-2 text-center">Bike Make
-                                            <span className="block font-bold text-bold text-black text-sm">{vehicleDetails.vehicle.make}</span>
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </Card>
-
-                        {vehicleDetails.vehicle.rider && <Card className="bg-gray-100 p-6">
-                            <h3 className="text-sm font-medium text-gray-500">Rider</h3>
-                            <div className="flex items-center gap-4 mt-3">
-                                <Avatar className="w-14 h-14 rounded-full">
-                                    <AvatarImage src={vehicleDetails.vehicle.rider?.img} className="rounded-full" />
-                                    <AvatarFallback>
-                                        <img
-                                            src={"https://ui-avatars.com/api/?name=" + vehicleDetails.vehicle.rider.full_name}
-                                            alt="Profile preview"
-                                            className="rounded-lg object-cover w-20"
-                                        />
-                                    </AvatarFallback>
-                                </Avatar>
-                                <div>
-                                    <h2 className="text-xl font-semibold text-black">{vehicleDetails.vehicle.rider.full_name}</h2>
-                                    <p className="text-sm text-gray-500">Since {getLocalFriendlyDate(vehicleDetails.vehicle.rider.createdAt)}</p>
-                                </div>
-
-                            </div>
-                        </Card>}
-                    </div>
-
-                    <div className="space-y-6">
-                        <Card className="p-6 bg-gray-100">
-                            <h2 className="text-lg font-semibold mb-4">Features</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10">
-
-                                {Object.entries(vehicleDetails.vehicle.features).map(([key, value], i) => (
-                                    <div key={i}>
-                                        <p className="text-sm text-gray-500 capitalize">{key.replace(/_/g, ' ')}</p>
-                                        <p className="font-medium">{value}</p>
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="mt-10">
-                                <h2 className="text-lg font-semibold mb-4">Health Status</h2>
-                                <div className="flex flex-wrap gap-10">
-
-                                    <div >
-                                        <p className="text-sm text-gray-500">Chasis State</p>
-                                        <p className="font-medium">{vehicleDetails.vehicle.chasis_state}</p>
-                                    </div>
-                                    <div >
-                                        <p className="text-sm text-gray-500">Initial Milage</p>
-                                        <p className="font-medium">{vehicleDetails.vehicle.initial_mileage}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                </div>
-
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                    {Object.keys(vehicleDetails.vehicle.documents)
-                        .filter(doc => doc !== '_id')
-                        .map((doc, i) => (
-                            <a
-                                key={i}
-                                className="flex flex-col items-center gap-2"
-                                href={vehicleDetails.vehicle.documents[doc]}
-                            >
-                                <div className="w-16 h-16 flex items-center justify-center bg-red-100 rounded-lg">
-                                    <FileText className="w-8 h-8 text-red-600" />
-                                </div>
-                                <p className="text-xs text-center capitalize">
-                                    {doc}
-                                    <br />
-                                    <span className="text-red-600">Available</span>
-                                </p>
-                            </a>
-                        ))}
-
-                </div>
-                <BikeRemittanceTable />
-            </>}
-            {/* Skeleton
-             */}
-            {!vehicleDetails && (
-                <>
-                    <div className="grid md:grid-cols-2 gap-8 animate-pulse">
-                        <div className="space-y-4">
-                            <div className="bg-gray-200 h-[300px] rounded-lg" />
-                            <div className="grid grid-cols-4 gap-2">
-                                {[1, 2, 3, 4].map((i) => (
-                                    <div key={i} className="bg-gray-200 h-20 rounded-lg" />
-                                ))}
-                            </div>
-                            <div className="bg-gray-200 h-32 rounded-lg" />
-                            <div className="bg-gray-200 h-24 rounded-lg" />
+      <div className="mx-auto w-full space-y-8 relative container">
+        {vehicleDetails && (
+          <>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <Card className="bg-gray-100 p-6 space-y-4">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                    <img
+                      src={
+                        vehicleDetails.vehicle.vehicle_images[0] ||
+                        "https://images.pexels.com/photos/2626665/pexels-photo-2626665.jpeg?auto=compress&cs=tinysrgb&w=600"
+                      }
+                      alt="vehicle image"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="grid grid-cols-4 gap-2">
+                    {vehicleDetails.vehicle.vehicle_images
+                      .slice(1)
+                      .map((src, i) => (
+                        <div
+                          key={i}
+                          className="relative aspect-square overflow-hidden rounded-lg"
+                        >
+                          <img
+                            src={src}
+                            alt={`Motorcycle view ${i + 2}`}
+                            className="object-cover"
+                          />
                         </div>
-                        <div className="space-y-6">
-                            <div className="bg-gray-200 h-96 rounded-lg" />
-                        </div>
+                      ))}
+                  </div>
+                </Card>
+                <Card className="bg-gray-100 p-6">
+                  <div className="flex items-center justify-between">
+                    <div className="w-full">
+                      <div className="flex justify-between w-full">
+                        <h1 className="text-2xl font-bold">
+                          {vehicleDetails.vehicle.model}
+                        </h1>
+                        <Badge
+                          variant="secondary"
+                          className={
+                            vehicleDetails.vehicle.verified_vehicle
+                              ? "bg-green-100 text-green-800"
+                              : "bg-red-100 text-red-800"
+                          }
+                        >
+                          {vehicleDetails.vehicle.verified_vehicle
+                            ? "Assigned"
+                            : "Not assigned"}
+                        </Badge>
+                      </div>
+                      <div className="flex gap-6 justify-between text-sm text-gray-500 mt-4">
+                        <p className="space-y-2 text-center">
+                          Reg number
+                          <span className="block font-bold text-bold text-black text-sm">
+                            {vehicleDetails.vehicle.vehicle_number}
+                          </span>
+                        </p>
+                        <p className="space-y-2 text-center">
+                          Bike Make
+                          <span className="block font-bold text-bold text-black text-sm">
+                            {vehicleDetails.vehicle.make}
+                          </span>
+                        </p>
+                      </div>
                     </div>
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                        {[1, 2, 3, 4, 5].map((i) => (
-                            <div key={i} className="flex flex-col items-center gap-2">
-                                <div className="bg-gray-200 w-16 h-16 rounded-lg" />
-                                <div className="bg-gray-200 w-20 h-4 rounded" />
-                            </div>
-                        ))}
-                    </div>
+                  </div>
+                </Card>
 
-                    <TableSkeleton />
-                </>
-            )}
-        </div>
-    )
+                {vehicleDetails.vehicle.rider && (
+                  <Card className="bg-gray-100 p-6">
+                    <h3 className="text-sm font-medium text-gray-500">Rider</h3>
+                    <div className="flex items-center gap-4 mt-3">
+                      <Avatar className="w-14 h-14 rounded-full">
+                        <AvatarImage
+                          src={vehicleDetails.vehicle.rider?.img}
+                          className="rounded-full"
+                        />
+                        <AvatarFallback>
+                          <img
+                            src={
+                              "https://ui-avatars.com/api/?name=" +
+                              vehicleDetails.vehicle.rider.full_name
+                            }
+                            alt="Profile preview"
+                            className="rounded-lg object-cover w-20"
+                          />
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <h2 className="text-xl font-semibold text-black">
+                          {vehicleDetails.vehicle.rider.full_name}
+                        </h2>
+                        <p className="text-sm text-gray-500">
+                          Since{" "}
+                          {getLocalFriendlyDate(
+                            vehicleDetails.vehicle.rider.createdAt
+                          )}
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
+                )}
+              </div>
+
+              <div className="space-y-6">
+                <Card className="p-6 bg-gray-100">
+                  <h2 className="text-lg font-semibold mb-4">Features</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10">
+                    {Object.entries(vehicleDetails.vehicle.features).map(
+                      ([key, value], i) => (
+                        <div key={i}>
+                          <p className="text-sm text-gray-500 capitalize">
+                            {key.replace(/_/g, " ")}
+                          </p>
+                          <p className="font-medium">{value}</p>
+                        </div>
+                      )
+                    )}
+                  </div>
+                  <div className="mt-10">
+                    <h2 className="text-lg font-semibold mb-4">
+                      Health Status
+                    </h2>
+                    <div className="flex flex-wrap gap-10">
+                      <div>
+                        <p className="text-sm text-gray-500">Chasis State</p>
+                        <p className="font-medium">
+                          {vehicleDetails.vehicle.chasis_state}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500">Initial Milage</p>
+                        <p className="font-medium">
+                          {vehicleDetails.vehicle.initial_mileage}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {Object.keys(vehicleDetails.vehicle.documents)
+                .filter((doc) => doc !== "_id")
+                .map((doc, i) => (
+                  <a
+                    key={i}
+                    className="flex flex-col items-center gap-2"
+                    href={vehicleDetails.vehicle.documents[doc]}
+                  >
+                    <div className="w-16 h-16 flex items-center justify-center bg-red-100 rounded-lg">
+                      <FileText className="w-8 h-8 text-red-600" />
+                    </div>
+                    <p className="text-xs text-center capitalize">
+                      {doc}
+                      <br />
+                      <span className="text-red-600">Available</span>
+                    </p>
+                  </a>
+                ))}
+            </div>
+            <BikeRemittanceTable />
+          </>
+        )}
+        {/* Skeleton
+         */}
+        {!vehicleDetails && (
+          <>
+            <div className="grid md:grid-cols-2 gap-8 animate-pulse">
+              <div className="space-y-4">
+                <div className="bg-gray-200 h-[300px] rounded-lg" />
+                <div className="grid grid-cols-4 gap-2">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="bg-gray-200 h-20 rounded-lg" />
+                  ))}
+                </div>
+                <div className="bg-gray-200 h-32 rounded-lg" />
+                <div className="bg-gray-200 h-24 rounded-lg" />
+              </div>
+              <div className="space-y-6">
+                <div className="bg-gray-200 h-96 rounded-lg" />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="flex flex-col items-center gap-2">
+                  <div className="bg-gray-200 w-16 h-16 rounded-lg" />
+                  <div className="bg-gray-200 w-20 h-4 rounded" />
+                </div>
+              ))}
+            </div>
+
+            <TableSkeleton />
+          </>
+        )}
+      </div>
+    );
 }
 
 

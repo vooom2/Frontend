@@ -53,6 +53,11 @@ function VehicleDetailsForm({
     },
   });
 
+  const bikeMakeOptions = bikeMakes.map((make) => ({
+    label: make.name,
+    value: make.name,
+  }));
+
   const { saveVehicleDetails } = useVehicleDeetStore();
   const [filteredModels, setFilteredModels] = useState<BikeModel[]>([]);
 
@@ -139,7 +144,7 @@ function VehicleDetailsForm({
                 <SelectTrigger className="bg-gray-50">
                   <SelectValue placeholder="Select a Manufacturer" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent searchable items={bikeMakeOptions}>
                   {bikeMakes.map((bikeMake) => (
                     <SelectItem key={bikeMake.id} value={bikeMake.name}>
                       {bikeMake.name}
@@ -179,8 +184,8 @@ function VehicleDetailsForm({
             {...register("vehicle_number", {
               required: "Registration number is required",
               pattern: {
-                value: /^\d{3}\s\d{4}\s\d{3}$/,
-                message: "Must be in format: 123 4567 890",
+                value: /^[A-Z0-9]{2}\s[A-Z0-9]{3}\s[A-Z0-9]{3}$/,
+                message: "Must be in format: Ab 123 ABC",
               },
             })}
           />
