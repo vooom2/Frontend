@@ -62,7 +62,7 @@ export default function Login() {
 
     return (
         <div className="min-h-screen flex lg:grid-cols-3 bg-black p-6 w-screen">
-            <div className="ld:p-8 text-white lg:w-[55vw]">
+            <div className="ld:p-8 text-white lg:w-[55vw] mx-auto">
                 <div className="max-w-xl mx-auto space-y-8 mt-10">
                     <div className="space-y-6">
                         <img src={logo} alt="vooom logo" className="w-40" />
