@@ -168,7 +168,7 @@ export default function RiderDashboard() {
             </div>
           )}
 
-          {!pendingVehicle && (
+          {!pendingVehicle && vehicleDetailsLoaded && (
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
               <DashboardInfoCard
                 label="Total Payment"
@@ -206,7 +206,7 @@ export default function RiderDashboard() {
           {/* Verifiying account banner */}
           {!userInfo?.account_verified && <VerifyingAccount />}
 
-          {!pendingVehicle && userInfo?.account_verified && userInfo && (
+          {!pendingVehicle && userInfo?.account_verified && userInfo && vehicleDetailsLoaded && (
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
               <div className="lg:col-span-3 text-nowrap">
                 <Card>
@@ -318,7 +318,7 @@ export default function RiderDashboard() {
               </div>
             </div>
           )}
-          {userInfo.account_verified && !vehicle && vehicleDetailsLoaded && (
+          {userInfo.account_verified && !vehicle && !vehicleDetailsLoaded && !pendingVehicle &&(
             <div className="text-center px-4 my-10">
               <img
                 src={image}
