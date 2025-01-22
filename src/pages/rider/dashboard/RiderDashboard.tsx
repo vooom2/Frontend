@@ -64,6 +64,7 @@ export default function RiderDashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       const res = (await RiderServices.getDashboardStat()) as { data: any };
+
       if (res != null) {
         setStats(res.data);
       }
@@ -77,7 +78,6 @@ export default function RiderDashboard() {
     const fetchApprovedVehicles = async () => {
       const res = (await UserService.getRiderVehicle()) as { vehicle: any };
       if (res != null) {
-        console.log("vihicoolart", vehicle);
         setVehicle(res.vehicle);
       }
     };
