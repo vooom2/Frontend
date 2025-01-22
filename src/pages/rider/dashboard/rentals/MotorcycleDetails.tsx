@@ -30,7 +30,7 @@ export default function MotorcycleDetails() {
                     <div className="space-y-4">
                         <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                             <img
-                                src={vehicle.vehicle_images[0]}
+                                src={vehicle.vehicle_images[0] || "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204"}
                                 alt="Motorcycle main view"
                                 className="object-cover"
                             />

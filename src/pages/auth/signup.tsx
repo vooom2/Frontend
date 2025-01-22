@@ -86,7 +86,7 @@ export default function Signup() {
             await AuthService.register({ ...fields, full_name: `${data.firstname} ${data.lastname}` }, userType);
             notify("Account created successfully", "success");
             setTimeout(() => {
-                window.location.href = `/auth/login`
+                window.location.href = `/auth/verify?email=${data.email}`
             }, 3000);
         } catch (error: unknown) {
             notify(handleAxiosError(error), "error");
