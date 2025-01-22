@@ -63,10 +63,12 @@ export default function DocumentUpload({
     }
     try {
       setIsLoading(true);
-      const url1 = await MediaServices.uploadSingleFile(driverLicense);
-      updatePrimaryID(url1.url);
-      const url2 = await MediaServices.uploadSingleFile(otherDocument);
-      updateSecondaryID(url2.url);
+      await MediaServices.uploadSingleFile(driverLicense).then((res) => {
+        updatePrimaryID(res.url);
+      });
+      await MediaServices.uploadSingleFile(otherDocument).then((res) => {
+        updateSecondaryID(res.url);
+      })
       handleStepChange(3);
     } finally {
       setIsLoading(false);

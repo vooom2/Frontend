@@ -68,7 +68,7 @@ export default function ChoosePlan({
 }) {
   const { primaryID, secondaryID } = useVerificationStore((state) => state);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  console.log(primaryID, secondaryID);
   const handleSubmitVerification = async () => {
     setIsLoading(true);
     try {

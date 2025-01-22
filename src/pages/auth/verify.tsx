@@ -49,7 +49,7 @@ export default function Verify({ email }: { email: string }) {
                     <div className="space-y-6">
                         <div className="space-y-2">
                             <h2 className="text-2xl mt-20 font-semibold">Verify Email Address</h2>
-                            <p className="text-sm text-onprimary">Check you email for a 6 digit verification code</p>
+                            <p className="text-sm text-onprimary">Check your email for a 6 digit verification code</p>
                         </div>
 
                         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
