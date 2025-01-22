@@ -15,14 +15,18 @@ import UserService from "@/api/user.services";
 import { useState } from "react";
 import CircularLoader from "@/components/circular_loader";
 import notify from "@/utils/toast";
+import useRiderDashboardStatStore from "@/stores/rider_store/rider_dashboard_stats.store";
 
 
 export default function BikeApplication() {
+  const  downPayment  = useRiderDashboardStatStore(
+    (state) => state.stats?.downPayment
+  );
   const vehicle = useRiderPendingVehicleStore((state) => state.pendingVehicle);
   const userInfo = useUserStore((state) => state.userInfo);
-  const payments = [{ amount: formatCurrency(40000), duration: "2 weeks" }];
+  const payments = [{ amount: formatCurrency(downPayment), duration: "2 weeks" }];
   const [isLoading, setIsLoading] = useState(false);
-
+ 
   const submitDownPayment = async () => {
     try {
       setIsLoading(true);

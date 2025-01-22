@@ -318,7 +318,7 @@ export default function RiderDashboard() {
               </div>
             </div>
           )}
-          {userInfo.account_verified && !vehicle && !vehicleDetailsLoaded && (
+          {userInfo.account_verified && !vehicle && !vehicleDetailsLoaded && !pendingVehicle &&(
             <div className="text-center px-4 my-10">
               <img
                 src={image}
