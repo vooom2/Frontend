@@ -106,7 +106,7 @@ export default function RiderDashboard() {
           <div className="container mx-auto p-2 lg:p-6 space-y-6">
             {/* bike info */}
             {vehicle ? (
-              !pendingVehicle && (
+              !pendingVehicle && vehicleDetailsLoaded && (
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="relative h-12 w-12 rounded-full overflow-hidden">
@@ -168,7 +168,7 @@ export default function RiderDashboard() {
               </div>
             )}
 
-            {!pendingVehicle && (
+            {!pendingVehicle && vehicleDetailsLoaded && (
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                 <DashboardInfoCard
                   label="Total Payment"
@@ -203,10 +203,10 @@ export default function RiderDashboard() {
               </div>
             )}
 
-            {/* Verifiying account banner */}
+            {/* account not verified */}
             {!userInfo?.account_verified && <VerifyingAccount />}
 
-            {!pendingVehicle && userInfo?.account_verified && userInfo && (
+            {!pendingVehicle && userInfo?.account_verified && userInfo && vehicleDetailsLoaded && (
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                 <div className="lg:col-span-3 text-nowrap">
                   <Card>
@@ -320,7 +320,9 @@ export default function RiderDashboard() {
                 </div>
               </div>
             )}
-            {userInfo.account_verified && !vehicle && vehicleDetailsLoaded && (
+
+            {/* bike not assigned */}
+            {userInfo.account_verified && !pendingVehicle && !vehicleDetailsLoaded && (
               <div className="text-center px-4 my-10">
                 <img
                   src={image}

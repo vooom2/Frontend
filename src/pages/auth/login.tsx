@@ -35,7 +35,6 @@ export default function Login() {
             setIsLoading(true);
             const response = await AuthService.login(data);
             console.log(response.profile.email_verified);
-            if (response.userType == userType) {
                 if (!response.profile.email_verified) {
                     notify("Email not verified, Otp sent to email for verification. Redirecting...", "error");
                     setTimeout(() => {
@@ -47,9 +46,7 @@ export default function Login() {
                 setTimeout(() => {
                     window.location.href = `/${userType}/dashboard`
                 }, 3000)
-            } else {
-                notify("Invalid user type selected", "error");
-            }
+            
         } catch (error: unknown) {
             notify(handleAxiosError(error), "error");
         } finally {
@@ -71,33 +68,12 @@ export default function Login() {
     return (
         <div className="min-h-screen flex lg:grid-cols-3 bg-black p-6 w-screen">
             <div className="ld:p-8 text-white lg:w-[55vw] mx-auto">
-                <div className="max-w-xl mx-auto space-y-8 mt-10">
-                    <div className="space-y-6">
-                        <img src={logo} alt="vooom logo" className="w-40" />
-                        <ToggleGroup
-                            type="single"
-                            value={userType}
-                            onValueChange={(value) => value && setUserType(value)}
-                            className="bg-zinc-900 p-1 rounded-lg grid grid-cols-2"
-                        >
-                            <ToggleGroupItem
-                                value={USER_ROLES.OWNER}
-                                className="data-[state=on]:bg-white data-[state=on]:text-black rounded-md px-3 py-2 text-sm transition-colors"
-                            >
-                                Vehicle Owner
-                            </ToggleGroupItem>
-                            <ToggleGroupItem
-                                value={USER_ROLES.RIDER}
-                                className="data-[state=on]:bg-white data-[state=on]:text-black rounded-md px-3 py-2 text-sm transition-colors"
-                            >
-                                Rider
-                            </ToggleGroupItem>
-                        </ToggleGroup>
-                    </div>
+                <div className="max-w-xl mx-auto space-y-8 mt-24">
+                
 
-                    <div className="space-y-6">
+                    <div className="space-y-10">
                         <div className="space-y-2">
-                            <h2 className="text-xl font-semibold">Welcome Back 👋</h2>
+                            <h2 className="text-xl font-semibold ">Welcome Back 👋</h2>
                             <p className="text-sm text-zinc-400">
                                 We are happy to have you back
                             </p>

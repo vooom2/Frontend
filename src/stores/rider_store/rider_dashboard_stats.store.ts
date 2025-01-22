@@ -6,6 +6,7 @@ interface DashboardStats {
   outstanding_payments: string;
   inspection_count: number;
   days_to_next_inspection: number;
+  downPayment: string;
 }
 
 interface RiderDashboardStatStore {

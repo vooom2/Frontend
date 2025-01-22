@@ -60,6 +60,8 @@ export default function Verify() {
                                 <Input
                                     id="email"
                                     type="email"
+                                    value={new URLSearchParams(window.location.search).get("email") || ""}
+                                    readOnly={true}
                                     className="bg-transparent border-zinc-800"
                                     {...register("email", { required: true })}
                                 />

@@ -29,7 +29,7 @@ export default function MotorcycleDetails() {
                     <div className="space-y-4">
                         <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                             <img
-                                src={vehicle.vehicle_images[0]}
+                                src={vehicle.vehicle_images[0] || "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204"}
                                 alt="Motorcycle main view"
                                 className="object-cover"
                             />
@@ -83,10 +83,10 @@ export default function MotorcycleDetails() {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10">
 
                                 {
-                                    vehicle.features.map((feature, i) => (
+                                    Object.entries(vehicle.features).map(([key, value], i) => (
                                         <div key={i}>
-                                            <p className="text-sm text-gray-500 capitalize">{feature}</p>
-                                            <p className="font-medium">Yes</p>
+                                            <p className="text-sm text-gray-500 capitalize">{key}</p>
+                                            <p className="font-medium">{value ? "Yes" : "No"}</p>
                                         </div>
                                     ))
                                 }

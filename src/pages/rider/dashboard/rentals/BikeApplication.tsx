@@ -15,13 +15,16 @@ import UserService from "@/api/user.services";
 import { useState } from "react";
 import CircularLoader from "@/components/circular_loader";
 import notify from "@/utils/toast";
-
+import useRiderDashboardStatStore from "@/stores/rider_store/rider_dashboard_stats.store";
 
 export default function BikeApplication() {
+  
+  const downPayment = useRiderDashboardStatStore((state) => state.stats?.downPayment);
   const vehicle = useRiderPendingVehicleStore((state) => state.pendingVehicle);
   const userInfo = useUserStore((state) => state.userInfo);
-  const payments = [{ amount: formatCurrency(40000), duration: "2 weeks" }];
+  const payments = [{ amount: formatCurrency(downPayment), duration: "2 weeks" }];
   const [isLoading, setIsLoading] = useState(false);
+
 
   const submitDownPayment = async () => {
     try {
@@ -49,7 +52,7 @@ export default function BikeApplication() {
           <div className="flex items-center gap-3">
             <div className="relative w-12 h-12 rounded-lg overflow-hidden">
               <img
-                src={vehicle?.vehicle_images[0]}
+                src={vehicle?.vehicle_images[0] || "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204"}
                 alt={vehicle?.make}
                 className="object-cover"
               />
