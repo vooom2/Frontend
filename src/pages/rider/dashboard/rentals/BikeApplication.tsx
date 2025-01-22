@@ -53,7 +53,7 @@ export default function BikeApplication() {
           <div className="flex items-center gap-3">
             <div className="relative w-12 h-12 rounded-lg overflow-hidden">
               <img
-                src={vehicle?.vehicle_images[0]}
+                src={vehicle?.vehicle_images[0] ||  "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204"}
                 alt={vehicle?.make}
                 className="object-cover"
               />
