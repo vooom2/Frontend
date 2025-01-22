@@ -1,5 +1,4 @@
-import { Upload } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { BadgeCheck } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import OwnerProfile from "./owner_profile";
@@ -87,13 +86,20 @@ export default function OwnerProfileSettings() {
                                         className="rounded-lg object-cover w-full"
                                     />
                                     <div className="absolute bottom-2 right-2 flex gap-2">
-                                        <Button
-                                            size="icon"
-                                            variant="secondary"
-                                            className="h-8 w-8 bg-white hover:bg-white/90"
-                                        >
-                                            <Upload className="h-4 w-4" />
-                                        </Button>
+                                        {userInfo?.account_verified ? (
+                                            <div className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center justify-center gap-1">
+                                                <span>
+                                                    Account  Verified
+                                                </span>
+                                                <BadgeCheck size={14} />
+                                            </div>
+                                        ) : (
+                                            <div className="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center justify-center gap-1">
+                                                <span>
+                                                    Unverified
+                                                </span>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </CardContent>

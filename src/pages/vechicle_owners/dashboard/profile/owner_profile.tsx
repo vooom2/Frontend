@@ -1,4 +1,4 @@
-import { MapPin, User } from "lucide-react";
+import { Edit, MapPin, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -10,12 +10,20 @@ import {
 } from "@/components/ui/select";
 import { TabsContent } from "@/components/ui/tabs";
 import useUserStore from "@/stores/user_store";
+import { Button } from "@/components/ui/button";
+import EditProfile from "@/pages/rider/dashboard/profile/edit_profile";
+import { useState } from "react";
 
 function OwnerProfile() {
     const userInfo = useUserStore((state) => state.userInfo);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     return (
         <TabsContent value="account" className="mt-6">
+            <EditProfile
+                setIsDialogOpen={setIsDialogOpen}
+                isDialogOpen={isDialogOpen}
+            />
             <form className="space-y-6 capitalize">
                 <div className="grid gap-6 sm:grid-cols-2">
                     <div className="space-y-2">
@@ -97,6 +105,10 @@ function OwnerProfile() {
                     </div>
                 </div>
             </form>
+            <Button className="mt-4" onClick={() => setIsDialogOpen(true)}>
+                {" "}
+                Edit Profile <Edit />
+            </Button>
         </TabsContent>
     )
 }

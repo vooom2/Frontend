@@ -31,13 +31,13 @@ const UserService = {
     }
   },
 
-  updateProfile: async (data: object): Promise<object> => {
+  updateProfile: async (data: object): Promise<object | null> => {
     try {
       const response = await axiosInstance.put("/user", data);
       return response.data;
     } catch (err) {
       notify(handleAxiosError(err), "error");
-      return {};
+      return null;
     }
   },
   uploadVerification: async (data: object): Promise<object | undefined> => {
