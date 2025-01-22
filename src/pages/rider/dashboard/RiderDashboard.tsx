@@ -112,8 +112,7 @@ export default function RiderDashboard() {
                   <div className="relative h-12 w-12 rounded-full overflow-hidden">
                     <img
                       src={
-                        vehicle.vehicle_images[0] ||
-                        "https://images.unsplash.com/photo-1603039997315-6dcb72ec1204"
+                        vehicle.vehicle_images[0] ?? ""
                       }
                       alt={vehicle.vehicle_number}
                       className="object-cover"
@@ -318,7 +317,7 @@ export default function RiderDashboard() {
               </div>
             </div>
           )}
-          {userInfo.account_verified && !vehicle && !vehicleDetailsLoaded && !pendingVehicle &&(
+          {userInfo.account_verified && !vehicle && !vehicleDetailsLoaded && !pendingVehicle && (
             <div className="text-center px-4 my-10">
               <img
                 src={image}
