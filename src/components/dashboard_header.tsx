@@ -97,7 +97,7 @@ function DashboardHeader() {
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogAction onClick={() => setShowDialog(false)}>Continue</AlertDialogAction>
+                  <AlertDialogAction onClick={() => setShowDialog(false)}>close</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
@@ -106,7 +106,7 @@ function DashboardHeader() {
                 <PopoverTrigger asChild>
                   <div>
                     <Bell className="cursor-pointer" />
-                    {notificationStore.notifications && (
+                    {notificationStore.notifications && notificationStore.notifications.filter((e) => e.seen == false).length > 0 && (
                       <span className="absolute -top-3 -right-2 bg-red-500 text-white text-[0.6rem] font-bold h-6 w-6 flex items-center justify-center rounded-full">
                         {notificationStore.notifications.filter((e) => e.seen == false).length > 99
                           ? "99+"
